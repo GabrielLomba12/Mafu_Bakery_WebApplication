@@ -1,0 +1,49 @@
+
+.container{
+    
+    background-color: #FFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  
+    justify-items: center;
+    justify-content: space-between;  
+}
+
+.user{
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+}
+
+.inputCPF{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputNome{
+    display: flex;
+    flex-direction: column;
+}
+
+
+.adress{
+    padding: 30px;
+    display: flex;
+    gap: 30px;
+}
+
+.inputCEP{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputRua{
+    display: flex;
+    flex-direction: column;
+}
+
+.inputNum{
+    display: flex;
+    flex-direction: column;
+}
