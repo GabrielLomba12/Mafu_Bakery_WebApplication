@@ -1,0 +1,18 @@
+table{
+    width: 70%;
+    background-color: gray;
+    border: solid #c0c0c0 1px;
+    padding: 10px
+}
+
+th{
+    background-color: black;
+    color: white;
+    text-align: left;
+    padding: 5px 10px
+}
+
+td{
+    border: solid #ededed;
+    padding: 5px 10px
+}
