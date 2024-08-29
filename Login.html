@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/login/login.css">
+    <link rel="stylesheet" href="./css/reset.css">
+    <title>Login</title>
+</head>
+<body>
+    <main class="principal">
+        <div class="login">
+            <form class="card-login">
+                <!--<h1 class="title">LOGIN</h1>-->
+                <a id="link_btn" href=""><img id="logo" src="" alt="logo"></a>
+                
+                <div class="text-field">
+                    <label class="label-text-field" for="user">Usuário</label>
+                    <input class="email" type="text" for="user" placeholder="Email">
+                </div>
+    
+                <div class="text-field">
+                    <label class="label-text-field" for="password">Senha</label>
+                    <input class="senha" type="password" for="password" placeholder="Senha">
+                </div>
+                
+                <a id="link_btn_login" href="">
+                    <button class="btn-login" type="submit">Login</button>
+                </a>
+               <p><a id="senha" href="">Esqueceu sua senha?</a></p>
+               <p><a id="cadastro" href="#" target="_blank">Ainda não tem cadastro?</a></p>
+            </form>
+        </div>
+
+        <div class="cartao">
+            <div class="modal-dados-pessoais">
+              <p class="message">Login Realizado com sucesso!</p>
+              <div class="button-wrapper">
+                <button class="inicial">Ir para tela Inicial</button>
+              </div>
+            </div>
+        </div>
+
+        <div class="invalido" id="not-valid">
+            <div class="modal-dados-pessoais">
+              <p class="message">Usuário/senha inválido!</p>
+                <div class="button-wrapper">
+                    <button id="clicked" class="inicial">OK</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
