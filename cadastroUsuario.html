@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,9 +12,12 @@
     <link rel="stylesheet" href="./vendor/BootStrap/open-iconic-bootstrap.css">
 
     <script src="./javaScript/CadastroUsuario/CadastroUsuario.js" defer></script>
+    <script src="./javaScript/CadastroUsuario/conexaoApi.js" defer></script>
+    <script src="./javaScript/CadastroUsuario/utils.js" defer></script>
 
     <title>Cadastro Usuario</title>
 </head>
+
 <body class="bg-light">
     <div class="main">
         <div class="container">
@@ -26,8 +30,8 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="nomeCompleto">Nome completo</label>
-                                <input type="text" class="form-control" id="nomeCompleto"
-                                    placeholder="Digite o nome" required>
+                                <input type="text" class="form-control" id="nomeCompleto" placeholder="Digite o nome"
+                                    required>
                                 <div class="invalid-feedback">
                                     Digite o seu nome completo.
                                 </div>
@@ -44,17 +48,16 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="grupo">Grupo</label>
-                                <select name="grupo_options" class="form-control" id="grupo">
-                                    <option value="Estoquista" selected>Estoquista</option>
-                                    <option value="Admin">Administrador</option>
+                                <select name="grupo_options" class="form-control" id="permissao">
+                                    <option value="ESTOQUISTA" selected>Estoquista</option>
+                                    <option value="ADMINISTRADOR">Administrador</option>
                                 </select>
                             </div>
                         </div>
                         <hr class="mb-4">
                         <div class="mb-3">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control" id="email" placeholder="Digite o e-mail"
-                                required>
+                            <input type="email" class="form-control" id="email" placeholder="Digite o e-mail" required>
                             <div class="invalid-feedback">
                                 Digite um e-mail válido.
                             </div>
@@ -69,8 +72,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="confirmSenha">Confirme sua senha</label>
-                            <input type="password" class="form-control" placeholder="Confirme a senha"
-                                id="confirmSenha" minlength="5" required>
+                            <input type="password" class="form-control" placeholder="Confirme a senha" id="confirmSenha"
+                                minlength="5" required>
                             <div class="invalid-feedback">
                                 As senhas precisam ser iguais.
                             </div>
@@ -83,7 +86,8 @@
                                 </button>
                             </div>
                             <div class="col-md-6 mb-2">
-                                <button class="btn btn-primary btn-lg btn-block" id="colorBtn" type="submit">Confirmar Cadastro</button>
+                                <button class="btn btn-primary btn-lg btn-block" id="colorBtn" type="submit">Confirmar
+                                    Cadastro</button>
                             </div>
                         </div>
                     </form>
@@ -91,12 +95,12 @@
             </div>
         </div>
     </div>
-    <!-- <div id="loadingModal" class="loading-modal">
+    <div id="loadingModal" class="loading-modal">
         <svg viewBox="25 25 50 50">
             <circle r="20" cy="50" cx="50"></circle>
         </svg>
     </div>
-    <div class="card">
+    <div class="card" id="card-modal">
         <div class="modal-confirm">
             <p class="modal-heading">Cadastro Realizado!</p>
             <p class="modal-info">
@@ -106,7 +110,7 @@
                 <button class="accept-cookie-button">OK</button>
             </div>
         </div>
-    </div> -->
     </div>
 </body>
+
 </html>
