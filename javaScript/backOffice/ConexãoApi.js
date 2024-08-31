@@ -4,7 +4,7 @@ async function fetchUserData() {
         const users = await response.json();
 
         const tableBody = document.querySelector('#userTable tbody');
-        tableBody.innerHTML = ''; // Limpa qualquer dado anterior
+        tableBody.innerHTML = '';
 
         users.forEach(user => {
             const row = document.createElement('tr');
@@ -27,10 +27,34 @@ async function fetchUserData() {
 
             const cellEditar = document.createElement('td');
             const editLink = document.createElement('a');
-            editLink.href = `./AlterarUsuario/${user.id}`; // Caminho para a página de edição com o ID do usuário
+            editLink.href = `./AlterarUsuario/${user.id}`;
             editLink.textContent = 'Editar';
             cellEditar.appendChild(editLink);
             row.appendChild(cellEditar);
+
+            const cellAtivar_Desativar = document.createElement('td');
+            const href_putStatus = document.createElement('a');
+            href_putStatus.href = '#';
+            href_putStatus.textContent = 'Ativar/Desativar';
+            href_putStatus.addEventListener('click', async (event) => {
+                event.preventDefault();
+            
+                    const response = await fetch(`http://localhost:8080/api/usuario/ativaDesativaUsuario${user.id}`, {
+                        method: 'PUT',
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            alert('Status do usuário alterado com sucesso!');
+                        } else {
+                            alert('Falha ao alterar o status do usuário.');
+                        }
+                    }).catch(error => {
+                    console.error('Erro na requisição:', error);
+                    alert('Ocorreu um erro ao tentar alterar o status do usuário.');
+                });
+            });
+            cellAtivar_Desativar.appendChild(href_putStatus);
+            row.appendChild(cellAtivar_Desativar);
 
             tableBody.appendChild(row);
         });
