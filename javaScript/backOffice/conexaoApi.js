@@ -1,6 +1,9 @@
+var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+// var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+
 async function fetchUserData() {
     try {
-        const response = await fetch('http://localhost:8080/api');
+        const response = await fetch('http://'+API+':8080/api');
         const users = await response.json();
 
         const tableBody = document.querySelector('#userTable tbody');
@@ -40,7 +43,8 @@ async function fetchUserData() {
                 event.preventDefault();
 
                 try {
-                    const response = await fetch(`http://localhost:8080/api/ativaDesativaUsuario?id=${user.id}`, {
+                    const response = 
+                    await fetch(`http://`+API+`:8080/api/ativaDesativaUsuario?id=${user.id}`, {
                         method: 'PUT',
                     });
 
