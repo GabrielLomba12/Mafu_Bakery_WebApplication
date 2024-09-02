@@ -38,11 +38,11 @@ function cadastrar(usuario) {
                     document.querySelector("#card-modal").style.display = "flex";
                 }, 3000);
             } 
-            // else if (response.status === 409) {
-            //     alert("CPF/E-mail já cadastrado.");
-            //     document.querySelector(".main").classList.remove('blur');
-            //     esconderLoading();
-            // }
+            else if (response.status === 409) {
+                alert("CPF/E-mail já cadastrado.");
+                document.querySelector(".main").classList.remove('blur');
+                esconderLoading();
+            }
         })
         .catch(error => {
             console.error('Erro ao cadastrar usuário:', error);
