@@ -1,9 +1,12 @@
+// import { loginUsuario } from "./Login";
+// var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+
 const formulario = document.querySelector("form")
 const email = document.querySelector(".email")
 const senha = document.querySelector(".senha")
 const btnLogin = document.querySelector(".btn-login");
 const show = document.querySelector(".modal-confirm");
-
 
 function validarCampos() {
     const emailValue = email.value;
@@ -24,50 +27,10 @@ function validarCampos() {
     }
 }
 
-// function consultar() {
-
-//     const login = {
-//         "email": email.value,
-//         "senha": senha.value
-//     };
-
-//     // console.log(login)
-//     fetch('http://localhost:8080/api/login', {
-//         method: 'POST',
-//         headers: {
-//             'Content-Type': 'application/json'
-//         },
-//         body: JSON.stringify(login)
-//     })
-//         .then(response => {
-//             if (response.status === 200) {
-//                 // Login realizado com sucesso
-                
-//                 irTelaInicial();
-//                 document.querySelector('.inicial').addEventListener('click', function (event) {
-//                     event.preventDefault(); // Evita o comportamento padrão do formulário
-                    
-//                     window.location.href = "TelaInicial.html";
-//                 });
-//             } else if (response.status === 403) {
-//                 // CPF já cadastrado
-//                 // alert("Usuário/senha inválido!");
-//                 loginInvalido()
-//             }
-//         })
-//         .catch(e => {
-//             console.log(e)
-//             // Exibe mensagem de erro em caso de falha na requisição
-//             //console.error('Erro ao acessar usuário:', error);
-//             alert("Erro ao acessar usuário. Por favor, tente novamente.");
-//             // erroLogin()
-//         });
-// }
-
 document.querySelector('.btn-login').addEventListener('click', function (event) {
     event.preventDefault();
     validarCampos();
-    consultar();
+    loginUsuario();
 });
 
 function limparCampos() {
@@ -85,8 +48,6 @@ function irTelaInicial(){
     // Quando o usuário clicar no botão, abre o modal
     openModal()
 }
-
-
 
 function loginInvalido() {
     const modal = document.querySelector('#not-valid');
@@ -122,3 +83,57 @@ function loginInvalido() {
         }
     });
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('.btn-login').addEventListener('click', function (event) {
+        event.preventDefault();
+        validarCampos();
+        loginUsuario();
+    });
+});
+
+function redirecionar() {
+    window.location.href = "TelaBackOffice.html";
+}
+
+function loginUsuario() {
+    fetch('http://' + API + ':8080/api/auth/signin', {
+        method: 'POST',
+        headers: {
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify({
+            email: email.value,
+            senha: senha.value
+        })
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Erro ao fazer login');
+        }
+    })
+    .then(data => {
+        const email = data.email;
+        const permissao = data.permissao;
+        localStorage.setItem("permissao", permissao);
+        localStorage.setItem("email", email);
+
+        const elementoCard = document.querySelector(".cartao");
+        if (elementoCard) {
+            if (permissao === "ADMINISTRADOR" || permissao === "ESTOQUISTA") {
+                elementoCard.style.display = "flex";
+            }
+        } else {
+            console.error("Elemento com a classe '.cartao' não encontrado.");
+        }
+    })
+    .catch(error => {
+        console.error('Erro ao fazer login:', error);
+    });
+}
+
+document.querySelector('.tela-back-office').addEventListener('click', function (event) {
+    redirecionar();
+});
