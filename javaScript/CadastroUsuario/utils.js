@@ -1,13 +1,12 @@
 function mostrarLoading() {
     document.getElementById("loadingModal").style.display = "block";
     document.querySelector(".main").classList.add('blur');
-    // document.querySelector("footer").classList.add('blur');
 }
 
 function redirecionarParaPagina() {
-    window.location.href = "TelaInicial.html";
+    window.location.href = "TelaBackOffice.html";
 
-    window.history.replaceState(null, null, "TelaInicial.html");
+    window.history.replaceState(null, null, "TelaBackOffice.html");
 }
 
 document.querySelector(".accept-cookie-button").addEventListener("click", redirecionarParaPagina);

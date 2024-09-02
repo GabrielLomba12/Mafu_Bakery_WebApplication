@@ -78,26 +78,17 @@
     }
 }
 
-
-.card {
+#card-modal {
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: none;
     align-items: center;
-    /* Centraliza verticalmente */
     justify-content: center;
-    /* Centraliza horizontalmente */
     background-color: rgba(0, 0, 0, 0.5);
-    /* Fundo escuro para sobreposição */
 }
-
-#card-modal {
-    display: none;
-}
-
 
 /* Estilo Modal confirmação */
 .modal-confirm {
