@@ -1,11 +1,17 @@
 // var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
 var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 let emailUsuario = localStorage.getItem("email")
+let token = localStorage.getItem("tokenAcesso")
 buscarUsuario(emailUsuario);
 
 async function fetchUserData() {
     try {
-        const response = await fetch('http://'+API+':8080/api');
+        const response = await fetch('http://'+API+':8080/api', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
         const users = await response.json();
 
         const tableBody = document.querySelector('#userTable tbody');
@@ -32,7 +38,7 @@ async function fetchUserData() {
 
             const cellEditar = document.createElement('td');
             const editLink = document.createElement('a');
-            editLink.href = `./AlterarUsuario/${user.id}`;
+            editLink.href = `../cadastroUsuario.html`;
             editLink.textContent = 'Editar';
             cellEditar.appendChild(editLink);
             row.appendChild(cellEditar);
@@ -48,6 +54,9 @@ async function fetchUserData() {
                     const response = 
                     await fetch(`http://`+API+`:8080/api/ativaDesativaUsuario?id=${user.id}`, {
                         method: 'PUT',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
                     });
 
                     if (response.ok) {
@@ -75,28 +84,29 @@ document.getElementById('listarUsuarios').addEventListener('click', fetchUserDat
 function redirecionar() {
     window.location.href = "cadastroUsuario.html";
 }
+
 document.getElementById('novo-usuario').addEventListener('click', redirecionar);
 
 function buscarUsuario(email) {
     fetch(`http://`+API+`:8080/api/usuarioLogado?email=${email}`, {
         method: 'GET',
     })
-        .then(response => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Erro ao fazer login');
-            }
-        })
-        .then(data => {
-            let nome = "";
-            nome = data.nome;
-            let palavras = nome.split(" ");
-            let primeiroNome = palavras[0];
-            document.getElementById("login_user").innerHTML = "Olá, " + primeiroNome + ' ('+data.permissao+')';
-        })
-        .catch(error => {
-            console.error('Erro ao fazer login:', error);
-            alert("Erro ao acessar usuário. Por favor, tente novamente.");
-        });
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        } else {
+            throw new Error('Erro ao fazer login');
+        }
+    })
+    .then(data => {
+        let nome = "";
+        nome = data.nome;
+        let palavras = nome.split(" ");
+        let primeiroNome = palavras[0];
+        document.getElementById("login_user").innerHTML = "Olá, " + primeiroNome + ' ('+data.permissao+')';
+    })
+    .catch(error => {
+        console.error('Erro ao fazer login:', error);
+        alert("Erro ao acessar usuário. Por favor, tente novamente.");
+    });
 }
