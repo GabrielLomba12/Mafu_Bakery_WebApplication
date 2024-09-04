@@ -25,6 +25,7 @@ document.querySelector(".form").addEventListener("submit", function (event) {
 });
 
 function cadastrar(usuario) {
+    const token = localStorage.getItem("token")
     mostrarLoading();
     fetch('http://'+API+':8080/api/usuario', {
         method: 'POST',
