@@ -72,6 +72,11 @@ async function fetchUserData() {
 
 document.getElementById('listarUsuarios').addEventListener('click', fetchUserData);
 
+function redirecionar() {
+    window.location.href = "cadastroUsuario.html";
+}
+document.getElementById('novo-usuario').addEventListener('click', redirecionar);
+
 function buscarUsuario(email) {
     fetch(`http://`+API+`:8080/api/usuarioLogado?email=${email}`, {
         method: 'GET',
