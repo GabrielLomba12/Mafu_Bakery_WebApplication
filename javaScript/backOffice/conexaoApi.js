@@ -79,13 +79,17 @@ async function fetchUserData() {
     }
 }
 
-document.getElementById('listarUsuarios').addEventListener('click', fetchUserData);
+// document.getElementById('listarUsuarios').addEventListener('click', fetchUserData);
 
 function redirecionar() {
     window.location.href = "cadastroUsuario.html";
 }
 
-document.getElementById('novo-usuario').addEventListener('click', redirecionar);
+// document.querySelector("#novo-usuario").addEventListener('click', redirecionar);
+
+const funcoes = document.querySelector(".funcoes")
+let link = document.createElement("a")
+
 
 function buscarUsuario(email) {
     fetch(`http://`+API+`:8080/api/usuarioLogado?email=${email}`, {
@@ -104,9 +108,37 @@ function buscarUsuario(email) {
         let palavras = nome.split(" ");
         let primeiroNome = palavras[0];
         document.getElementById("login_user").innerHTML = "Olá, " + primeiroNome + ' ('+data.permissao+')';
+
+            // Adicionando links de funções baseados na permissão do usuário
+            const funcoes = document.querySelector(".funcoes");
+
+            if (data.permissao === 'ADMINISTRADOR') {
+                adicionarLink(funcoes, "#listarUsuarios", "Listar Usuários  ", fetchUserData);
+                adicionarLink(funcoes, "#listarProdutos", "Listar Produtos");
+            }
+    
+            if (data.permissao === 'ESTOQUISTA' || data.permissao === 'ADMINISTRADPR') {
+                adicionarLink(funcoes, "#listarPedidos", "Listar Pedidos");
+                adicionarLink(funcoes, "#listarProdutos", "Listar Produtos");
+            }
     })
     .catch(error => {
         console.error('Erro ao fazer login:', error);
         alert("Erro ao acessar usuário. Por favor, tente novamente.");
     });
+
+    function adicionarLink(container, href, texto, clickHandler = null) {
+        let link = document.createElement("a");
+        link.href = href;
+        link.textContent = texto;
+        
+        if (clickHandler) {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                clickHandler();
+            });
+        }
+    
+        container.appendChild(link);
+    }
 }
