@@ -38,7 +38,7 @@ async function fetchUserData() {
 
             const cellEditar = document.createElement('td');
             const editLink = document.createElement('a');
-            editLink.href = `../cadastroUsuario.html`;
+            editLink.href = `../cadastroUsuario.html?id=${user.id}`;
             editLink.textContent = 'Editar';
             cellEditar.appendChild(editLink);
             row.appendChild(cellEditar);
