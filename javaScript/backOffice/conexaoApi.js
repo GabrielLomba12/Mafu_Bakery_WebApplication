@@ -9,7 +9,8 @@ async function fetchUserData() {
         const response = await fetch('http://'+API+':8080/api', {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${token}`
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
             }
         });
         const users = await response.json();
@@ -47,27 +48,9 @@ async function fetchUserData() {
             const href_putStatus = document.createElement('a');
             href_putStatus.href = '#';
             href_putStatus.textContent = 'Ativar/Desativar';
-            href_putStatus.addEventListener('click', async (event) => {
-                event.preventDefault();
-
-                try {
-                    const response = 
-                    await fetch(`http://`+API+`:8080/api/ativaDesativaUsuario?id=${user.id}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        }
-                    });
-
-                    if (response.ok) {
-                        alert('Status do usuário alterado com sucesso!');
-                    } else {
-                        alert('Falha ao alterar o status do usuário.');
-                    }
-                } catch (error) {
-                    console.error('Erro na requisição:', error);
-                    alert('Ocorreu um erro ao tentar alterar o status do usuário.');
-                }
+            href_putStatus.addEventListener('click', () => {
+                document.querySelector("#card-modal").style.display = "flex";
+                document.querySelector("#btnsim").setAttribute('data-user-id', user.id);
             });
             cellAtivar_Desativar.appendChild(href_putStatus);
             row.appendChild(cellAtivar_Desativar);
@@ -79,13 +62,39 @@ async function fetchUserData() {
     }
 }
 
-// document.getElementById('listarUsuarios').addEventListener('click', fetchUserData);
+
+
+document.querySelector("#btnsim").addEventListener('click', async (event) => {
+    event.preventDefault();
+        try {
+            const userId = document.querySelector("#btnsim").getAttribute('data-user-id');
+            const response = 
+            await fetch(`http://`+API+`:8080/api/ativaDesativaUsuario?id=${userId}`, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            if (response.ok) {
+                fetchUserData();
+                document.querySelector("#card-modal").style.display = "none";
+            } else {
+                alert('Falha ao alterar o status do usuário.');
+            }
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                alert('Ocorreu um erro ao tentar alterar o status do usuário.');
+            }
+});
+
+document.querySelector("#btnnao").addEventListener('click', () => {
+    document.querySelector("#card-modal").style.display = "none";
+});
 
 function redirecionar() {
     window.location.href = "cadastroUsuario.html";
 }
 
-// document.querySelector("#novo-usuario").addEventListener('click', redirecionar);
 
 const funcoes = document.querySelector(".funcoes")
 let link = document.createElement("a")
