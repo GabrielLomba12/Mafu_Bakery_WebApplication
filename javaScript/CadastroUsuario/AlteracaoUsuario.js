@@ -42,6 +42,7 @@ function alterarDadosUsuario() {
     }
     
     const email = document.getElementById('email').value
+    mostrarLoading();
     fetch(`http://`+API+`:8080/api/alterarUsuario?email=${email}`, {
         method: 'PATCH',
         headers: {
