@@ -117,9 +117,10 @@ function loginUsuario() {
     .then(data => {
         const email = data.email;
         const permissao = data.permissao;
+        const token = data.tokenAcesso;
         localStorage.setItem("permissao", permissao);
         localStorage.setItem("email", email);
-
+        localStorage.setItem("tokenAcesso", token);
         const elementoCard = document.querySelector(".cartao");
         if (elementoCard) {
             if (permissao === "ADMINISTRADOR" || permissao === "ESTOQUISTA") {
