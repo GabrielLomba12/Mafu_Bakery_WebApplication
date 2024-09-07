@@ -1,16 +1,8 @@
 // var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
 var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
-// document.addEventListener('DOMContentLoaded', () => {
-//     const urlParams = new URLSearchParams(window.location.search);
-//     const userId = urlParams.get('id');
-
-//     if (userId) {
-//         // Modo de edição: carregar os dados do usuário
-//         carregarDadosDoUsuario(userId);
-//         alterarInterfaceParaEdicao();
-//     }
-// });
+const emailUsuario = localStorage.getItem("email")
+const currentUserPermission = localStorage.getItem('permissao');
 
 document.getElementById('colorBtn').addEventListener('click', ()=> {
     alterarDadosUsuario();
@@ -43,6 +35,11 @@ function alterarDadosUsuario() {
         senha: form.querySelector('#senha').value,
         permissao: form.querySelector('#permissao').value
     };
+
+    if (usuarioAlterado.email === emailUsuario && usuarioAlterado.permissao !== currentUserPermission) {
+        alert("Você não pode alterar suas próprias permissões.");
+        return;
+    }
     
     const email = document.getElementById('email').value
     fetch(`http://`+API+`:8080/api/alterarUsuario?email=${email}`, {

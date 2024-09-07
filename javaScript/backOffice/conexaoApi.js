@@ -98,7 +98,7 @@ function redirecionar() {
 
 const funcoes = document.querySelector(".funcoes")
 let link = document.createElement("a")
-
+let usuarioLogadoId;
 
 function buscarUsuario(email) {
     fetch(`http://`+API+`:8080/api/usuarioLogado?email=${email}`, {
@@ -112,6 +112,8 @@ function buscarUsuario(email) {
         }
     })
     .then(data => {
+        usuarioLogadoId = data.id;
+
         let nome = "";
         nome = data.nome;
         let palavras = nome.split(" ");
