@@ -23,6 +23,10 @@ async function carregarDadosDoUsuario(userId) {
     document.getElementById('permissao').value = user.permissao;
     document.getElementById('email').value = user.email;
     document.getElementById('email').disabled = true;
+
+    if (user.email === emailUsuario) {
+        document.getElementById('permissao').disabled = true;
+    }
 }
 
 function alterarDadosUsuario() {
@@ -36,10 +40,6 @@ function alterarDadosUsuario() {
         permissao: form.querySelector('#permissao').value
     };
 
-    if (usuarioAlterado.email === emailUsuario && usuarioAlterado.permissao !== currentUserPermission) {
-        alert("Você não pode alterar suas próprias permissões.");
-        return;
-    }
     
     const email = document.getElementById('email').value
     mostrarLoading();
