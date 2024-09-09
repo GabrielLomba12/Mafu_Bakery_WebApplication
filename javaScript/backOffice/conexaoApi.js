@@ -1,5 +1,6 @@
-// var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+// var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+
 let emailUsuario = localStorage.getItem("email")
 let token = localStorage.getItem("tokenAcesso")
 buscarUsuario(emailUsuario);
@@ -61,8 +62,6 @@ async function fetchUserData() {
         console.error('Erro ao buscar os dados dos usuários:', error);
     }
 }
-
-
 
 document.querySelector("#btnsim").addEventListener('click', async (event) => {
     event.preventDefault();
