@@ -22,7 +22,6 @@ async function carregarDadosDoUsuario(userId) {
     document.getElementById('cpf').value = user.cpf;
     document.getElementById('permissao').value = user.permissao;
     document.getElementById('email').value = user.email;
-    document.getElementById('email').disabled = true;
 
     if (user.email === emailUsuario) {
         document.getElementById('permissao').disabled = true;
@@ -63,10 +62,15 @@ function alterarDadosUsuario() {
             document.querySelector(".main").classList.remove('blur');
             esconderLoading();
         }
+        else if (response.status === 401) {
+            alert("A senha informada para atualização não pode ser a mesma senha atual.");
+            document.querySelector(".main").classList.remove('blur');
+            esconderLoading();
+        }
     })
     .catch(error => {
         console.error('Erro ao cadastrar ou alterar usuário:', error);
-        alert("Erro ao cadastrar ou alterar usuário. Por favor, tente novamente.");
+        alert("Erro ao alterar usuário. Por favor, tente novamente.");
         esconderLoading();
         document.querySelector(".main").classList.remove('blur');
     });

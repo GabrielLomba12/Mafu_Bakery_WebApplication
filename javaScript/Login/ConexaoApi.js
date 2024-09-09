@@ -111,7 +111,7 @@ function loginUsuario() {
         if (response.ok) {
             return response.json();
         } else {
-            throw new Error('Erro ao fazer login');
+            alert("E-mail ou senha inválidos!");
         }
     })
     .then(data => {
