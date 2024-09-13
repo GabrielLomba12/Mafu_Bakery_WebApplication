@@ -125,11 +125,14 @@ function buscarUsuario(email) {
             if (data.permissao === 'ADMINISTRADOR') {
                 adicionarLink(funcoes, "#listarUsuarios", "Listar Usuários  ", fetchUserData);
                 adicionarLink(funcoes, "#listarProdutos", "Listar Produtos");
+                adicionarLink(funcoes, "#listarIngredientes", "Listar Ingredientes");
+                adicionarLink(funcoes, "#listarPedidos", "Listar Pedidos");
             }
     
-            if (data.permissao === 'ESTOQUISTA' || data.permissao === 'ADMINISTRADPR') {
+            if (data.permissao === 'ESTOQUISTA') {
                 adicionarLink(funcoes, "#listarPedidos", "Listar Pedidos");
                 adicionarLink(funcoes, "#listarProdutos", "Listar Produtos");
+                adicionarLink(funcoes, "#listarIngredientes", "Listar Ingredientes");
             }
     })
     .catch(error => {
