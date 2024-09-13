@@ -1,6 +1,6 @@
 // import { loginUsuario } from "./Login";
-var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-// var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+// var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
 const formulario = document.querySelector("form")
 const email = document.querySelector(".email")
@@ -97,7 +97,7 @@ function redirecionar() {
 }
 
 function loginUsuario() {
-    fetch('http://' + API + ':8080/api/auth/signin', {
+    fetch(`http://${API}:8080/api/auth/signin`, {
         method: 'POST',
         headers: {
             'Content-Type': "application/json"
