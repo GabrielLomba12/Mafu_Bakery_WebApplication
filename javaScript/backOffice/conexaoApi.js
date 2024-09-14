@@ -2,10 +2,12 @@
 var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
 const emailUsuario = localStorage.getItem("email");
-const token = localStorage.getItem("tokenAcesso");
+var token = localStorage.getItem("tokenAcesso");
 buscarUsuario(emailUsuario);
 
 document.getElementById('btn-usuario').addEventListener('click', () => {
+    document.getElementById('tabela-de-produto').style.display = 'none';
+    document.getElementById('filtro-produto').style.display = 'none';
     document.getElementById('tabela-de-ingrediente').style.display = 'none';
     document.getElementById('filtro-ingrediente').style.display = 'none';
     document.getElementById('tabela-de-usuario').style.display = 'flex';
@@ -14,11 +16,23 @@ document.getElementById('btn-usuario').addEventListener('click', () => {
 });
 
 document.getElementById('btn-ingrediente').addEventListener('click', () => {
+    document.getElementById('tabela-de-produto').style.display = 'none';
+    document.getElementById('filtro-produto').style.display = 'none';
     document.getElementById('tabela-de-usuario').style.display = 'none';
     document.getElementById('filtro-usuario').style.display = 'none';
     document.getElementById('tabela-de-ingrediente').style.display = 'flex';
     document.getElementById('filtro-ingrediente').style.display = 'flex';
     fetchIngredienteData();
+});
+
+document.getElementById('btn-produto').addEventListener('click', () => {
+    document.getElementById('tabela-de-usuario').style.display = 'none';
+    document.getElementById('filtro-usuario').style.display = 'none';
+    document.getElementById('tabela-de-ingrediente').style.display = 'none';
+    document.getElementById('filtro-ingrediente').style.display = 'none';
+    document.getElementById('tabela-de-produto').style.display = 'flex';
+    document.getElementById('filtro-produto').style.display = 'flex';
+    
 });
 
 async function fetchUserData() {
@@ -147,36 +161,44 @@ async function fetchIngredienteData() {
     }
 }
 
-document.querySelector("#btnsim").addEventListener('click', async (event) => {
-    event.preventDefault();
+function desativarUsuario(userId) {
     try {
-        const userId = document.querySelector("#btnsim").getAttribute('data-user-id');
-        const response =
-            await fetch(`http://`+API+`:8080/api/ativaDesativaUsuario?id=${userId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-        if (response.ok) {
-            fetchUserData();
-            document.querySelector("#card-modal").style.display = "none";
-        } else {
-            alert('Falha ao alterar o status do usuário.');
-        }
+        fetch(`http://${API}:8080/api/ativaDesativaUsuario?id=${userId}`, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                fetchUserData();
+                document.querySelector("#card-modal").style.display = "none";
+            } else 
+                alert('Falha ao alterar o status do usuário.');
+        })
     } catch (error) {
         console.error('Erro na requisição:', error);
         alert('Ocorreu um erro ao tentar alterar o status do usuário.');
     }
-});
+};
+
+document.querySelector("#btnsim").addEventListener('click', (event) => {
+    event.preventDefault();
+    const userId = document.querySelector("#btnsim").getAttribute('data-user-id');
+    desativarUsuario(userId)
+}); 
 
 document.querySelector("#btnnao").addEventListener('click', () => {
     document.querySelector("#card-modal").style.display = "none";
 });
 
-function redirecionar() {
+function redirecionarCadastroUsuario() {
     window.location.href = "cadastroUsuario.html";
+}
+
+function redirecionarCadastroProduto() {
+    window.location.href = "cadastroProduto.html";
 }
 
 const funcoes = document.querySelector(".funcoes")
@@ -202,40 +224,12 @@ function buscarUsuario(email) {
             let palavras = nome.split(" ");
             let primeiroNome = palavras[0];
             document.getElementById("login_user").innerHTML = "Olá, " + primeiroNome + ' (' + data.permissao + ')';
-
-            // Adicionando links de funções baseados na permissão do usuário
-            const funcoes = document.querySelector(".funcoes");
-
-            // if (data.permissao === 'ADMINISTRADOR') {
-            //     adicionarLink(funcoes, "#listarUsuarios", "Listar Usuários  ", fetchUserData);
-            //     adicionarLink(funcoes, "#listarProdutos", "Listar Produtos");
-            //     adicionarLink(funcoes, "#listarIngredientes", "Listar Ingredientes");
-            //     adicionarLink(funcoes, "#listarPedidos", "Listar Pedidos");
-            // }
-
-            // if (data.permissao === 'ESTOQUISTA') {
-            //     adicionarLink(funcoes, "#listarPedidos", "Listar Pedidos");
-            //     adicionarLink(funcoes, "#listarProdutos", "Listar Produtos");
-            //     adicionarLink(funcoes, "#listarIngredientes", "Listar Ingredientes");
-            // }
+            if(data.permissao === 'ESTOQUISTA') {
+                document.getElementById('btn-usuario').style.display = 'none';
+            }
         })
         .catch(error => {
             console.error('Erro ao fazer login:', error);
             alert("Erro ao acessar usuário. Por favor, tente novamente.");
         });
-
-    // function adicionarLink(container, href, texto, clickHandler = null) {
-    //     let link = document.createElement("a");
-    //     link.href = href;
-    //     link.textContent = texto;
-
-    //     if (clickHandler) {
-    //         link.addEventListener('click', (event) => {
-    //             event.preventDefault();
-    //             clickHandler();
-    //         });
-    //     }
-
-    //     container.appendChild(link);
-    // }
 }

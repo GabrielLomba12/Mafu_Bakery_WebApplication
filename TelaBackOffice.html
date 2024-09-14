@@ -35,8 +35,9 @@
         <div class="container">
             <div class="informacoes" id="filtro-usuario" style="display: none;">
                 <label class="label-text-field" for="user"></label>
-                <input class="nome" type="text" id="user" placeholder="Consultar usuário..." onkeyup="filtrarUsuarios()">
-                <button id="novo-usuario" onclick="redirecionar()">+</i></button>
+                <input class="nome" type="text" id="user" placeholder="Consultar usuário..."
+                    onkeyup="filtrarUsuarios()">
+                <button id="novo-usuario" onclick="redirecionarCadastroUsuario()">+</i></button>
             </div>
             <div class="tabela" id="tabela-de-usuario" style="display: none;">
                 <table border="1" class="estilo-tabela" id="userTable">
@@ -80,6 +81,33 @@
             </div>
         </div>
         <!--FIM TABELA DE INGREDIENTES-->
+
+        <!--TABELA DE PRODUTOS-->
+        <div class="container">
+            <div class="informacoes" id="filtro-produto" style="display: none;">
+                <label class="label-text-field" for="produto"></label>
+                <input class="nome" type="text" id="produto" placeholder="Consultar produto...">
+                <button id="novo-ingrediente" onclick="redirecionarCadastroProduto()">+</i></button>
+            </div>
+            <div class="tabela" id="tabela-de-produto" style="display: none;">
+                <table border="1" class="estilo-tabela" id="produtoTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Estoque</th>
+                            <th>Preço</th>
+                            <th>Status</th>
+                            <th>Alterar</th>
+                            <th>Ativar/Desativar</th>
+                            <th>Visualizar</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <!--FIM TABELA DE PRODUTOS-->
 
     </main>
     <div class="card" id="card-modal">

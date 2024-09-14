@@ -72,6 +72,15 @@ a{
     background-color: #007bff;
 }
 
+#novo-produto {
+    font-size: 25px;
+    padding: 7px 14px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: #007bff;
+}
+
 main{
     width: 100%;
 }
@@ -126,6 +135,7 @@ td{
     padding: 10px; 
     font-weight: bold;
     border: none;
+    border-radius: 10px;
 }
 
 .estilo-tabela tbody tr {
