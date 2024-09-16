@@ -17,33 +17,33 @@ async function listarIngredientes() {
             'Content-Type': 'application/json'
         }
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("Erro ao acessar a API: " + response.statusText);
-            }
-            return response.json();
-        })
-        .then(data => {
-            listaIngredientes = data;
-            const selectIngrediente = document.getElementById("ingrediente");
-            selectIngrediente.innerHTML = "";
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Erro ao acessar a API: " + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        listaIngredientes = data;
+        const selectIngrediente = document.getElementById("ingrediente");
+        selectIngrediente.innerHTML = "";
 
-            const opcaoPadrao = document.createElement("option");
-            opcaoPadrao.value = "";
-            opcaoPadrao.text = "-";
-            opcaoPadrao.selected = true;
-            selectIngrediente.appendChild(opcaoPadrao);
+        const opcaoPadrao = document.createElement("option");
+        opcaoPadrao.value = "";
+        opcaoPadrao.text = "-";
+        opcaoPadrao.selected = true;
+        selectIngrediente.appendChild(opcaoPadrao);
 
-            data.forEach(ingrediente => {
-                const option = document.createElement("option");
-                option.value = ingrediente.id;  // Use o ID como valor para a seleção
-                option.text = `${ingrediente.id} - ${ingrediente.nome}`;
-                selectIngrediente.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.log("Erro: " + error);
+        data.forEach(ingrediente => {
+            const option = document.createElement("option");
+            option.value = ingrediente.id;  // Use o ID como valor para a seleção
+            option.text = `${ingrediente.id} - ${ingrediente.nome}`;
+            selectIngrediente.appendChild(option);
         });
+    })
+    .catch(error => {
+        console.log("Erro: " + error);
+    });
 }
 
 let imageCount = 1; // Inicia o contador de imagens
@@ -137,9 +137,6 @@ async function cadastrar() {
     for (let i = 0; i < imagensInput.files.length; i++) {
         formData.append("imagens", imagensInput.files[i]);
     }
-    console.log(produto.ingredientes)
-    console.log(imagensInput.files[0])
-    console.log(formData)
 
     // Faz a requisição POST com o FormData
     await fetch(`http://localhost:8080/api/produtos/cadastrar`, {
@@ -149,22 +146,20 @@ async function cadastrar() {
         },
         body: formData
     })
-        .then(async response => {
-            if (response.ok) {
-                alert("Produto cadastrado com sucesso!");
-                return response.json();
-            } else {
-                const errorData = await response.json();
-                throw new Error("Erro ao cadastrar o produto: " + errorData.message);
-            }
-        })
-        .then(data => {
-            console.log("Produto cadastrado:", data);
-        })
-        .catch(error => {
-            console.error("Erro ao cadastrar o produto:", error);
-            alert("Erro ao cadastrar o produto: " + error.message);
-        });
+    .then(async response => {
+        if (response.ok) {
+            alert("Produto cadastrado com sucesso!");
+            document.querySelector(".form").reset();
+            window.location.href = 'TelaBackOffice.html';
+        } else {
+            const errorData = await response.json();
+            throw new Error("Erro ao cadastrar o produto: " + errorData.message);
+        }
+    })
+    .catch(error => {
+        console.error("Erro ao cadastrar o produto:", error);
+        alert("Erro ao cadastrar o produto: " + error.message);
+    });
 }
 
 document.querySelector("#colorBtn").addEventListener("click", function (event) {
