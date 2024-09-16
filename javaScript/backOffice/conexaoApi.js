@@ -32,7 +32,7 @@ document.getElementById('btn-produto').addEventListener('click', () => {
     document.getElementById('filtro-ingrediente').style.display = 'none';
     document.getElementById('tabela-de-produto').style.display = 'flex';
     document.getElementById('filtro-produto').style.display = 'flex';
-    
+    fetchProdutosData();
 });
 
 async function fetchUserData() {
@@ -122,7 +122,7 @@ async function fetchIngredienteData() {
             row.appendChild(cellNome);
 
             const cellEstoque = document.createElement('td');
-            cellEstoque.textContent = ingrediente.quantidadeEstoque;
+            cellEstoque.textContent = ingrediente.quantidadeEstoque + " " + ingrediente.unidadeMedida;
             row.appendChild(cellEstoque);
 
             const cellPreco = document.createElement('td');
@@ -150,6 +150,71 @@ async function fetchIngredienteData() {
             href_putStatus.addEventListener('click', () => {
                 document.querySelector("#card-modal").style.display = "flex";
                 document.querySelector("#btnsim").setAttribute('data-user-id', ingrediente.id);
+            });
+            cellAtivar_Desativar.appendChild(href_putStatus);
+            row.appendChild(cellAtivar_Desativar);
+
+            tableBody.appendChild(row);
+        });
+    } catch (error) {
+        console.error('Erro ao buscar os dados dos ingredientes:', error);
+    }
+}
+
+async function fetchProdutosData() {
+    try {
+        const response = await fetch(`http://${API}:8080/api/produtos`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        const produtos = await response.json();
+
+        const tableBody = document.querySelector('#produtoTable tbody');
+        tableBody.innerHTML = '';
+
+        produtos.forEach(produto => {
+            const row = document.createElement('tr');
+
+            const cellId = document.createElement('td');
+            cellId.textContent = produto.id;
+            row.appendChild(cellId);
+
+            const cellNome = document.createElement('td');
+            cellNome.textContent = produto.nome;
+            row.appendChild(cellNome);
+
+            const cellEstoque = document.createElement('td');
+            cellEstoque.textContent = produto.quantidadeEstoque;
+            row.appendChild(cellEstoque);
+
+            const cellPreco = document.createElement('td');
+            cellPreco.textContent = 'R$ ' + formatarCasasDecimais(produto.preco);
+            row.appendChild(cellPreco);
+
+            const cellStatus = document.createElement('td');
+            if (produto.status) {
+                cellStatus.textContent = 'Ativo';
+            } else 
+                cellStatus.textContent = 'Inativo'
+            row.appendChild(cellStatus);
+
+            const cellEditar = document.createElement('td');
+            const editLink = document.createElement('a');
+            editLink.href = `../cadastroProduto.html?id=${produto.id}`;
+            editLink.textContent = 'Editar';
+            cellEditar.appendChild(editLink);
+            row.appendChild(cellEditar);
+
+            const cellAtivar_Desativar = document.createElement('td');
+            const href_putStatus = document.createElement('a');
+            href_putStatus.href = '#';
+            href_putStatus.textContent = 'Ativar/Desativar';
+            href_putStatus.addEventListener('click', () => {
+                document.querySelector("#card-modal").style.display = "flex";
+                document.querySelector("#btnsim").setAttribute('data-user-id', produto.id);
             });
             cellAtivar_Desativar.appendChild(href_putStatus);
             row.appendChild(cellAtivar_Desativar);
@@ -199,6 +264,10 @@ function redirecionarCadastroUsuario() {
 
 function redirecionarCadastroProduto() {
     window.location.href = "cadastroProduto.html";
+}
+
+function redirecionarCadasdtroIngrediente() {
+    window.location.href = "cadastroIngrediente.html";
 }
 
 const funcoes = document.querySelector(".funcoes")

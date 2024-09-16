@@ -6,6 +6,7 @@ const Iquantidade = document.querySelector("#qtd-ingrediente")
 const Iingrediente = document.querySelector("#ingrediente")
 
 document.addEventListener("DOMContentLoaded", listarIngredientes(),{})
+// document.addEventListener("DOMContentLoaded", listarProdutos(),{})
 
 async function listarIngredientes() {
     let listaIngredientes = [];
@@ -81,64 +82,6 @@ document.getElementById('add-image-btn').addEventListener('click', function () {
     imageCount++; // Incrementa o contador
 });
 
-// document.querySelector("form").addEventListener("submit", async function (event) {
-//     event.preventDefault();
-
-//     // Cria um objeto FormData para enviar os dados como multipart/form-data
-//     let formData = new FormData();
-
-//     // Obtém os valores dos campos de entrada
-//     let nome = document.getElementById("nomeProduto").value;
-//     let descricao = document.getElementById("descricao").value;
-//     let preco = document.getElementById("preco").value;
-//     let tamanho = document.getElementById("unidade").value;
-//     let categoria = document.getElementById("unidade").value; // Assumindo que a categoria é a mesma que o tamanho
-//     let avaliacao = document.getElementById("avaliacao").value;
-//     let qtdIngredientes = document.getElementById("qtd-ingrediente").value;
-
-//     // Adiciona os dados ao FormData
-//     formData.append("nome", nome);
-//     formData.append("descricao", descricao);
-//     formData.append("preco", preco);
-//     formData.append("tamanho", tamanho);
-//     formData.append("categoria", categoria);
-//     formData.append("avaliacao", avaliacao);
-//     formData.append("qtdIngredientes", qtdIngredientes);
-
-//     // Adiciona os ingredientes
-//     // Supondo que os ingredientes sejam selecionados a partir de um campo select
-//     let ingredientes = Array.from(document.getElementById("ingrediente").selectedOptions)
-//         .map(option => option.value);
-//     formData.append("ingredientes", JSON.stringify(ingredientes));
-
-//     // Obtém os arquivos de imagem
-//     let imagensInput = document.querySelector("input[type='file']");
-//     for (let i = 0; i < imagensInput.files.length; i++) {
-//         formData.append("imagens", imagensInput.files[i]);
-//     }
-
-//     try {
-//         // Faz a requisição POST com o FormData
-//         let response = await fetch("/api/produtos/cadastrar", {
-//             method: "POST",
-//             body: formData
-//         });
-
-//         if (response.ok) {
-//             let data = await response.json();
-//             alert("Produto cadastrado com sucesso!");
-//             console.log("Produto cadastrado:", data);
-//         } else {
-//             let errorData = await response.json();
-//             alert("Erro ao cadastrar o produto: " + errorData.message);
-//         }
-//     } catch (error) {
-//         console.error("Erro ao cadastrar o produto:", error);
-//         alert("Erro ao cadastrar o produto: " + error.message);
-//     }
-// });
-
-
 const nome = document.getElementById("nomeProduto");
 const descricao = document.getElementById("descricao");
 const preco = document.getElementById("preco");
@@ -148,8 +91,32 @@ const avaliacao = document.getElementById("avaliacao");
 const qtdIngredientes = document.getElementById("qtd-ingrediente");
 const ingredientes = document.getElementById("ingrediente");
 
+const ingredientesTextarea = document.getElementById("textarea-tam-est"); // O ID do seu textarea que contém os ingredientes
+
+function obterIngredientes() {
+    const ingredientes = [];
+    
+    const linhas = ingredientesTextarea.value.split('\n'); // Cada linha é um ingrediente
+    linhas.forEach(linha => {
+        const partes = linha.split('Ingrediente:');
+        const quantidade = partes[0].replace('Quantidade:', '').trim(); // Extrai a quantidade
+        const idIngrediente = partes[1].trim(); // Extrai o ID do ingrediente
+        
+        if (quantidade && idIngrediente) {
+            ingredientes.push({
+                id: parseInt(idIngrediente),
+                quantidade: parseFloat(quantidade)
+            });
+        }
+    });
+
+    return ingredientes;
+}
+
 async function cadastrar() {
     const formData = new FormData();
+
+    const dadosIngr = obterIngredientes();
 
     const produto = {
         nome: document.getElementById('nomeProduto').value,
@@ -205,25 +172,10 @@ document.querySelector("#colorBtn").addEventListener("click", function (event) {
     cadastrar();
 });
 
-
-
-
-
-
-
-
-
-
-
-
 document.querySelector('#btn-incluir').addEventListener('click', function (event) {
     event.preventDefault(); // Evita o comportamento padrão do formulário
     adicionarIngrediente(); // Chama a função para adicionar na lista
 });
-
-
-
-
 
 function adicionarIngrediente(){
     const quantidade = Iquantidade.value.trim();
