@@ -61,7 +61,8 @@
         <div class="container">
             <div class="informacoes" id="filtro-ingrediente" style="display: none;">
                 <label class="label-text-field" for="ingrediente"></label>
-                <input class="nome" type="text" id="ingrediente" placeholder="Consultar ingrediente...">
+                <input class="nome" type="text" id="ingrediente" placeholder="Consultar ingrediente..."
+                    onkeyup="filtrarIngredientes()">
                 <button id="novo-ingrediente" onclick="redirecionarCadasdtroIngrediente()">+</i></button>
             </div>
             <div class="tabela" id="tabela-de-ingrediente" style="display: none;">
@@ -86,7 +87,8 @@
         <div class="container">
             <div class="informacoes" id="filtro-produto" style="display: none;">
                 <label class="label-text-field" for="produto"></label>
-                <input class="nome" type="text" id="produto" placeholder="Consultar produto...">
+                <input class="nome" type="text" id="produto" placeholder="Consultar produto..."
+                    onkeyup="filtrarProdutos()">
                 <button id="novo-ingrediente" onclick="redirecionarCadastroProduto()">+</i></button>
             </div>
             <div class="tabela" id="tabela-de-produto" style="display: none;">

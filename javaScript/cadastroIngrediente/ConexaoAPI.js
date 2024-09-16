@@ -22,14 +22,12 @@ async function cadastrarIngrediente() {
     .then(async response => {
         if (response.ok) {
             alert("Ingrediente cadastrado com sucesso!");
-            return response.json();
+            limparFormulario();
+            window.location.href = "TelaBackOffice.html";
         } else {
             const errorData = await response.json();
             throw new Error("Erro ao cadastrar o ingrediente: " + errorData.message);
         }
-    })
-    .then(data => {
-        console.log("Ingrediente cadastrado:", data);
     })
     .catch(error => {
         console.error("Erro ao cadastrar o ingrediente:", error);
@@ -41,3 +39,11 @@ document.querySelector("#colorBtn").addEventListener("click", function (event) {
     event.preventDefault();
     cadastrarIngrediente();
 });
+
+function limparFormulario(){
+    document.getElementById('nomeIngrediente').value = '';
+    document.getElementById('descricao').value = '';
+    document.getElementById('preco').value = '';
+    document.getElementById('estoque').value = '';
+    document.getElementById('unidadeMedida').value = '-';
+}
