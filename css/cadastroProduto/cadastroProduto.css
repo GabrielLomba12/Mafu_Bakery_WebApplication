@@ -1,0 +1,55 @@
+/* .container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Botão de upload estilizado */
+.btn-upload {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.btn-upload:hover {
+    background-color: #0056b3;
+}
+
+/* Imagens de pré-visualização */
+.container-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Espaçamento entre as imagens */
+    justify-content: center;
+}
+
+.imagem-preview {
+    width: 150px; /* Largura de cada imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    border: 1px solid #ddd; /* Adiciona uma borda leve ao redor da imagem */
+    padding: 5px; /* Espaçamento interno */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); /* Sombra leve para destacar as imagens */
+    border-radius: 4px; /* Bordas arredondadas */
+    object-fit: cover; /* Ajusta o tamanho da imagem sem distorção */
+}
+
+.btn-submit {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.btn-submit:hover {
+    background-color: #218838;
+}
