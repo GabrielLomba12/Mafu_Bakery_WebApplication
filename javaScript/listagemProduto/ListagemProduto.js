@@ -104,7 +104,7 @@ function displayTableData() {
             <td>${item.quantidadeEstoque}</td>
             <td>R$${formatarCasasDecimais(item.preco)}</td>
             <td>${item.status ? 'Ativo' : 'Inativo'}</td>
-            <td class="acao"><button>Alterar</button></td>
+            <td class="acao"><button onclick="enviarParaAlteracao(${item.id})">Alterar</button></td>
         `;
             tableBody.appendChild(row);
         });
