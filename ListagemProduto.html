@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset/reset.css">
+    <link rel="stylesheet" href="./css/listagemProduto/listagemProduto.css">
+    <title>Listar Produto</title>
+</head>
+
+<body>
+
+    <main class="main">
+        <div class="container">
+            <span>Listagem de produtos</span>
+            <div class="informacoes">
+                <div class="container-filtro">
+                    <div class="filtro-produto">
+                        <input id="filtro" onkeyup="filtrarProdutos()" type="text" placeholder="Digite o nome do produto">
+                    </div>
+                </div>
+                <div class="header">
+                    <button onclick="redirecionarCadastroProduto()" id="novo">+</i></button>
+                </div>
+            </div>
+            
+            <div class="divTable">
+
+            </div>
+            <div id="paginacao" class="paginacao"></div>
+        </div>
+    </main>
+
+
+    <script src="javaScript/listagemProduto/ListagemProduto.js"></script>
+    <script src="javaScript/listagemProduto/Filtro.js"></script>
+
+</body>
+
+</html>
