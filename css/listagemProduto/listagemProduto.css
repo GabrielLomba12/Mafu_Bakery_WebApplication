@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background: radial-gradient(circle, #f8f8f8, #e0e0e0);
+}
+
+.main{
+    width: 100%;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 0 auto;
+}
+
+.informacoes{
+    display: flex;
+    flex-direction: row; /* Mantém os elementos em linha */
+    align-items: center;
+    justify-content: flex-start; /* Alinha ao início (esquerda) */
+    text-align: left;
+    width: 56%;
+    margin-top: 20px;
+    gap: 5px;
+}
+
+.informacoes input{
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+}
+
+#novo{
+    font-size: 25px;
+    padding: 7px 14px;
+    border-radius: 10px;
+    border: none;
+    color: white;
+    background-color: #007bff;
+}
+
+.divTable{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.tabela{
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+}
+
+table{
+    width: 70%;
+    background-color: gray;
+    border: solid #c0c0c0 1px;
+    padding: 10px
+}
+
+th{
+    background-color: black;
+    color: white;
+    text-align: left;
+    padding: 5px 10px
+}
+
+td{
+    border: solid #ededed;
+    padding: 5px 10px
+}
+
+.estilo-tabela th {
+    background-color: #007bff;
+    color: white; 
+    padding: 10px; 
+    text-align: left; 
+    font-weight: bold;
+}
+
+.estilo-tabela tbody tr {
+    background-color: white;
+}
+
+
+.estilo-tabela tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+
+.estilo-tabela td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /
+}
