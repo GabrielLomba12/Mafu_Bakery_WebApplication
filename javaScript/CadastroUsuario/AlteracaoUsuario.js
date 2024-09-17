@@ -69,7 +69,7 @@ function alterarDadosUsuario() {
         }
     })
     .catch(error => {
-        console.error('Erro ao cadastrar ou alterar usuário:', error);
+        console.error('Erro ao alterar usuário:', error);
         alert("Erro ao alterar usuário. Por favor, tente novamente.");
         esconderLoading();
         document.querySelector(".main").classList.remove('blur');
