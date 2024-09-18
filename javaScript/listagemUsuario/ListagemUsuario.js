@@ -24,6 +24,9 @@ async function fetchUsuarioData() {
     }
 }
 
+let selectedUserId = null; 
+let selectedToggleState = null; 
+
 function preencherTabela(usuarios) {
     const tabela = document.querySelector('.divTable');
 
@@ -54,12 +57,61 @@ function preencherTabela(usuarios) {
         tr.innerHTML = 
         `<td>${usuario.nome}</td>
         <td>${usuario.email}</td>
-        <td>${usuario.status ? 'Inativo' : 'Ativo'}</td>
+        <td>${usuario.isEnabled ? 'Ativo' : 'Inativo'}</td>
         <td>${usuario.permissao}</td>
         <td class="acao"><button onclick="enviarParaAlteracao(${usuario.id})" id="alterar">Alterar</button></td>
-        <td class="acao"><button>Ativar/Desativar</button></td>`;
+        <td class="acao">
+            <label class="switch">
+                <input type="checkbox" id="toggle-btn-${usuario.id}" ${usuario.isEnabled ? 'checked' : ''} 
+                onclick="exibirModal(${usuario.id}, this.checked)">
+                <span class="slider"></span>
+            </label>
+        </td>`;
         tbody.appendChild(tr);
     });
+}
+
+function alterarStatusUsuario(userId, isEnabled) {
+    fetch(`http://${API}:8080/api/ativaDesativaUsuario?id=${userId}&status=${isEnabled}`, {
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            fetchUsuarioData();
+            fecharModal();
+        } else {
+            alert('Falha ao alterar o status do usuário.');
+        }
+    })
+    .catch(error => {
+        console.error('Erro na requisição:', error);
+        alert('Ocorreu um erro ao tentar alterar o status do usuário.');
+        fecharModal(); 
+    });
+}
+
+function exibirModal(userId, isEnabled) {
+    selectedUserId = userId; 
+    selectedToggleState = isEnabled; 
+
+    document.querySelector("#card-modal").style.display = "flex";
+
+    document.querySelector("#btnsim").onclick = function() {
+        alterarStatusUsuario(selectedUserId, selectedToggleState);
+    };
+    document.querySelector("#btnnao").onclick = function() {
+        fecharModal(); 
+        const toggle = document.querySelector(`#toggle-btn-${selectedUserId}`);
+        toggle.checked = !selectedToggleState;
+    };
+}
+
+function fecharModal() {
+    document.querySelector("#card-modal").style.display = "none";
 }
 
 function enviarParaAlteracao(id) {
