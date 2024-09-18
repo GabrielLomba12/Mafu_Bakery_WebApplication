@@ -214,27 +214,27 @@ async function fetchIngredienteData() {
 //     }
 // }
 
-function desativarUsuario(userId) {
-    try {
-        fetch(`http://${API}:8080/api/ativaDesativaUsuario?id=${userId}`, {
-            method: 'PATCH',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                fetchUserData();
-                document.querySelector("#card-modal").style.display = "none";
-            } else 
-                alert('Falha ao alterar o status do usuário.');
-        })
-    } catch (error) {
-        console.error('Erro na requisição:', error);
-        alert('Ocorreu um erro ao tentar alterar o status do usuário.');
-    }
-};
+// function desativarUsuario(userId) {
+//     try {
+//         fetch(`http://${API}:8080/api/ativaDesativaUsuario?id=${userId}`, {
+//             method: 'PATCH',
+//             headers: {
+//                 'Authorization': `Bearer ${token}`,
+//                 'Content-Type': 'application/json'
+//             }
+//         })
+//         .then(response => {
+//             if (response.ok) {
+//                 fetchUserData();
+//                 document.querySelector("#card-modal").style.display = "none";
+//             } else 
+//                 alert('Falha ao alterar o status do usuário.');
+//         })
+//     } catch (error) {
+//         console.error('Erro na requisição:', error);
+//         alert('Ocorreu um erro ao tentar alterar o status do usuário.');
+//     }
+// };
 
 document.querySelector("#btnsim").addEventListener('click', (event) => {
     event.preventDefault();
