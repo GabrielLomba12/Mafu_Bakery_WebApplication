@@ -25,7 +25,7 @@ async function fetchProdutoData(page = 0) {
         console.log(result);  // Verifique aqui se os dados estão corretos
 
         data = result.produtos; // Armazena os produtos recebidos
-        paginasTotais = result.paginasTotais; // Armazena o número total de páginas
+        paginasTotais = result.totalPages; // Armazena o número total de páginas
         displayTableData();
         setupPagination();
     } catch (error) {
@@ -115,7 +115,12 @@ function displayTableData() {
 }
 
 function setupPagination() {
-    const paginacao = document.getElementById('paginacao');
+    const paginacao = document.getElementById('pagination');
+    if (!paginacao) {
+        console.error("Elemento de paginação não encontrado!");
+        return;
+    }
+
     paginacao.innerHTML = '';
 
     for (let i = 1; i <= paginasTotais; i++) {
