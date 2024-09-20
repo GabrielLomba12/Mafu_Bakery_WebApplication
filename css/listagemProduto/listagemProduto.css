@@ -102,3 +102,8 @@ td{
     padding: 10px;
     border-bottom: 1px solid #ddd; /
 }
+
+#pesquisa-produto img {
+    width: 20px;
+    height: 20px;
+}
