@@ -6,7 +6,6 @@ const Iquantidade = document.querySelector("#qtd-ingrediente")
 const Iingrediente = document.querySelector("#ingrediente")
 
 document.addEventListener("DOMContentLoaded", listarIngredientes(),{})
-// document.addEventListener("DOMContentLoaded", listarProdutos(),{})
 
 async function listarIngredientes() {
     let listaIngredientes = [];
@@ -45,42 +44,6 @@ async function listarIngredientes() {
         console.log("Erro: " + error);
     });
 }
-
-// let imageCount = 1; // Inicia o contador de imagens
-
-// document.getElementById('add-image-btn').addEventListener('click', function () {
-//     const container = document.getElementById('imagens-container');
-
-//     // Cria um novo div para a imagem
-//     const newImageDiv = document.createElement('div');
-//     newImageDiv.classList.add('EscolhaImg');
-
-//     // Adiciona um título para a nova imagem
-//     const newImageTitle = document.createElement('p');
-//     newImageTitle.innerText = `Imagem ${imageCount + 1}`;
-//     newImageDiv.appendChild(newImageTitle);
-
-//     // Cria o rótulo e o input para o upload de imagem
-//     const label = document.createElement('label');
-//     label.classList.add('picture');
-//     label.setAttribute('for', `picture__input_${imageCount}`);
-//     label.setAttribute('tabIndex', '0');
-//     newImageDiv.appendChild(label);
-
-//     const imageSpan = document.createElement('span');
-//     imageSpan.classList.add('picture__image');
-//     label.appendChild(imageSpan);
-
-//     const input = document.createElement('input');
-//     input.type = 'file';
-//     input.name = 'picture__input';
-//     input.id = `picture__input_${imageCount}`;
-//     input.setAttribute('multiple', true); // Permite múltiplos uploads de imagens
-//     newImageDiv.appendChild(input);
-
-//     container.appendChild(newImageDiv);
-//     imageCount++; // Incrementa o contador
-// });
 
 const nome = document.getElementById("nomeProduto");
 const descricao = document.getElementById("descricao");
