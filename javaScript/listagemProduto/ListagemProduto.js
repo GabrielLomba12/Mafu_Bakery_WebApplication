@@ -3,7 +3,6 @@ var API = "localhost"; //Setar essa variavel quando testar local e comentar a do
 
 const emailUsuario = localStorage.getItem("email");
 var token = localStorage.getItem("tokenAcesso");
-// buscarUsuario(emailUsuario);
 
 const linhasPagina = 10;
 let paginaAtual = 1;
@@ -69,9 +68,15 @@ function displayTableData() {
             <td>R$${formatarCasasDecimais(item.preco)}</td>
             <td>${item.status ? 'Ativo' : 'Inativo'}</td>
             <td class="acao"><button onclick="enviarParaAlteracao(${item.id})" id="alterar">Alterar</button></td>
-            <td class="acao"><button id="ativar">Ativar/Desativar</button></td>
+            <td class="acao">
+            <label class="switch">
+                <input type="checkbox" id="toggle-btn-${item.id}" ${item.status ? 'checked' : ''} 
+                onclick="exibirModalProduto(${item.id}, this.checked)">
+                <span class="slider"></span>
+            </label>
+            </td>
             <td class="acao"><button>Visualizar</button></td>
-        `;
+            `;
             tableBody.appendChild(row);
         });
     } else if (permissao === "ESTOQUISTA") {
@@ -114,6 +119,25 @@ function displayTableData() {
     }
 }
 
+let selectedProdutoId = null; 
+let selectedToggleStatus = null;
+
+function exibirModalProduto(produtoId, statusProduto) {
+    selectedProdutoId = produtoId; 
+    selectedToggleStatus = statusProduto; 
+
+    document.querySelector("#card-modal").style.display = "flex";
+
+    document.querySelector("#btnsim").onclick = function() {
+        alterarStatusProduto(selectedProdutoId, selectedToggleStatus);
+    };
+    document.querySelector("#btnnao").onclick = function() {
+        fecharModalProduto(); 
+        const toggle = document.querySelector(`#toggle-btn-${selectedProdutoId}`);
+        toggle.checked = !selectedToggleStatus;
+    };
+}
+
 function setupPagination() {
     const paginacao = document.getElementById('pagination');
     if (!paginacao) {
@@ -138,6 +162,29 @@ function setupPagination() {
     }
 }
 
+function alterarStatusProduto(produtoId, status) {
+    fetch(`http://${API}:8080/api/produtos/statusProduto?id=${produtoId}&status=${status}`, {
+        method: 'PATCH',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            fetchProdutoData(paginaAtual - 1);
+            fecharModalProduto();
+        } else {
+            alert('Falha ao alterar o status do produto.');
+        }
+    })
+    .catch(error => {
+        console.error('Erro na requisição:', error);
+        alert('Ocorreu um erro ao tentar alterar o status do produto.');
+        fecharModalProduto(); 
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     fetchProdutoData(); // Carrega os dados do backend quando a página é carregada
 });
@@ -148,6 +195,10 @@ function formatarCasasDecimais(numero) {
 
 function redirecionarCadastroProduto() {
     window.location.href = "cadastroProduto.html";
+}
+
+function fecharModalProduto() {
+    document.querySelector("#card-modal").style.display = "none";
 }
 
 function enviarParaAlteracao(id) {

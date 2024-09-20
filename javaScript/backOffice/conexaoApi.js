@@ -10,13 +10,14 @@ document.getElementById('btn-usuario').addEventListener('click', () => {
 });
 
 document.getElementById('btn-ingrediente').addEventListener('click', () => {
-    document.getElementById('tabela-de-produto').style.display = 'none';
-    document.getElementById('filtro-produto').style.display = 'none';
-    document.getElementById('tabela-de-usuario').style.display = 'none';
-    document.getElementById('filtro-usuario').style.display = 'none';
-    document.getElementById('tabela-de-ingrediente').style.display = 'flex';
-    document.getElementById('filtro-ingrediente').style.display = 'flex';
-    fetchIngredienteData();
+    // document.getElementById('tabela-de-produto').style.display = 'none';
+    // document.getElementById('filtro-produto').style.display = 'none';
+    // document.getElementById('tabela-de-usuario').style.display = 'none';
+    // document.getElementById('filtro-usuario').style.display = 'none';
+    // document.getElementById('tabela-de-ingrediente').style.display = 'flex';
+    // document.getElementById('filtro-ingrediente').style.display = 'flex';
+    // fetchIngredienteData();
+    window.location.href = "ListagemIngrediente.html";
 });
 
 document.getElementById('btn-produto').addEventListener('click', () => {
@@ -88,66 +89,66 @@ function formatarCasasDecimais(numero) {
     return Number(numero).toFixed(2);
 }
 
-async function fetchIngredienteData() {
-    try {
-        const response = await fetch(`http://${API}:8080/api/mp`, {
-            method: 'GET',
-            headers: {
-                'Authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
-            }
-        });
-        const ingredientes = await response.json();
+// async function fetchIngredienteData() {
+//     try {
+//         const response = await fetch(`http://${API}:8080/api/mp`, {
+//             method: 'GET',
+//             headers: {
+//                 'Authorization': `Bearer ${token}`,
+//                 'Content-Type': 'application/json'
+//             }
+//         });
+//         const ingredientes = await response.json();
 
-        const tableBody = document.querySelector('#ingredienteTable tbody');
-        tableBody.innerHTML = '';
+//         const tableBody = document.querySelector('#ingredienteTable tbody');
+//         tableBody.innerHTML = '';
 
-        ingredientes.forEach(ingrediente => {
-            const row = document.createElement('tr');
+//         ingredientes.forEach(ingrediente => {
+//             const row = document.createElement('tr');
 
-            const cellNome = document.createElement('td');
-            cellNome.textContent = ingrediente.nome;
-            row.appendChild(cellNome);
+//             const cellNome = document.createElement('td');
+//             cellNome.textContent = ingrediente.nome;
+//             row.appendChild(cellNome);
 
-            const cellEstoque = document.createElement('td');
-            cellEstoque.textContent = ingrediente.quantidadeEstoque + " " + ingrediente.unidadeMedida;
-            row.appendChild(cellEstoque);
+//             const cellEstoque = document.createElement('td');
+//             cellEstoque.textContent = ingrediente.quantidadeEstoque + " " + ingrediente.unidadeMedida;
+//             row.appendChild(cellEstoque);
 
-            const cellPreco = document.createElement('td');
-            cellPreco.textContent = 'R$ ' + formatarCasasDecimais(ingrediente.preco);
-            row.appendChild(cellPreco);
+//             const cellPreco = document.createElement('td');
+//             cellPreco.textContent = 'R$ ' + formatarCasasDecimais(ingrediente.preco);
+//             row.appendChild(cellPreco);
 
-            const cellStatus = document.createElement('td');
-            if (ingrediente.status) {
-                cellStatus.textContent = 'Ativo';
-            } else 
-                cellStatus.textContent = 'Inativo'
-            row.appendChild(cellStatus);
+//             const cellStatus = document.createElement('td');
+//             if (ingrediente.status) {
+//                 cellStatus.textContent = 'Ativo';
+//             } else 
+//                 cellStatus.textContent = 'Inativo'
+//             row.appendChild(cellStatus);
 
-            const cellEditar = document.createElement('td');
-            const editLink = document.createElement('a');
-            editLink.href = `../cadastroIngrediente.html?id=${ingrediente.id}`;
-            editLink.textContent = 'Editar';
-            cellEditar.appendChild(editLink);
-            row.appendChild(cellEditar);
+//             const cellEditar = document.createElement('td');
+//             const editLink = document.createElement('a');
+//             editLink.href = `../cadastroIngrediente.html?id=${ingrediente.id}`;
+//             editLink.textContent = 'Editar';
+//             cellEditar.appendChild(editLink);
+//             row.appendChild(cellEditar);
 
-            const cellAtivar_Desativar = document.createElement('td');
-            const href_putStatus = document.createElement('a');
-            href_putStatus.href = '#';
-            href_putStatus.textContent = 'Ativar/Desativar';
-            href_putStatus.addEventListener('click', () => {
-                document.querySelector("#card-modal").style.display = "flex";
-                document.querySelector("#btnsim").setAttribute('data-user-id', ingrediente.id);
-            });
-            cellAtivar_Desativar.appendChild(href_putStatus);
-            row.appendChild(cellAtivar_Desativar);
+//             const cellAtivar_Desativar = document.createElement('td');
+//             const href_putStatus = document.createElement('a');
+//             href_putStatus.href = '#';
+//             href_putStatus.textContent = 'Ativar/Desativar';
+//             href_putStatus.addEventListener('click', () => {
+//                 document.querySelector("#card-modal").style.display = "flex";
+//                 document.querySelector("#btnsim").setAttribute('data-user-id', ingrediente.id);
+//             });
+//             cellAtivar_Desativar.appendChild(href_putStatus);
+//             row.appendChild(cellAtivar_Desativar);
 
-            tableBody.appendChild(row);
-        });
-    } catch (error) {
-        console.error('Erro ao buscar os dados dos ingredientes:', error);
-    }
-}
+//             tableBody.appendChild(row);
+//         });
+//     } catch (error) {
+//         console.error('Erro ao buscar os dados dos ingredientes:', error);
+//     }
+// }
 
 // async function fetchProdutosData() {
 //     try {
@@ -236,31 +237,31 @@ async function fetchIngredienteData() {
 //     }
 // };
 
-document.querySelector("#btnsim").addEventListener('click', (event) => {
-    event.preventDefault();
-    const userId = document.querySelector("#btnsim").getAttribute('data-user-id');
-    desativarUsuario(userId)
-}); 
+// document.querySelector("#btnsim").addEventListener('click', (event) => {
+//     event.preventDefault();
+//     const userId = document.querySelector("#btnsim").getAttribute('data-user-id');
+//     desativarUsuario(userId)
+// }); 
 
-document.querySelector("#btnnao").addEventListener('click', () => {
-    document.querySelector("#card-modal").style.display = "none";
-});
+// document.querySelector("#btnnao").addEventListener('click', () => {
+//     document.querySelector("#card-modal").style.display = "none";
+// });
 
-function redirecionarCadastroUsuario() {
-    window.location.href = "cadastroUsuario.html";
-}
+// function redirecionarCadastroUsuario() {
+//     window.location.href = "cadastroUsuario.html";
+// }
 
-function redirecionarCadastroProduto() {
-    window.location.href = "cadastroProduto.html";
-}
+// function redirecionarCadastroProduto() {
+//     window.location.href = "cadastroProduto.html";
+// }
 
-function redirecionarCadasdtroIngrediente() {
-    window.location.href = "cadastroIngrediente.html";
-}
+// function redirecionarCadasdtroIngrediente() {
+//     window.location.href = "cadastroIngrediente.html";
+// }
 
-const funcoes = document.querySelector(".funcoes")
-let link = document.createElement("a")
-let usuarioLogadoId;
+// const funcoes = document.querySelector(".funcoes")
+// let link = document.createElement("a")
+// let usuarioLogadoId;
 
 function buscarUsuario(email) {
     fetch(`http://` + API + `:8080/api/usuarioLogado?email=${email}`, {
