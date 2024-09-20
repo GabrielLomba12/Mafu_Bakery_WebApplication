@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function preencherFormulario(data) {
+    const inputImagem = document.getElementById("container-preview")
     // Preencher os campos do formulário com os dados recebidos
     document.getElementById("nomeProduto").value = data.nome;
     document.getElementById("preco").value = data.preco;
@@ -30,7 +31,7 @@ function preencherFormulario(data) {
     document.getElementById("descricao").value = data.descricao;
     document.getElementById("categoria").value = data.categoria;
     document.getElementById("tamanho").value = data.tamanho;
-    
+
     // Preenchendo ingredientes
     let dadosIngrediente = []
     const ingredienteSelect = document.getElementById("textarea-tam-est");
@@ -41,6 +42,14 @@ function preencherFormulario(data) {
         dadosIngrediente.push({quantidade, ingredienteid});
         const texto = dadosIngrediente.map(item => `Quantidade: ${item.quantidade}, Ingrediente: ${item.ingredienteid}`).join('\n');
         ingredienteSelect.value = texto;
+    });
+
+    data.imagens.forEach(url => {
+        const imgElement = document.createElement('img');
+        imgElement.src = url;
+        imgElement.alt = data.nome;
+        imgElement.classList.add('imagem-preview'); // Classe para estilização
+        inputImagem.appendChild(imgElement);
     });
 
 }
