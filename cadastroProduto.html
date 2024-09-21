@@ -149,15 +149,40 @@
                         </div>
 
                          <!-- Container para pré-visualização das imagens -->
-                         <div id="container-preview" class="container-preview">
-                            <!-- As imagens serão adicionadas aqui -->
-                        </div>
+                         <!-- <div id="container-preview" class="container-preview">
+                            As imagens serão adicionadas aqui
+                        </div> -->
 
                         <!-- Botão para adicionar imagens -->
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                             <label for="input-imagens" class="btn-upload">Adicionar Imagens</label>
                             <input type="file" id="input-imagens" name="imagens" multiple style="display: none;">
+                        </div> -->
+
+                        <!-- Container para exibir a imagem principal -->
+                        <div id="preview-imagem-principal" class="preview-imagem-principal">
+                            <p>Imagem Principal:</p>
+                            <img id="imagem-principal" src="" alt="Imagem Principal" style="display: none; width: 200px; height: auto;"/>
                         </div>
+
+                        <!-- Botão para adicionar a imagem principal -->
+                        <div class="form-group">
+                            <label for="input-imagem-principal" class="btn-upload">Adicionar Imagem Principal</label>
+                            <input type="file" id="input-imagem-principal" name="imagemPrincipal" accept="image/*" style="display: none;" required>
+                        </div>
+
+                        <!-- Container para exibir as imagens adicionais -->
+                        <div id="preview-imagens-adicionais" class="preview-imagens-adicionais">
+                            <p>Imagens Adicionais:</p>
+                            <div id="container-imagens"></div>
+                        </div>
+
+                        <!-- Botão para adicionar imagens adicionais -->
+                        <div class="form-group">
+                            <label for="input-imagens" class="btn-upload">Adicionar Imagens Adicionais</label>
+                            <input type="file" id="input-imagens" name="imagens" multiple accept="image/*" style="display: none;">
+                        </div>
+
 
                         <hr class="mb-4">
                         <div class="col-md-6 mb-2">
