@@ -24,7 +24,7 @@
 }
 
 /* Imagens de pré-visualização */
-.container-preview {
+.container-imagens {
     display: flex;
     flex-wrap: wrap;
     gap: 10px; /* Espaçamento entre as imagens */
