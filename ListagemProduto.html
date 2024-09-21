@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="css/listagemProduto/listagemProduto.css">
     <link rel="stylesheet" href="css/desativarItem/desativarItem.css">
     <link rel="stylesheet" href="css/backOffice/BackOffice.css">
+    <link rel="stylesheet" href="css/previewProduto/PreviewProduto.css">
     <script src="javaScript/listagemProduto/ListagemProduto.js" defer></script>
+    <script src="javaScript/listagemProduto/utils.js"></script>
     <title>Listar Produto</title>
 </head>
 
@@ -22,19 +24,25 @@
                     <div class="filtro-produto">
                         <input id="filtro" type="text" placeholder="Digite o nome do produto">
                     </div>
-                    <button onclick="filtrarProdutos()" id="pesquisa-produto"><img src="images/lupa.png" alt="Pesquisa"></button>
+                    <button onclick="filtrarProdutos()" id="pesquisa-produto"><img src="images/lupa.png"
+                            alt="Pesquisa"></button>
                 </div>
                 <div class="header">
                     <button onclick="redirecionarCadastroProduto()" id="novo">+</i></button>
                 </div>
             </div>
-            
+
             <div class="divTable">
 
             </div>
             <div id="pagination" class="paginacao"></div>
         </div>
     </main>
+
+    <div class="card-produto">
+        <div class="content"></div>
+    </div>
+
     <div class="card" id="card-modal">
         <div class="modal-confirm" id="modal-confirm">
             <p class="modal-heading">Deseja alterar o status?</p>

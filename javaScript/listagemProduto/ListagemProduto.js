@@ -7,7 +7,7 @@ var token = localStorage.getItem("tokenAcesso");
 const linhasPagina = 10;
 let paginaAtual = 1;
 let paginasTotais = 0;
-let data = []; // Array para armazenar os dados dos produtos
+let data = [];
 
 var permissao = localStorage.getItem("permissao")
 
@@ -19,12 +19,11 @@ async function fetchProdutoData(page = 0) {
                 'Authorization': `Bearer ${token}`
             }
         });
-         // Substitua pela URL do seu backend
         const result = await response.json();
-        console.log(result);  // Verifique aqui se os dados estão corretos
+        console.log(result); 
 
-        data = result.produtos; // Armazena os produtos recebidos
-        paginasTotais = result.totalPages; // Armazena o número total de páginas
+        data = result.produtos;
+        paginasTotais = result.totalPages; 
         displayTableData();
         setupPagination();
     } catch (error) {
@@ -75,7 +74,7 @@ function displayTableData() {
                 <span class="slider"></span>
             </label>
             </td>
-            <td class="acao"><button>Visualizar</button></td>
+            <td class="acao"><button id="preview" onclick="fetchPreviewProduto(${item.id})">Visualizar</button></td>
             `;
             tableBody.appendChild(row);
         });
@@ -185,22 +184,91 @@ function alterarStatusProduto(produtoId, status) {
     });
 }
 
+function previewProduto(id) {
+    localStorage.setItem("produtoId", id)
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-    fetchProdutoData(); // Carrega os dados do backend quando a página é carregada
+    fetchProdutoData(); 
 });
 
-function formatarCasasDecimais(numero) {
-    return Number(numero).toFixed(2);
+let imagemAtual = 0;
+
+function fetchPreviewProduto(id) {
+    fetch(`http://${API}:8080/api/produtos/exibicao?id=${id}`, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(response => {
+        exibirModal();
+        console.log(response);
+        if (response.ok) {
+            return response.json();
+        } else {
+            alert("Não foi possível acessar o preview do produto!");
+        }
+    })
+    .then(data => {
+        divPreview.innerHTML = '';
+
+        const divInformacoes = document.createElement('div');
+        const divImagens = document.createElement('div');
+
+        divInformacoes.classList.add('div-informacoes');
+        divImagens.classList.add('div-imagens');
+        
+        let imagens = data.imagens;
+
+        function mostrarImagem(index) {
+            divImagens.innerHTML = ''; 
+
+            const imgElement = document.createElement('img');
+            imgElement.src = imagens[index];
+            imgElement.alt = `${data.nome} imagem`;
+            imgElement.style.width = "400px";
+            imgElement.classList.add('img-carousel');
+            divImagens.appendChild(imgElement);
+
+            const prevButton = document.createElement('button');
+            prevButton.id = 'prev-button';
+            prevButton.innerText = '◀';
+            prevButton.onclick = () => {
+                imagemAtual = (imagemAtual > 0) ? imagemAtual - 1 : imagens.length - 1;
+                mostrarImagem(imagemAtual);
+            };
+
+            const nextButton = document.createElement('button');
+            nextButton.id = 'next-button';
+            nextButton.innerText = '▶';
+            nextButton.onclick = () => {
+                imagemAtual = (imagemAtual < imagens.length - 1) ? imagemAtual + 1 : 0;
+                mostrarImagem(imagemAtual);
+            };
+
+            divImagens.appendChild(prevButton);
+            divImagens.appendChild(nextButton);
+        }
+
+        mostrarImagem(imagemAtual);
+
+        divPreview.appendChild(divImagens);
+
+        divInformacoes.innerHTML = `
+            <button class="close-btn" onclick="fecharModal()">X</button>
+            <p>${data.nome}</p>
+            <p>${data.descricao}</p>
+            <p>Avaliação: ${data.avaliacao}</p>
+            <p>R$ ${data.preco}</p>
+        `;
+        divPreview.appendChild(divInformacoes);
+
+    })
+    .catch(error => {
+        console.error("Erro ao buscar preview do produto:", error);
+        alert("Ocorreu um erro ao acessar o preview do produto.");
+    });
 }
 
-function redirecionarCadastroProduto() {
-    window.location.href = "cadastroProduto.html";
-}
 
-function fecharModalProduto() {
-    document.querySelector("#card-modal").style.display = "none";
-}
-
-function enviarParaAlteracao(id) {
-    window.location.href = `../cadastroProduto.html?id=${id}`
-}

@@ -32,15 +32,15 @@ function filtrarProdutos() {
                 // Caso a lista de produtos retornada seja vazia, exibe mensagem de produto não encontrado
                 alert("Produto não encontrado")
             } else {
-                data = result.produtos; // Armazena os produtos filtrados
-                totalPages = result.totalPages; // Armazena o número total de páginas para os produtos filtrados
-                displayTableData(); // Exibe os dados filtrados
-                setupPagination(); // Configura a paginação para os dados filtrados
+                data = result.produtos; 
+                totalPages = result.totalPages; 
+                displayTableData(); 
+                setupPagination(); 
             }
         } catch (error) {
             console.error('Erro ao buscar dados filtrados:', error);
         }
     }
 
-    fetchFilteredData(); // Chama a função para buscar os produtos filtrados
+    fetchFilteredData(); 
 }
