@@ -148,6 +148,7 @@ function fecharModalIngrediente() {
 }
 
 function enviarParaAlteracao(id) {
+    localStorage.setItem('ingredienteId', id)
     window.location.href = `../cadastroIngrediente.html?id=${id}`
 }
 

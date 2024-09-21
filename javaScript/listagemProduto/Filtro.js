@@ -31,8 +31,8 @@ function filtrarProdutos() {
             } else {
                 data = result.produtos; 
                 totalPages = result.totalPages;
-                displayTableData; 
-                setupPagination; 
+                displayTableData(); 
+                setupPagination(); 
             }
         } catch (error) {
             console.error('Erro ao buscar dados filtrados:', error);
