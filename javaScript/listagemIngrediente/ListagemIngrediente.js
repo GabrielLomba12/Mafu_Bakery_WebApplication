@@ -3,6 +3,7 @@ var API = "localhost"; //Setar essa variavel quando testar local e comentar a do
 
 const emailUsuario = localStorage.getItem("email");
 var token = localStorage.getItem("tokenAcesso");
+const permissao = localStorage.getItem("permissao")
 let selectedIngredienteId = null; 
 let selectedToggleStats = null; 
 
@@ -28,6 +29,7 @@ async function fetchIngredienteData() {
 function preencherTabela(ingredientes) {
     const tabela = document.querySelector('.divTable');
 
+    if(permissao === "ADMINISTRADOR") {
         tabela.innerHTML = `
         <div class="tabela" id="tabela-de-usuario"> 
             <table border="1" class="estilo-tabela" id="userTable">
@@ -46,29 +48,62 @@ function preencherTabela(ingredientes) {
             </table>
         </div>`;
 
-    const tbody = document.querySelector("tbody");
-    tbody.innerHTML = "";
+        const tbody = document.querySelector("tbody");
+        tbody.innerHTML = "";
 
-    ingredientes.forEach(ingrediente => {
-        
-        const tr = document.createElement("tr");
-        tr.innerHTML = 
-        `<td>${ingrediente.nome}</td>
-        <td>${ingrediente.quantidadeEstoque}</td>
-        <td>${ingrediente.preco}</td>
-        <td>${ingrediente.status ? 'Ativo' : 'Inativo'}</td>
-        <td class="acao"><button onclick="enviarParaAlteracao(${ingrediente.id})" id="alterar">Alterar</button></td>
-        <td class="acao">
-            <label class="switch">
-                <input type="checkbox" id="toggle-btn-${ingrediente.id}" ${ingrediente.status ? 'checked' : ''} 
-                onclick="exibirModalIngrediente(${ingrediente.id}, this.checked)">
-                <span class="slider"></span>
-            </label>
-        </td>`;
-        tbody.appendChild(tr);
-    });
-}
+        ingredientes.forEach(ingrediente => {
+            
+            const tr = document.createElement("tr");
+            tr.innerHTML = 
+            `<td>${ingrediente.nome}</td>
+            <td>${ingrediente.quantidadeEstoque}</td>
+            <td>${ingrediente.preco}</td>
+            <td>${ingrediente.status ? 'Ativo' : 'Inativo'}</td>
+            <td class="acao"><button onclick="enviarParaAlteracao(${ingrediente.id})" id="alterar">Alterar</button></td>
+            <td class="acao">
+                <label class="switch">
+                    <input type="checkbox" id="toggle-btn-${ingrediente.id}" ${ingrediente.status ? 'checked' : ''} 
+                    onclick="exibirModalIngrediente(${ingrediente.id}, this.checked)">
+                    <span class="slider"></span>
+                </label>
+            </td>`;
+            tbody.appendChild(tr);
+        });
+    } else if(permissao === "ESTOQUISTA") {
+        tabela.innerHTML = `
+        <div class="tabela" id="tabela-de-usuario"> 
+            <table border="1" class="estilo-tabela" id="userTable">
+                <thead> 
+                    <tr>       
+                        <th>Nome</th>
+                        <th>Estoque</th>
+                        <th>Preço</th>
+                        <th>Status</th>
+                        <th class="acao">Alterar</th>
+                    </tr>
+                </thead>
+                <tbody id="table-body">
+                </tbody>
+            </table>
+        </div>`;
 
+        const tbody = document.querySelector("tbody");
+        tbody.innerHTML = "";
+
+        ingredientes.forEach(ingrediente => {
+            
+            const tr = document.createElement("tr");
+            tr.innerHTML = 
+            `<td>${ingrediente.nome}</td>
+            <td>${ingrediente.quantidadeEstoque}</td>
+            <td>${ingrediente.preco}</td>
+            <td>${ingrediente.status ? 'Ativo' : 'Inativo'}</td>
+            <td class="acao"><button onclick="enviarParaAlteracao(${ingrediente.id})" id="alterar">Alterar</button></td>
+            `;
+            tbody.appendChild(tr);
+        }); 
+    }
+};
 function alterarStatusIngrediente(ingredienteId, status) {
     fetch(`http://${API}:8080/api/mp/statusMp?id=${ingredienteId}&status=${status}`, {
         method: 'PATCH',
