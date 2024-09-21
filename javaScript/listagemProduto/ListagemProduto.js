@@ -96,8 +96,8 @@ function displayTableData() {
                 </tbody>
             </table>
         </div>
-        
-                        `;
+        `;
+
         const tableBody = document.getElementById('table-body');
         tableBody.innerHTML = '';
         data.forEach(item => {
@@ -187,3 +187,6 @@ function alterarStatusProduto(produtoId, status) {
 document.addEventListener('DOMContentLoaded', () => {
     fetchProdutoData(); 
 });
+
+
+
