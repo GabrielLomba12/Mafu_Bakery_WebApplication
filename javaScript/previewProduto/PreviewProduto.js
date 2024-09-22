@@ -45,7 +45,13 @@ export function fetchPreviewProduto(id) {
 
             const prevButton = document.createElement('button');
             prevButton.id = 'prev-button';
-            prevButton.innerText = '◀';
+            prevButton.classList.add('prev');
+            prevButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                </svg>
+            `;
+            // prevButton.innerText = '◀';
             prevButton.onclick = () => {
                 imagemAtual = (imagemAtual > 0) ? imagemAtual - 1 : imagens.length - 1;
                 mostrarImagem(imagemAtual);
@@ -53,7 +59,13 @@ export function fetchPreviewProduto(id) {
 
             const nextButton = document.createElement('button');
             nextButton.id = 'next-button';
-            nextButton.innerText = '▶';
+            nextButton.classList.add('next');
+            nextButton.innerHTML = `
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            `;
+            // nextButton.innerText = '▶';
             nextButton.onclick = () => {
                 imagemAtual = (imagemAtual < imagens.length - 1) ? imagemAtual + 1 : 0;
                 mostrarImagem(imagemAtual);
@@ -69,10 +81,11 @@ export function fetchPreviewProduto(id) {
 
         divInformacoes.innerHTML = `
             <button class="close-btn" onclick="fecharModal()">X</button>
-            <p>${data.nome}</p>
+            <p class="nomeProd">${data.nome}</p>
             <p>${data.descricao}</p>
             <p>Avaliação: ${data.avaliacao}</p>
             <p>R$ ${data.preco}</p>
+            <button class="buttonComprar" type="submit" disabled>Comprar</button>
         `;
         divPreview.appendChild(divInformacoes);
 
@@ -82,5 +95,4 @@ export function fetchPreviewProduto(id) {
         alert("Ocorreu um erro ao acessar o preview do produto.");
     });
 }
-
 window.fetchPreviewProduto = fetchPreviewProduto;
