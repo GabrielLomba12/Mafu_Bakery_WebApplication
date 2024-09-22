@@ -66,8 +66,36 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
+#card-modal-alteracao {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 /* Estilo Modal confirmação */
 .modal-confirm {
+    width: 280px;
+    height: fit-content;
+    background-color: #ffffff;
+    border-radius: 10px;
+    border: 1px solid rgb(206, 206, 206);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 15px;
+    position: relative;
+    font-family: Arial, Helvetica, sans-serif;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.066);
+}
+
+.modal-confirm-alteracao {
     width: 280px;
     height: fit-content;
     background-color: #ffffff;
