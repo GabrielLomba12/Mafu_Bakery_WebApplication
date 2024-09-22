@@ -1,5 +1,3 @@
-
-
 function formatarCasasDecimais(numero) {
     return Number(numero).toFixed(2);
 }

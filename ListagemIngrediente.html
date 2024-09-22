@@ -4,10 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="./css/reset/reset.css">
     <link rel="stylesheet" href="css/listagemProduto/listagemProduto.css">
     <link rel="stylesheet" href="css/desativarItem/desativarItem.css">
     <link rel="stylesheet" href="css/backOffice/BackOffice.css">
+
+    <script src="javaScript/cadastroIngrediente/ConexaoAPI.js" defer></script>
+    <script src="javaScript/listagemIngrediente/ListagemIngrediente.js" defer ></script>
+    <script src="javaScript/listagemIngrediente/Filtro.js" defer></script>
+    
+
     <title>Listar Ingredientes</title>
 </head>
 
@@ -21,8 +28,8 @@
                         <input id="filtro" onkeyup="filtrarIngredientes()" type="text" placeholder="Digite o nome do ingrediente">
                     </div>
                 </div>
-                <div class="header">
-                    <button onclick="redirecionarCadastroIngrediente()" id="novo">+</i></button>
+                <div class="header" id="headerA">
+                    <button id="novo">+</i></button>
                 </div>
             </div>
             <div class="divTable"></div>
@@ -42,9 +49,6 @@
             <circle r="20" cy="50" cx="50"></circle>
         </svg>
     </div>
-
-    <script src="javaScript/listagemIngrediente/ListagemIngrediente.js"></script>
-    <script src="javaScript/listagemIngrediente/Filtro.js"></script>
 
 </body>
 

@@ -3,12 +3,21 @@ var API = "localhost"; //Setar essa variavel quando testar local e comentar a do
 
 const emailUsuario = localStorage.getItem("email");
 var token = localStorage.getItem("tokenAcesso");
-const permissao = localStorage.getItem("permissao")
+var permissao = localStorage.getItem("permissao")
 let selectedIngredienteId = null; 
 let selectedToggleStats = null; 
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchIngredienteData();
+    if(permissao === "ESTOQUISTA") {
+        document.getElementById('headerA').style.display = 'none';
+    }
+    else if (permissao === "ADMINISTRADOR") {
+            document.getElementById('novo').addEventListener('click', function () {
+            localStorage.removeItem('ingredienteId');
+            window.location.href = 'cadastroIngrediente.html';
+        });
+    }
 });
 
 async function fetchIngredienteData() {
@@ -25,7 +34,6 @@ async function fetchIngredienteData() {
         console.error("Erro ao buscar ingredientes:", error);
     }
 }
-// Nome	Estoque	Preço	Status	Alterar	Ativar/Desativar
 function preencherTabela(ingredientes) {
     const tabela = document.querySelector('.divTable');
 
@@ -56,8 +64,8 @@ function preencherTabela(ingredientes) {
             const tr = document.createElement("tr");
             tr.innerHTML = 
             `<td>${ingrediente.nome}</td>
-            <td>${ingrediente.quantidadeEstoque}</td>
-            <td>${ingrediente.preco}</td>
+            <td>${ingrediente.quantidadeEstoque + " " + ingrediente.unidadeMedida}</td>
+            <td>R$ ${formatarCasasDecimais(ingrediente.preco)}</td>
             <td>${ingrediente.status ? 'Ativo' : 'Inativo'}</td>
             <td class="acao"><button onclick="enviarParaAlteracao(${ingrediente.id})" id="alterar">Alterar</button></td>
             <td class="acao">
@@ -95,8 +103,8 @@ function preencherTabela(ingredientes) {
             const tr = document.createElement("tr");
             tr.innerHTML = 
             `<td>${ingrediente.nome}</td>
-            <td>${ingrediente.quantidadeEstoque}</td>
-            <td>${ingrediente.preco}</td>
+            <td>${ingrediente.quantidadeEstoque + " " +ingrediente.unidadeMedida}</td>
+            <td>R$ ${formatarCasasDecimais(ingrediente.preco)}</td>
             <td>${ingrediente.status ? 'Ativo' : 'Inativo'}</td>
             <td class="acao"><button onclick="enviarParaAlteracao(${ingrediente.id})" id="alterar">Alterar</button></td>
             `;
@@ -154,4 +162,8 @@ function enviarParaAlteracao(id) {
 
 function redirecionarCadastroIngrediente() {
     window.location.href = "cadastroIngrediente.html";
+}
+
+function formatarCasasDecimais(numero) {
+    return Number(numero).toFixed(2);
 }
