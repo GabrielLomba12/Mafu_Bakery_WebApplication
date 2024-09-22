@@ -15,6 +15,15 @@ document.addEventListener('DOMContentLoaded', () => {
     
 });
 
+document.getElementById("btn-excluir").addEventListener('click', function (event) {
+    event.preventDefault(); // Evita o comportamento padrão do botão
+
+    // Limpar apenas o conteúdo da textArea específica
+    const ingredienteSelect = document.getElementById("textarea-tam-est");
+    ingredienteSelect.value = '';  // Limpa apenas o conteúdo da textArea de ingredientes
+});
+
+
 function voltaPraTelaBackOffice() {
     window.location.href = "TelaBackOffice.html";
 }
