@@ -7,43 +7,43 @@ const Iingrediente = document.querySelector("#ingrediente");
 
 document.addEventListener("DOMContentLoaded", listarIngredientes);
 
-async function listarIngredientes() {
-    let listaIngredientes = [];
-    await fetch(`http://${API}:8080/api/mp`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error("Erro ao acessar a API: " + response.statusText);
-        }
-        return response.json();
-    })
-    .then(data => {
-        listaIngredientes = data;
-        const selectIngrediente = document.getElementById("ingrediente");
-        selectIngrediente.innerHTML = "";
+// async function listarIngredientes() {
+//     let listaIngredientes = [];
+//     await fetch(`http://${API}:8080/api/mp`, {
+//         method: 'GET',
+//         headers: {
+//             'Authorization': `Bearer ${token}`,
+//             'Content-Type': 'application/json'
+//         }
+//     })
+//     .then(response => {
+//         if (!response.ok) {
+//             throw new Error("Erro ao acessar a API: " + response.statusText);
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         listaIngredientes = data;
+//         const selectIngrediente = document.getElementById("ingrediente");
+//         selectIngrediente.innerHTML = "";
 
-        const opcaoPadrao = document.createElement("option");
-        opcaoPadrao.value = "";
-        opcaoPadrao.text = "-";
-        opcaoPadrao.selected = true;
-        selectIngrediente.appendChild(opcaoPadrao);
+//         const opcaoPadrao = document.createElement("option");
+//         opcaoPadrao.value = "";
+//         opcaoPadrao.text = "-";
+//         opcaoPadrao.selected = true;
+//         selectIngrediente.appendChild(opcaoPadrao);
 
-        data.forEach(ingrediente => {
-            const option = document.createElement("option");
-            option.value = ingrediente.id;  // Use o ID como valor para a seleção
-            option.text = `${ingrediente.id} - ${ingrediente.nome}`;
-            selectIngrediente.appendChild(option);
-        });
-    })
-    .catch(error => {
-        console.log("Erro: " + error);
-    });
-}
+//         data.forEach(ingrediente => {
+//             const option = document.createElement("option");
+//             option.value = ingrediente.id;  // Use o ID como valor para a seleção
+//             option.text = `${ingrediente.id} - ${ingrediente.nome}`;
+//             selectIngrediente.appendChild(option);
+//         });
+//     })
+//     .catch(error => {
+//         console.log("Erro: " + error);
+//     });
+// }
 
 const nome = document.getElementById("nomeProduto");
 const descricao = document.getElementById("descricao");
