@@ -14,7 +14,7 @@ body{
     font-size: 64px;
     font-weight: 550;
     text-align: center;
-    color: #007bff;
+    color: rgb(127, 66, 22);
 }
 
 .headerr{
@@ -24,10 +24,6 @@ body{
     align-items: center;
     justify-content: center;
     gap: 10px;
-}
-
-#login_user{
-    font-size: 24px;
 }
 
 a{
@@ -131,7 +127,7 @@ td{
 }
 
 .botoes {
-    background-color: #007bff;
+    background-color: rgb(127, 66, 22);
     color: white; 
     padding: 10px; 
     font-weight: bold;
