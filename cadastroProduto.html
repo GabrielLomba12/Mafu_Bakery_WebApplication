@@ -90,7 +90,7 @@
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="estoque">Estoque</label>
-                                <input type="text" class="form-control" id="estoque" required disabled>
+                                <input type="number" class="form-control" id="estoque" required disabled>
                                 <div class="invalid-feedback">
                                     Informe um estoque válido.
                                 </div>
@@ -141,7 +141,7 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="avaliacao">Avaliação (0 a 5)</label>
-                                <input type="number" class="form-control" id="avaliacao" name="avaliacao" step="0.5" min="0" max="5" placeholder="Avaliação" required>
+                                <input type="number" class="form-control" id="avaliacao" name="avaliacao" step="0.5" min="0" max="5" placeholder="Avaliação" required onkeydown="return false;">
                                 <div class="invalid-feedback">
                                     Insira uma avaliação entre 0 e 5.
                                 </div>
@@ -174,14 +174,17 @@
 
 
                         <hr class="mb-4">
-                        <div class="col-md-6 mb-2">
-                            <button class="btn btn-light btn-lg btn-block" id="colorCancel">
-                                <a href="TelaBackOffice.html" style="color: inherit; text-decoration: none;">Cancelar</a>
-                            </button>
-                        </div>
-                        <div class="col-md-6 mb-2">
-                            <button class="btn btn-primary btn-lg btn-block" id="colorBtn" type="submit">Confirmar
-                                Cadastro</button>
+                        <div id="botoes-acao">
+                            <div class="col-md-6 mb-2">
+                                <a href="TelaBackOffice.html" class="btn btn-light btn-lg btn-block" id="colorCancel" style="text-decoration: none;">
+                                    Cancelar
+                                </a>
+                                
+                            </div>
+                            <div class="col-md-6 mb-2">
+                                <button class="btn btn-primary btn-lg btn-block" id="colorBtn" type="submit">Confirmar
+                                    Cadastro</button>
+                            </div>
                         </div>
                     </form>
                 </div>
