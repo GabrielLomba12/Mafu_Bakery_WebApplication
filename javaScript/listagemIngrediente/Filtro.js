@@ -1,5 +1,5 @@
 function filtrarIngredientes() {
-    var filtro = document.getElementById('ingrediente').value.toUpperCase();
+    var filtro = document.getElementById('filtro').value.toUpperCase();
  
     var ingredientes = document.querySelectorAll("tbody tr");
   

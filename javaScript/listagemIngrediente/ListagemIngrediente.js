@@ -9,6 +9,15 @@ let selectedToggleStats = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchIngredienteData();
+    if(permissao === "ESTOQUISTA") {
+        document.getElementById('headerA').style.display = 'none';
+    }
+    else if (permissao === "ADMINISTRADOR") {
+            document.getElementById('novo').addEventListener('click', function () {
+            localStorage.removeItem('ingredienteId');
+            window.location.href = 'cadastroIngrediente.html';
+        });
+    }
 });
 
 async function fetchIngredienteData() {

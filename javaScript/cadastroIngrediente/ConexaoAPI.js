@@ -4,20 +4,7 @@ var API = "localhost"; //Setar essa variavel quando testar local e comentar a do
 var token = localStorage.getItem("tokenAcesso");
 var permissao = localStorage.getItem("permissao");
 
-document.addEventListener('DOMContentLoaded', function () {
-    if(permissao === "ESTOQUISTA") {
-        document.getElementById('headerA').style.display = 'none';
-    }
-
-    else if (permissao === "ADMINISTRADOR") {
-        document.getElementById('novo').addEventListener('click', function () {
-            localStorage.removeItem('ingredienteId');
-            window.location.href = 'cadastroIngrediente.html';
-        });
-    }
-});
-
-// document.querySelector(".form").addEventListener("submit", validarCamposIngrediente);
+document.querySelector(".form").addEventListener("submit", validarCamposIngrediente);
 
 function validarCamposIngrediente(event) {
     event.preventDefault();
@@ -32,15 +19,15 @@ function validarCamposIngrediente(event) {
             unidadeMedida: document.getElementById('unidadeMedida').value,
         };
 
-        cadastrarIngrediente(ingrediente);
+        cadastrarIngrediente(ingrediente, event);
         // document.querySelector(".form").addEventListener("click", function () {
         //     removerInvalidFeedbackClass();
         // });
-        limparCampos();
     }
 };
 
-function cadastrarIngrediente(ingrediente) {
+function cadastrarIngrediente(ingrediente, event) {
+    event.preventDefault();
     mostrarLoading();
 
     fetch(`http://${API}:8080/api/mp`, {
@@ -55,7 +42,8 @@ function cadastrarIngrediente(ingrediente) {
         if (response.status === 201) {
             setTimeout(() => {
                 esconderLoading();
-                document.querySelector(".modal-confirm").style.display = "flex";
+                document.getElementById("card-modal").style.display = "flex";
+                limparFormulario();
             }, 3000);
         } else {
             const errorData = response.json(); 
