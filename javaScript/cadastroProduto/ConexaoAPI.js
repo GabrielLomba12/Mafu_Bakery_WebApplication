@@ -162,11 +162,9 @@ function atualizarTextarea() {
     // Monta a string com os valores do vetor
     const texto = dadosIngr.map(item => `Quantidade: ${item.quantidade}, Ingrediente: ${item.ingrediente}`).join('\n');
 
-    // Atualiza a textarea com a string
     document.getElementById('textarea-tam-est').value = texto;
 }
 
-// Selecionando elementos do DOM para imagens
 const inputImagemPrincipal = document.getElementById("input-imagem-principal");
 const inputImagensAdicionais = document.getElementById("input-imagens");
 const imgPrincipal = document.getElementById("imagem-principal");
@@ -178,23 +176,16 @@ inputImagemPrincipal.addEventListener("change", function (event) {
     if (file) {
         const reader = new FileReader();
         reader.onload = function (e) {
-            imgPrincipal.src = e.target.result; // Define a URL da imagem
-            imgPrincipal.style.display = 'block'; // Mostra a imagem
+            imgPrincipal.src = e.target.result; 
+            imgPrincipal.style.display = 'block';
         };
         reader.readAsDataURL(file); // Lê a imagem como URL
     }
 });
 
-
-
-// Adiciona o evento ao input para quando o usuário selecionar as imagens
 inputImagensAdicionais.addEventListener('change', function (evento) {
     const arquivos = evento.target.files;
 
-    // Limpa o container de pré-visualização antes de adicionar novas imagens
-    // containerImagens.innerHTML = '';
-
-    // Adiciona as novas imagens ao container
     for (let i = 0; i < arquivos.length; i++) {
         const arquivo = arquivos[i];
 
@@ -203,10 +194,25 @@ inputImagensAdicionais.addEventListener('change', function (evento) {
             const leitor = new FileReader();
 
             leitor.onload = function (e) {
+
+                const imagemContainer = document.createElement('div');
+                imagemContainer.classList.add('imagem-container');
+
                 const img = document.createElement('img');
                 img.src = e.target.result;
-                img.classList.add('imagem-preview'); // Classe para estilização
-                containerImagens.appendChild(img);
+                img.classList.add('imagem-preview');
+                
+                const botaoRemover = document.createElement('button');
+                botaoRemover.textContent = 'Remover';
+                botaoRemover.classList.add('botao-remover');
+
+                botaoRemover.addEventListener('click', function () {
+                    imagemContainer.remove(); // Remove o container da imagem
+                });
+
+                imagemContainer.appendChild(img);
+                imagemContainer.appendChild(botaoRemover);
+                containerImagens.appendChild(imagemContainer);
             };
 
             leitor.readAsDataURL(arquivo); // Lê o arquivo como URL para exibir

@@ -7,9 +7,9 @@ var token = localStorage.getItem("tokenAcesso");
 const linhasPagina = 10;
 let paginaAtual = 1;
 let paginasTotais = 0;
-let data = []; // Array para armazenar os dados dos produtos
+let data = [];
 
-var permissao = localStorage.getItem("permissao")
+var permissao = localStorage.getItem("permissao");
 
 async function fetchProdutoData(page = 0) {
     try {
@@ -19,12 +19,11 @@ async function fetchProdutoData(page = 0) {
                 'Authorization': `Bearer ${token}`
             }
         });
-         // Substitua pela URL do seu backend
         const result = await response.json();
-        console.log(result);  // Verifique aqui se os dados estão corretos
+        console.log(result); 
 
-        data = result.produtos; // Armazena os produtos recebidos
-        paginasTotais = result.totalPages; // Armazena o número total de páginas
+        data = result.produtos;
+        paginasTotais = result.totalPages; 
         displayTableData();
         setupPagination();
     } catch (error) {
@@ -75,7 +74,7 @@ function displayTableData() {
                 <span class="slider"></span>
             </label>
             </td>
-            <td class="acao"><button>Visualizar</button></td>
+            <td class="acao"><button id="preview" onclick="fetchPreviewProduto(${item.id})">Visualizar</button></td>
             `;
             tableBody.appendChild(row);
         });
@@ -97,8 +96,8 @@ function displayTableData() {
                 </tbody>
             </table>
         </div>
-        
-                        `;
+        `;
+
         const tableBody = document.getElementById('table-body');
         tableBody.innerHTML = '';
         data.forEach(item => {
@@ -162,6 +161,44 @@ function setupPagination() {
     }
 }
 
+export function filtrarProdutos() {
+    var filtro = document.getElementById('filtro').value.trim().toUpperCase();
+
+    if (!filtro) {
+        fetchProdutoData();
+        return;
+    }
+
+    async function fetchFilteredData(page = 0) {
+        try {
+            const response = await fetch(`http://${API}:8080/api/produtos/buscarNome?nome=${filtro}&page=${page}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (response.status === 404) {
+                alert('erro de conexão com a API')
+                return;
+            }
+
+            const result = await response.json();
+            if (result.produtos.length === 0) {
+                alert("Produto não encontrado")
+            } else {
+                data = result.produtos; 
+                paginasTotais = result.totalPages;
+                displayTableData(); 
+                setupPagination(); 
+            }
+        } catch (error) {
+            console.error('Erro ao buscar dados filtrados:', error);
+        }
+    }
+
+    fetchFilteredData(); 
+}
+
 function alterarStatusProduto(produtoId, status) {
     fetch(`http://${API}:8080/api/produtos/statusProduto?id=${produtoId}&status=${status}`, {
         method: 'PATCH',
@@ -192,18 +229,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-function formatarCasasDecimais(numero) {
-    return Number(numero).toFixed(2);
-}
 
-function redirecionarCadastroProduto() {
-    window.location.href = "cadastroProduto.html";
-}
 
-function fecharModalProduto() {
-    document.querySelector("#card-modal").style.display = "none";
-}
-
-function enviarParaAlteracao(id) {
-    window.location.href = `../cadastroProduto.html?id=${id}`
-}
+window.filtrarProdutos = filtrarProdutos
