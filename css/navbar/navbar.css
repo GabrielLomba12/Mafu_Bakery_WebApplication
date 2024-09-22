@@ -1,0 +1,23 @@
+.nav{
+    background-color: #925a22;
+    display: flex;
+    flex-direction: row;   
+    align-items: center;
+    justify-content: space-around;
+    gap: 40%;
+    margin-bottom: 25px;
+}
+
+.logo{
+    padding: 10px;
+}
+
+.imgLogo{
+    width: 100px;
+}
+
+#login_user{
+    font-size: 24px;
+    color: white;
+}
+
