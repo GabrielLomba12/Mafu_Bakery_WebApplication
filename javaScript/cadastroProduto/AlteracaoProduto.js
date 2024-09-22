@@ -60,6 +60,7 @@ function preencherFormulario(data) {
         ingredienteSelect.disabled = true;
         document.getElementById("btn-img-principal").style.display = "none";
         document.getElementById("btn-img-secundaria").style.display = "none";
+        document.getElementById("colorBtn").style.display = "none";
         document.getElementById("qtd-ingrediente").placeholder = "Qtd. a inserir"
         botao_incluir.removeEventListener('click', adicionarIngrediente)
         botao_incluir.addEventListener('click', function (event) {
@@ -119,8 +120,8 @@ function fetchConfeccionaProduto(productId, qtd_produto) {
     })
     .then(response => {
         if(response.status === 200) {
-            alert("Estoque alterado com sucesso!");
-            fetchBuscaProduto(productId);
+            document.getElementById("card-modal-alteracao").style.display = "flex";
+            document.getElementById("qtd-ingrediente").value = "";
         }
         else if(response.status === 401) {
             return response.json();
