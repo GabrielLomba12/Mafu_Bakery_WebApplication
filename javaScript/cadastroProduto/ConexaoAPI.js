@@ -139,12 +139,10 @@ document.querySelector("#colorBtn").addEventListener("click", function (event) {
     cadastrar();
 });
 
-document.querySelector('#btn-incluir').addEventListener('click', function (event) {
-    event.preventDefault(); 
-    adicionarIngrediente(); 
-});
+document.querySelector('#btn-incluir').addEventListener('click', adicionarIngrediente);
 
-function adicionarIngrediente(){
+function adicionarIngrediente(event){
+    event.preventDefault();
     const quantidade = Iquantidade.value.trim();
     const ingrediente = Iingrediente.value.trim();
 
