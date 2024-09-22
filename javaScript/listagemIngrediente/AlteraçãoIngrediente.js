@@ -68,32 +68,35 @@ function preencherFormulario(data) {
     }  
 }
 
-function adicionarNovoEstoque() {
+function adicionarNovoEstoque(event) {
+    event.preventDefault();
     const valorNovo = document.getElementById('estoqueNovo').value;
-    fetch(`http://${API}:8080/api/mp/aumentarMp?id=${ingrediente}&novaQuantidade=${valorNovo}`), {
+    mostrarLoading();
+    fetch(`http://${API}:8080/api/mp/aumentarMp?id=${ingrediente}&novaQuantidade=${valorNovo}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         }
-        .then(response => {
-            if (response.status === 200) {
-                setTimeout(() => {
-                    esconderLoading();
-                    document.querySelector(".modal-confirm").style.display = "flex";
-                }, 3000);
-            } else {
-                const errorData = response.json(); 
-                throw new Error("Erro ao alterar o estoque do ingrediente: " + errorData.message);
-            }
-        })
-        .catch(error => {
-            console.error("Erro ao alterar o estoque do ingrediente:", error);
-            esconderLoading();
-            document.querySelector(".main").classList.remove('blur');
-        })
-    }
+    })
+    .then(response => {
+        if (response.status === 200) {
+            setTimeout(() => {
+                esconderLoading();
+                document.getElementById("card-modal").style.display = "flex";
+            }, 3000);
+        } else {
+            const errorData = response.json(); 
+            throw new Error("Erro ao alterar o estoque do ingrediente: " + errorData.message);
+        }
+    })
+    .catch(error => {
+        console.error("Erro ao alterar o estoque do ingrediente:", error);
+        esconderLoading();
+        document.querySelector(".main").classList.remove('blur');
+    })
 }
+
 
 function alterarInterfaceParaEdicaoDoIngrediente() {
     if(permissao === "ESTOQUISTA") {
@@ -103,5 +106,6 @@ function alterarInterfaceParaEdicaoDoIngrediente() {
         document.querySelector('h2').textContent = 'Edite os dados do ingrediente!';
         document.getElementById('colorBtn').textContent = 'Confirmar Alteração'
     }
-    
+    document.getElementById("titulo").textContent = "Ingrediente atualizado!";
+    document.getElementById("conteudo").textContent = "Ingrediente atualizado com sucesso!";
 }
