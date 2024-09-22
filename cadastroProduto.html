@@ -90,7 +90,7 @@
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="estoque">Estoque</label>
-                                <input type="text" class="form-control" id="estoque" value="0" required disabled>
+                                <input type="text" class="form-control" id="estoque" required disabled>
                                 <div class="invalid-feedback">
                                     Informe um estoque válido.
                                 </div>
@@ -115,7 +115,7 @@
                                             <button class="btn btn-primary btn-block btn-incluir" id="btn-incluir">Incluir</button>
                                         </div>
                                         <div class="col-md-6 mb-2">
-                                            <button class="btn btn-secondary btn-block btn-excluir">Excluir</button>
+                                            <button class="btn btn-secondary btn-block btn-excluir" id="btn-excluir">Excluir</button>
                                         </div>
                                     </div>
                                     <label for="textarea-tam-est"></label>
@@ -148,7 +148,6 @@
                             </div>
                         </div>
 
-
                         <!-- Container para exibir a imagem principal -->
                         <div id="preview-imagem-principal" class="preview-imagem-principal">
                             <p>Imagem Principal:</p>
@@ -157,7 +156,7 @@
 
                         <!-- Botão para adicionar a imagem principal -->
                         <div class="form-group">
-                            <label for="input-imagem-principal" class="btn-upload">Adicionar Imagem Principal</label>
+                            <label for="input-imagem-principal" class="btn-upload" id="btn-img-principal">Adicionar Imagem Principal</label>
                             <input type="file" id="input-imagem-principal" name="imagemPrincipal" accept="image/*" style="display: none;" required>
                         </div>
 
@@ -169,7 +168,7 @@
 
                         <!-- Botão para adicionar imagens adicionais -->
                         <div class="form-group">
-                            <label for="input-imagens" class="btn-upload">Adicionar Imagens Adicionais</label>
+                            <label for="input-imagens" class="btn-upload" id="btn-img-secundaria">Adicionar Imagens Adicionais</label>
                             <input type="file" id="input-imagens" name="imagens" multiple accept="image/*" style="display: none;">
                         </div>
 
@@ -186,6 +185,15 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div class="card" id="card-modal">
+        <div class="modal-confirm" id="modal-confirm">
+            <p class="modal-heading">Não foi possível produzir os produtos. Ingredientes faltantes:</p>
+            <textarea name="textarea-tam-est" id="textarea-ingredientes-faltantes" cols="40" rows="9" readonly></textarea>
+            <div class="button-wrapper">
+                <button class="accept-cookie-button" id="btnok">OK</button>
             </div>
         </div>
     </div>

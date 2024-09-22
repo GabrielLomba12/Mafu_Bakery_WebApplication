@@ -223,7 +223,10 @@ function alterarStatusProduto(produtoId, status) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    fetchProdutoData(); 
+    fetchProdutoData(); // Carrega os dados do backend quando a página é carregada
+    if(permissao === "ESTOQUISTA") {
+        document.getElementById("novo").style.display = "none";
+    }
 });
 
 
