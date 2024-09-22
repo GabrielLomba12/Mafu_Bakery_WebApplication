@@ -1,10 +1,9 @@
 // var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
 var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
-const emailUsuario = localStorage.getItem("email");
 var token = localStorage.getItem("tokenAcesso");
 
-const linhasPagina = 10;
+// const linhasPagina = 10;
 let paginaAtual = 1;
 let paginasTotais = 0;
 let data = [];
@@ -29,6 +28,25 @@ async function fetchProdutoData(page = 0) {
     } catch (error) {
         console.error('Erro ao buscar dados:', error);
     }
+}
+
+let selectedProdutoId = null; 
+let selectedToggleStatus = null;
+
+function exibirModalProduto(produtoId, statusProduto) {
+    selectedProdutoId = produtoId; 
+    selectedToggleStatus = statusProduto; 
+
+    document.querySelector("#card-modal").style.display = "flex";
+
+    document.querySelector("#btnsim").onclick = function() {
+        alterarStatusProduto(selectedProdutoId, selectedToggleStatus);
+    };
+    document.querySelector("#btnnao").onclick = function() {
+        fecharModalProduto(); 
+        const toggle = document.querySelector(`#toggle-btn-${selectedProdutoId}`);
+        toggle.checked = !selectedToggleStatus;
+    };
 }
 
 function displayTableData() {
@@ -118,24 +136,6 @@ function displayTableData() {
     }
 }
 
-let selectedProdutoId = null; 
-let selectedToggleStatus = null;
-
-function exibirModalProduto(produtoId, statusProduto) {
-    selectedProdutoId = produtoId; 
-    selectedToggleStatus = statusProduto; 
-
-    document.querySelector("#card-modal").style.display = "flex";
-
-    document.querySelector("#btnsim").onclick = function() {
-        alterarStatusProduto(selectedProdutoId, selectedToggleStatus);
-    };
-    document.querySelector("#btnnao").onclick = function() {
-        fecharModalProduto(); 
-        const toggle = document.querySelector(`#toggle-btn-${selectedProdutoId}`);
-        toggle.checked = !selectedToggleStatus;
-    };
-}
 
 function setupPagination() {
     const paginacao = document.getElementById('pagination');
@@ -230,5 +230,5 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
+window.exibirModalProduto = exibirModalProduto;
 window.filtrarProdutos = filtrarProdutos
