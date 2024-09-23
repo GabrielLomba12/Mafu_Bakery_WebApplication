@@ -77,6 +77,7 @@ function obterIngredientes() {
 }
 
 async function cadastrar() {
+    mostrarLoading()
     const formData = new FormData();
 
     const dadosIngr = obterIngredientes();
@@ -120,18 +121,33 @@ async function cadastrar() {
     })
     .then(async response => {
         if (response.ok) {
-            alert("Produto cadastrado com sucesso!");
-            document.querySelector(".form").reset();
-            window.location.href = 'TelaBackOffice.html';
+            setTimeout(() => {
+                esconderLoading();
+                alert("Cadastro realizado com sucesso!")
+                document.querySelector(".form").reset();
+                window.location.href = 'TelaBackOffice.html';
+            }, 3000);
+            // alert("Produto cadastrado com sucesso!");
+            // document.querySelector(".form").reset();
+            // window.location.href = 'TelaBackOffice.html';
         } else {
             const errorData = await response.json();
             throw new Error("Erro ao cadastrar o produto: " + errorData.message);
         }
     })
-    .catch(error => {
+    .catch(async (error) => {
         console.error("Erro ao cadastrar o produto:", error);
+    
+        if (error.response) {
+            const errorData = await error.response.json();
+            console.log("Dados do erro da API:", errorData);
+        }
+    
         alert("Erro ao cadastrar o produto: " + error.message);
+        esconderLoading();
+        document.querySelector(".main").classList.remove('blur');
     });
+    
 }
 
 document.querySelector("#colorBtn").addEventListener("click", function (event) {
