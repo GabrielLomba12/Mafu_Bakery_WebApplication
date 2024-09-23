@@ -150,10 +150,12 @@ async function cadastrar() {
     
 }
 
-document.querySelector("#colorBtn").addEventListener("click", function (event) {
+document.querySelector("#colorBtn").addEventListener("click", cadastrarProd);
+
+function cadastrarProd(event) {
     event.preventDefault();
     cadastrar();
-});
+}
 
 document.querySelector('#btn-incluir').addEventListener('click', adicionarIngrediente);
 
@@ -187,7 +189,9 @@ const imgPrincipal = document.getElementById("imagem-principal");
 const containerImagens = document.getElementById("container-imagens");
 
 // Evento para a imagem principal
-inputImagemPrincipal.addEventListener("change", function (event) {
+inputImagemPrincipal.addEventListener("change", carregaImagemPrincipal);
+
+function carregaImagemPrincipal(event) {
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
@@ -197,7 +201,7 @@ inputImagemPrincipal.addEventListener("change", function (event) {
         };
         reader.readAsDataURL(file); // Lê a imagem como URL
     }
-});
+}
 
 inputImagensAdicionais.addEventListener('change', function (evento) {
     const arquivos = evento.target.files;
