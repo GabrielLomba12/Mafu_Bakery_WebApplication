@@ -139,4 +139,3 @@ function alterarInterfaceParaEdicao() {
     // Desabilitar o email para edição
     document.getElementById('email').disabled = true;
 }
-

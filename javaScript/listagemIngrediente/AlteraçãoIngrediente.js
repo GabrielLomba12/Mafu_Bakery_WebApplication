@@ -43,7 +43,8 @@ function preencherFormulario(data) {
 
     if(permissao === "ADMINISTRADOR") {
         document.getElementById('estoque').disabled = true;
-
+        document.querySelector(".form").removeEventListener("submit", validarCamposIngrediente);
+        document.querySelector(".form").addEventListener("submit", alterarDadosIngrediente);
     } else if (permissao === "ESTOQUISTA") {
         document.getElementById('nomeIngrediente').disabled = true;
         document.getElementById('descricao').disabled = true;
@@ -66,6 +67,46 @@ function preencherFormulario(data) {
         const unidadeMedidaDiv = document.getElementById('unidadeMedida').closest('.col-md-6');
         unidadeMedidaDiv.insertAdjacentHTML('afterend', novoCampoHTML);
     }  
+}
+
+function alterarDadosIngrediente(event) {
+    event.preventDefault();
+
+    const form = event.target;
+    if (form.checkValidity()) {
+        const ingredienteAlterado = {
+            nome: document.getElementById('nomeIngrediente').value,
+            descricao: document.getElementById('descricao').value,
+            preco: parseFloat(document.getElementById('preco').value),
+            unidadeMedida: document.getElementById('unidadeMedida').value,
+        };
+
+        mostrarLoading();
+        fetch(`http://${API}:8080/api/mp?id=${ingrediente}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(ingredienteAlterado)
+        })
+        .then(response => {
+            if (response.status === 200) {
+                setTimeout(() => {
+                    esconderLoading();
+                    document.getElementById("card-modal").style.display = "flex";
+                }, 3000);
+            } else {
+                const errorData = response.json(); 
+                throw new Error("Erro ao alterar os dados do ingrediente: " + errorData.message);
+            }
+        })
+        .catch(error => {
+            console.error("Erro ao alterar os dados do ingrediente:", error);
+            esconderLoading();
+            document.querySelector(".main").classList.remove('blur');
+        })
+    }
 }
 
 function adicionarNovoEstoque(event) {
