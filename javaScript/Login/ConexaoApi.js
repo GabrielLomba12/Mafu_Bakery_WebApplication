@@ -1,4 +1,3 @@
-// import { loginUsuario } from "./Login";
 var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
 // var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
@@ -68,7 +67,7 @@ function loginInvalido() {
 
     // Adiciona o evento de clique ao botão 'btnOk'
     if (btnOk) {
-        btnOk.addEventListener('click', (event) => {
+        btnOk.addEventListener('click', () => {
             console.log("Botão OK clicado");
             closeModal();
         });
@@ -97,7 +96,7 @@ function redirecionar() {
 }
 
 function loginUsuario() {
-    fetch('http://' + API + ':8080/api/auth/signin', {
+    fetch(`http://${API}:8080/api/auth/signin`, {
         method: 'POST',
         headers: {
             'Content-Type': "application/json"
@@ -135,6 +134,6 @@ function loginUsuario() {
     });
 }
 
-document.querySelector('.tela-back-office').addEventListener('click', function (event) {
+document.querySelector('.tela-back-office').addEventListener('click', function () {
     redirecionar();
 });

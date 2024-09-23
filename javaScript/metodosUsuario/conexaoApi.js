@@ -6,9 +6,6 @@ let token = localStorage.getItem("tokenAcesso");
 document.querySelector(".form").addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const urlParams = new URLSearchParams(window.location.search);
-    const userId = urlParams.get('id'); // Verifica se é edição
-
     const form = event.target;
     if (form.checkValidity() && validarSenha() === true) {
         const usuario = {
@@ -19,20 +16,18 @@ document.querySelector(".form").addEventListener("submit", function (event) {
             permissao: form.querySelector('#permissao').value
         };
         
-        const method = userId ? 'PATCH' : 'POST';
-        const url = userId ? `http://`+API+`:8080/api/alterarUsuario?email=${usuario.email}` : `http://`+API+`:8080/api/usuario`;
-        cadastrar_alterar(usuario, method, url);
-        document.querySelector(".form").addEventListener("click", function () {
-            removerInvalidFeedbackClass();
-        });
+        cadastrar(usuario);
+        // document.querySelector(".form").addEventListener("click", function () {
+        //     removerInvalidFeedbackClass();
+        // });
         limparCampos();
     }
 });
 
-function cadastrar_alterar(usuario, method, url) {
+function cadastrar(usuario) {
     mostrarLoading();
-    fetch(url, {
-        method: method,
+    fetch(`http://`+API+`:8080/api/usuario`, {
+        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
@@ -40,7 +35,7 @@ function cadastrar_alterar(usuario, method, url) {
         body: JSON.stringify(usuario)
     })
     .then(response => {
-        if (response.status === 201 || response.status === 200) {
+        if (response.status === 201) {
             setTimeout(() => {
                 esconderLoading();
                 document.querySelector("#card-modal").style.display = "flex";
@@ -53,8 +48,8 @@ function cadastrar_alterar(usuario, method, url) {
         }
     })
     .catch(error => {
-        console.error('Erro ao cadastrar ou alterar usuário:', error);
-        alert("Erro ao cadastrar ou alterar usuário. Por favor, tente novamente.");
+        console.error('Erro ao cadastrar usuário:', error);
+        alert("Erro ao cadastrar usuário. Por favor, tente novamente.");
         esconderLoading();
         document.querySelector(".main").classList.remove('blur');
     });

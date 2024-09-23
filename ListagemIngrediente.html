@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./css/reset/reset.css">
+    <link rel="stylesheet" href="css/listagemProduto/listagemProduto.css">
+    <link rel="stylesheet" href="css/desativarItem/desativarItem.css">
+    <link rel="stylesheet" href="css/backOffice/BackOffice.css">
+    <link rel="stylesheet" href="css/navbar/navbar.css">
+
+    <script src="javaScript/cadastroIngrediente/ConexaoAPI.js" defer></script>
+    <script src="javaScript/listagemIngrediente/ListagemIngrediente.js" defer ></script>
+    <script src="javaScript/listagemIngrediente/Filtro.js" defer></script>
+    
+
+    <title>Listar Ingredientes</title>
+</head>
+
+<body>
+    <nav class="nav">
+        <div class="logo">
+            <img class="imgLogo" src="images/logo-removebg-preview.png" alt="logo">
+        </div>
+        
+        <div class="userInfo">
+            <p id="login_user"></p>
+        </div>
+    </nav>
+    <main class="main">
+        <div class="container">
+            <span>Listagem de Ingredientes</span>
+            <div class="informacoes">
+                <div class="container-filtro">
+                    <div class="filtro-produto">
+                        <input id="filtro" onkeyup="filtrarIngredientes()" type="text" placeholder="Digite o nome do ingrediente">
+                    </div>
+                </div>
+                <div class="header" id="headerA">
+                    <button id="novo">+</i></button>
+                </div>
+            </div>
+            <div class="divTable"></div>
+        </div>
+    </main>
+    <div class="card" id="card-modal">
+        <div class="modal-confirm" id="modal-confirm">
+            <p class="modal-heading">Deseja alterar o status?</p>
+            <div class="button-wrapper">
+                <button class="accept-cookie-button" id="btnsim">SIM</button>
+                <button class="accept-cookie-button" id="btnnao">NÃO</button>
+            </div>
+        </div>
+    </div>
+    <div id="loadingModal" class="loading-modal">
+        <svg viewBox="25 25 50 50">
+            <circle r="20" cy="50" cx="50"></circle>
+        </svg>
+    </div>
+
+</body>
+
+</html>

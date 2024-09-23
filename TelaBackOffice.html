@@ -8,62 +8,125 @@
 
     <link rel="stylesheet" href="./css/reset/reset.css">
     <link rel="stylesheet" href="./css/backOffice/BackOffice.css">
+    <link rel="stylesheet" href="css/navbar/navbar.css">
 
-    <script src="./javaScript/backOffice/conexaoApi.js" defer></script>
-    <script src="./javaScript/backOffice/Filtro.js" defer></script>
-
-    
+    <script src="javaScript/backOffice/conexaoApi.js" defer></script>
 
     <title>Back-Office</title>
 </head>
 
 <body>
     <header>
-        <div class="header">
-            <h1 class="titulo">Back-Office</h1>
-            <p id="login_user"></p>
-            <div class="funcoes">
-                
-            </div>
-        </div>
-        
-
-    </header>
- 
-    <main >
-       
-        <div class="container">
-            <div class="informacoes">
-                <label class="label-text-field" for="user">Usuário</label>
-                <input class="nome" type="text" id="user" placeholder="Usuário" onkeyup="filtrarUsuarios()">
-                <button id="novo-usuario" onclick="redirecionar()">+</i></button>
+        <nav class="nav">
+            <div class="logo">
+                <img class="imgLogo" src="images/logo-removebg-preview.png" alt="logo">
             </div>
             
-    
-            <div class="tabela">
-                <table border="1" id="userTable">
+            <div class="userInfo">
+                <p id="login_user"></p>
+            </div>
+        </nav>
+
+
+
+        <div class="headerr">
+            <h1 class="titulo">Back-Office</h1>
+            <div class="btns-acoes">
+                <button class="botoes" id="btn-usuario">Listar Usuários</button>
+                <button class="botoes" id="btn-pedido">Listar Pedidos</button>
+                <button class="botoes" id="btn-produto">Listar Produtos</button>
+                <button class="botoes" id="btn-ingrediente">Listar Ingredientes</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <!-- TABELA DE USUÁRIOS
+        <div class="container">
+            <div class="informacoes" id="filtro-usuario" style="display: none;">
+                <label class="label-text-field" for="user"></label>
+                <input class="nome" type="text" id="user" placeholder="Consultar usuário..."
+                    onkeyup="filtrarUsuarios()">
+                <button id="novo-usuario" onclick="redirecionarCadastroUsuario()">+</i></button>
+            </div>
+            <div class="tabela" id="tabela-de-usuario" style="display: none;">
+                <table border="1" class="estilo-tabela" id="userTable">
                     <thead>
                         <tr>
                             <th>Nome</th>
                             <th>Email</th>
-                            <th>Ativo</th>
+                            <th>Status</th>
                             <th>Grupo</th>
                             <th>Alterar</th>
                             <th>Ativar/Desativar</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- As linhas da tabela serão inseridas aqui -->
-                    </tbody>
+                    <tbody></tbody>
                 </table>
             </div>
         </div>
-        
+        <!--FIM TABELA DE USUÁRIOS-->
+
+        <!--TABELA DE INGREDIENTES-->
+        <!-- <div class="container">
+            <div class="informacoes" id="filtro-ingrediente" style="display: none;">
+                <label class="label-text-field" for="ingrediente"></label>
+                <input class="nome" type="text" id="ingrediente" placeholder="Consultar ingrediente..."
+                    onkeyup="filtrarIngredientes()">
+                <button id="novo-ingrediente" onclick="redirecionarCadasdtroIngrediente()">+</i></button>
+            </div>
+            <div class="tabela" id="tabela-de-ingrediente" style="display: none;">
+                <table border="1" class="estilo-tabela" id="ingredienteTable">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Estoque</th>
+                            <th>Preço</th>
+                            <th>Status</th>
+                            <th>Alterar</th>
+                            <th>Ativar/Desativar</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div> -->
+        <!--FIM TABELA DE INGREDIENTES-->
+
+        <!--TABELA DE PRODUTOS-->
+        <!-- <div class="container">
+            <div class="informacoes" id="filtro-produto" style="display: none;">
+                <label class="label-text-field" for="produto"></label>
+                <input class="nome" type="text" id="produto" placeholder="Consultar produto..."
+                    onkeyup="filtrarProdutos()">
+                <button id="novo-ingrediente" onclick="redirecionarCadastroProduto()">+</i></button>
+            </div>
+            <div class="tabela" id="tabela-de-produto" style="display: none;">
+                <table border="1" class="estilo-tabela" id="produtoTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                            <th>Estoque</th>
+                            <th>Preço</th>
+                            <th>Status</th>
+                            <th>Alterar</th>
+                            <th>Ativar/Desativar</th>
+                            <th>Visualizar</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div> -->
+        <div id="paginacao" class="paginacao"></div>
+
+        <!--FIM TABELA DE PRODUTOS-->
 
     </main>
-    <div class="card" id="card-modal">
+    <!-- <div class="card" id="card-modal">
         <div class="modal-confirm" id="modal-confirm">
-            <p class="modal-heading">Deseja alterar o status do usuário?</p>
+            <p class="modal-heading">Deseja alterar o status?</p>
             <div class="button-wrapper">
                 <button class="accept-cookie-button" id="btnsim">SIM</button>
                 <button class="accept-cookie-button" id="btnnao">NÃO</button>
@@ -74,7 +137,7 @@
         <svg viewBox="25 25 50 50">
             <circle r="20" cy="50" cx="50"></circle>
         </svg>
-    </div>
+    </div> -->
 </body>
 
 </html>

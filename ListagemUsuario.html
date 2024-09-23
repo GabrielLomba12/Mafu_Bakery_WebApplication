@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/reset/reset.css">
+    <link rel="stylesheet" href="css/listagemProduto/listagemProduto.css">
+    <link rel="stylesheet" href="css/desativarItem/desativarItem.css">
+    <link rel="stylesheet" href="css/backOffice/BackOffice.css">
+    <link rel="stylesheet" href="css/navbar/navbar.css">
+    <title>Listar Usuário</title>
+</head>
+
+<body>
+    <main class="main">
+        <nav class="nav">
+            <div class="logo">
+                <img class="imgLogo" src="images/logo-removebg-preview.png" alt="logo">
+            </div>
+            
+            <div class="userInfo">
+                <p id="login_user"></p>
+            </div>
+        </nav>
+        <div class="container">
+            <span>Listagem de Usuários</span>
+            <div class="informacoes">
+                <div class="container-filtro">
+                    <div class="filtro-produto">
+                        <input id="filtro" onkeyup="filtrarUsuarios()" type="text" placeholder="Digite o nome do usuário">
+                    </div>
+                </div>
+                <div class="header">
+                    <button onclick="redirecionarCadastroUsuario()" id="novo">+</i></button>
+                </div>
+            </div>
+            <div class="divTable"></div>
+        </div>
+    </main>
+    <div class="card" id="card-modal">
+        <div class="modal-confirm" id="modal-confirm">
+            <p class="modal-heading">Deseja alterar o status?</p>
+            <div class="button-wrapper">
+                <button class="accept-cookie-button" id="btnsim">SIM</button>
+                <button class="accept-cookie-button" id="btnnao">NÃO</button>
+            </div>
+        </div>
+    </div>
+    <div id="loadingModal" class="loading-modal">
+        <svg viewBox="25 25 50 50">
+            <circle r="20" cy="50" cx="50"></circle>
+        </svg>
+    </div>
+
+    <script src="javaScript/listagemUsuario/ListagemUsuario.js"></script>
+    <script src="javaScript/listagemUsuario/Filtro.js"></script>
+
+</body>
+
+</html>
