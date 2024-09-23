@@ -9,7 +9,7 @@ function redirecionarParaPagina() {
     window.history.replaceState(null, null, "TelaBackOffice.html");
 }
 
-document.querySelector(".accept-cookie-button").addEventListener("click", redirecionarParaPagina);
+document.getElementById("botaook").addEventListener("click", redirecionarParaPagina);
 
 function esconderLoading() {
     document.getElementById("loadingModal").style.display = "none";
