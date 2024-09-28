@@ -2,13 +2,13 @@ var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e com
 // var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 var token = localStorage.getItem("tokenAcesso");
 let dadosIngr = [];
+let imagensAdicionais = [];
 const Iquantidade = document.querySelector("#qtd-ingrediente");
 const Iingrediente = document.querySelector("#ingrediente");
 
 document.addEventListener("DOMContentLoaded", listarIngredientes);
 
 async function listarIngredientes() {
-    let listaIngredientes = [];
     await fetch(`http://${API}:8080/api/mp`, {
         method: 'GET',
         headers: {
@@ -106,10 +106,11 @@ async function cadastrar() {
     }
 
     // Adiciona os arquivos de imagem adicionais
-    const imagensInput = document.querySelector("#input-imagens");
-    for (let i = 0; i < imagensInput.files.length; i++) {
-        formData.append("imagens", imagensInput.files[i]);
-    }
+    const imagensInput = document.getElementById("input-imagens");
+    console.log(imagensAdicionais.length);
+    imagensAdicionais.forEach(image => {
+        formData.append('imagens', image);
+    });
 
     // Faz a requisição POST com o FormData
     await fetch(`http://localhost:8080/api/produtos/cadastrar`, {
@@ -150,10 +151,12 @@ async function cadastrar() {
     
 }
 
-document.querySelector("#colorBtn").addEventListener("click", function (event) {
+document.querySelector("#colorBtn").addEventListener("click", cadastrarProd);
+
+function cadastrarProd(event) {
     event.preventDefault();
     cadastrar();
-});
+}
 
 document.querySelector('#btn-incluir').addEventListener('click', adicionarIngrediente);
 
@@ -187,7 +190,9 @@ const imgPrincipal = document.getElementById("imagem-principal");
 const containerImagens = document.getElementById("container-imagens");
 
 // Evento para a imagem principal
-inputImagemPrincipal.addEventListener("change", function (event) {
+inputImagemPrincipal.addEventListener("change", carregaImagemPrincipal);
+
+function carregaImagemPrincipal(event) {
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
@@ -197,14 +202,14 @@ inputImagemPrincipal.addEventListener("change", function (event) {
         };
         reader.readAsDataURL(file); // Lê a imagem como URL
     }
-});
+}
 
 inputImagensAdicionais.addEventListener('change', function (evento) {
     const arquivos = evento.target.files;
 
     for (let i = 0; i < arquivos.length; i++) {
+        imagensAdicionais.push(arquivos[i]);
         const arquivo = arquivos[i];
-
         // Verifica se o arquivo é uma imagem
         if (arquivo && arquivo.type.startsWith('image/')) {
             const leitor = new FileReader();
