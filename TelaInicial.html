@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/navbar/navbar.css">
+    <link rel="stylesheet" href="css/reset/reset.css">
+    <link rel="stylesheet" href="css/telaInicial/TelaInicial.css">
+    <link rel="stylesheet" href="./vendor/BootStrap/bootstrap.css">
+    <link rel="stylesheet" href="./vendor/BootStrap/open-iconic-bootstrap.css">
+
+    <script src="javaScript/telaInicial/MontarLayoutProdutos.js" defer></script>
+    <script src="javaScript/telaInicial/Utils.js" defer></script>
+
+    <title>Tela Inicial</title>
+</head>
+
+<body>
+
+    <header>
+        <nav class="nav">
+            <div class="logo">
+                <img class="imgLogo" onclick="redirecionarTelaLogin()" src="images/logo-removebg-preview.png"
+                    alt="logo">
+            </div>
+
+            <div class="userInfo">
+                <p id="login_user"></p>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container my-5 custom-container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4" id="product-list">
+
+            <!-- <div class="col product-col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Produto 1</h5>
+                        <p class="card-text">Descrição do produto 1.</p>
+                        <p class="card-text"><strong>R$ 100,00</strong></p>
+                        <a href="#" class="btn btn-primary">Adicionar ao carrinho</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col product-col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Produto 2</h5>
+                        <p class="card-text">Descrição do produto 2.</p>
+                        <p class="card-text"><strong>R$ 150,00</strong></p>
+                        <a href="#" class="btn btn-primary">Adicionar ao carrinho</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col product-col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Produto 3</h5>
+                        <p class="card-text">Descrição do produto 3.</p>
+                        <p class="card-text"><strong>R$ 200,00</strong></p>
+                        <a href="#" class="btn btn-primary">Adicionar ao carrinho</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col product-col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Produto 4</h5>
+                        <p class="card-text">Descrição do produto 4.</p>
+                        <p class="card-text"><strong>R$ 250,00</strong></p>
+                        <a href="#" class="btn btn-primary">Adicionar ao carrinho</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col product-col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Produto 4</h5>
+                        <p class="card-text">Descrição do produto 4.</p>
+                        <p class="card-text"><strong>R$ 250,00</strong></p>
+                        <a href="#" class="btn btn-primary">Adicionar ao carrinho</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col product-col">
+                <div class="card h-100">
+                    <img src="https://via.placeholder.com/150" class="card-img-top" alt="Produto 4">
+                    <div class="card-body">
+                        <h5 class="card-title">Produto 4</h5>
+                        <p class="card-text">Descrição do produto 4.</p>
+                        <p class="card-text"><strong>R$ 250,00</strong></p>
+                        <a href="#" class="btn btn-primary">Adicionar ao carrinho</a>
+                    </div>
+                </div>
+            </div> -->
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
