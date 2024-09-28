@@ -4,7 +4,8 @@ var API = "localhost"; //Setar essa variavel quando testar local e comentar a do
 var permissao = localStorage.getItem("permissao")
 let productId = null;
 let listaImagensExcluidas = []
-
+let dadosIngrediente = []
+let ingredienteSelect = document.getElementById("textarea-tam-est");
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     productId = urlParams.get('id');
@@ -16,11 +17,30 @@ document.addEventListener('DOMContentLoaded', () => {
     
 });
 
+function obterIngredientes() {
+    const ingredientes = [];
+    
+    const linhas = ingredienteSelect.value.split('\n'); // Cada linha é um ingrediente
+    linhas.forEach(linha => {
+        const partes = linha.split('Ingrediente:');
+        const quantidade = partes[0].replace('Quantidade:', '').trim(); // Extrai a quantidade
+        const idIngrediente = partes[1].trim(); // Extrai o ID do ingrediente
+        
+        if (quantidade && idIngrediente) {
+            ingredientes.push({
+                id: parseInt(idIngrediente),
+                quantidade: parseFloat(quantidade)
+            });
+        }
+    });
+
+    return ingredientes;
+}
+
 document.getElementById("btn-excluir").addEventListener('click', function (event) {
     event.preventDefault(); // Evita o comportamento padrão do botão
 
     // Limpar apenas o conteúdo da textArea específica
-    const ingredienteSelect = document.getElementById("textarea-tam-est");
     ingredienteSelect.value = '';  // Limpa apenas o conteúdo da textArea de ingredientes
 });
 
@@ -47,9 +67,7 @@ function fetchBuscaProduto(productId) {
 
 function preencherFormulario(data) {
     const inputImagemPrincipal = document.getElementById("preview-imagem-principal");
-    const botao_incluir_img = document.getElementById("input-imagem-principal")
     const inputImagens = document.getElementById("preview-imagens-adicionais");
-    const ingredienteSelect = document.getElementById("textarea-tam-est");
     const botao_incluir = document.getElementById("btn-incluir");
     // Preencher os campos do formulário com os dados recebidos
     document.getElementById("nomeProduto").value = data.nome;
@@ -80,14 +98,8 @@ function preencherFormulario(data) {
             const qtd_produto = document.getElementById("qtd-ingrediente").value;
             fetchConfeccionaProduto(productId, qtd_produto); // Chama a função para adicionar na lista
         });
-    } else if(permissao === "ADMINISTRADOR") {
-        botao_incluir_img.removeEventListener("change", carregaImagemPrincipal);
-        botao_incluir_img.addEventListener("change", alteraImagemPrincipal);
-        document.querySelector("#colorBtn").removeEventListener("click", cadastrarProd);
-        document.querySelector("#colorBtn").addEventListener("click", alterarDadosDoProduto(productId));
     }
     // Preenchendo ingredientes
-    let dadosIngrediente = []
     ingredienteSelect.innerHTML = ''; // Limpa o campo antes de adicionar ingredientes
     data.ingredientes.forEach(ingrediente => {
         const quantidade = ingrediente.quantidade;
@@ -132,7 +144,7 @@ function preencherFormulario(data) {
 function alterarDadosDoProduto(productId) {
     const formData = new FormData();
 
-    const dadosIngr = obterIngredientes();
+    const ingredientesDados = obterIngredientes();
 
     const produto = {
         nome: document.getElementById('nomeProduto').value,
@@ -140,53 +152,52 @@ function alterarDadosDoProduto(productId) {
         preco: document.getElementById('preco').value,
         tamanho: document.getElementById('tamanho').value,
         categoria: document.getElementById('categoria').value,
-        ingredientes: dadosIngr,
+        ingredientes: ingredientesDados,
         qtdIngredientes: document.getElementById('qtd-ingrediente').value,
-        avaliacao: document.getElementById('avaliacao').value
+        avaliacao: document.getElementById('avaliacao').value,
+        urlImagensExcluidas: listaImagensExcluidas
     };
 
-    const produtoBlob = new Blob([JSON.stringify(produto)], { type: 'application/json' });
-    formData.append('produto', produtoBlob);
+    // const produtoBlob = new Blob([JSON.stringify(produto)], { type: 'application/json' });
+    // formData.append('produto', produtoBlob);
+
+    formData.append('produto', new Blob([JSON.stringify(produto)], { type: 'application/json' }));
 
     // Adiciona a imagem principal
-    const imagemPrincipalInput = document.getElementById("input-imagem-principal");
-    if (imagemPrincipalInput.files[0]) {
-        console.log("Imagem principal encontrada:", imagemPrincipalInput.files[0]);
-        formData.append("imagemPrincipal", imagemPrincipalInput.files[0]);
-    }else{
-        throw new Error("Imagem principal não foi selecionada!")
-    }
+    // const imagemPrincipalInput = document.getElementById("imagem-principal");
+    // if (imagemPrincipalInput) {
+    //     console.log("Imagem principal encontrada:", imagemPrincipalInput);
+    //     formData.append("imagemPrincipal", imagemPrincipalInput);
+    // }else{
+    //     throw new Error("Imagem principal não foi selecionada!")
+    // }
 
-    // Adiciona os arquivos de imagem adicionais
-    const imagensInput = document.querySelector("#input-imagens");
-    for (let i = 0; i < imagensInput.files.length; i++) {
-        formData.append("imagensNovas", imagensInput.files[i]);
-    }
-
-    for (let i = 0; i < listaImagensExcluidas.length; i++) {
-        formData.append("urlImagensExcluidas", listaImagensExcluidas[i]);
-    }
+    // // Adiciona os arquivos de imagem adicionais
+    // const imagensInput = document.querySelector("#input-imagens");
+    // for (let i = 0; i < imagensInput.files.length; i++) {
+    //     formData.append("imagensNovas", imagensInput.files[i]);
+    // }
 
     mostrarLoading();
     fetch(`http://`+API+`:8080/api/produtos/alterar?id=${productId}`, {
         method: 'PATCH',
         headers: {
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: formData
     })
     .then(response => {
         if (response.status === 200) {
             setTimeout(() => {
                 esconderLoading();
-                document.querySelector("#card-modal").style.display = "flex";
+                // document.querySelector("#card-modal").style.display = "flex";
+                alert("Produto alterado com sucesso!");
             }, 3000);
         } 
     })
     .catch(error => {
         console.error('Erro ao alterar produto:', error);
-        alert("Erro ao alterar usuário. Por favor, tente novamente.");
+        alert("Erro ao alterar produto. Por favor, tente novamente.");
         esconderLoading();
         document.querySelector(".main").classList.remove('blur');
     });
@@ -213,8 +224,17 @@ form.addEventListener('submit', (event) => {
 function alterarInterfaceParaEdicaoDoProduto() {
     if(permissao === "ESTOQUISTA")
         document.querySelector('h2').textContent = 'Edite o estoque do produto!';
-    else
+    else {
+        const botao_incluir_img = document.getElementById("input-imagem-principal")
+        botao_incluir_img.removeEventListener("change", carregaImagemPrincipal);
+        botao_incluir_img.addEventListener("change", alteraImagemPrincipal);
+        document.querySelector("#colorBtn").removeEventListener("click", cadastrarProd);
+        document.querySelector("#colorBtn").addEventListener("click", function (event) {
+            event.preventDefault(); // Evita o comportamento padrão do formulário
+            alterarDadosDoProduto(productId); // Chama a função para adicionar na lista
+        });
         document.querySelector('h2').textContent = 'Edite os dados do produto!';
+    }
 }
 
 function fetchConfeccionaProduto(productId, qtd_produto) {
