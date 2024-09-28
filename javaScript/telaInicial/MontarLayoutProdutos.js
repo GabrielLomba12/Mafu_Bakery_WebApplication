@@ -28,7 +28,6 @@ function montarLayoutExibicao(produtos) {
     const listaProdutos = document.getElementById('product-list');
     listaProdutos.innerHTML = '';
 
-
     let produtosHTML = '';
 
     produtos.forEach(produto => {
@@ -38,7 +37,10 @@ function montarLayoutExibicao(produtos) {
                     <div class="card h-100">
                         <img src="${produto.imagens[0]}" class="card-img-top" alt="${produto.nome}">
                         <div class="card-body">
-                            <h5 class="card-title">${produto.nome}</h5>
+                            <div class="produtos-nome">
+                                <h5 class="card-title">${produto.nome}</h5>
+                                <hr>
+                            </div>
                             <p class="card-text"><strong>R$ ${formatarCasasDecimais(produto.preco)}</strong></p>
                             <p>Avaliação: ${produto.avaliacao}</p>
                             <a href="#" class="btn btn-primary">Detalhes do produto</a>
