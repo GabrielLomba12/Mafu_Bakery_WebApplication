@@ -1,8 +1,6 @@
 // var API = "4.228.231.149"; // Setar essa variavel quando subir para a nuvem e comentar a localhost
 var API = "localhost"; // Setar essa variavel quando testar local e comentar a do IP
 
-var token = localStorage.getItem("tokenAcesso");
-
 const divPreview = document.querySelector('.content');
 let imagemAtual = 0;
 
@@ -19,9 +17,6 @@ console.log(produtoId); // Verifique se o ID do produto está correto
 // Agora você pode usar o produtoId para buscar os detalhes do produto e exibi-los na tela
 fetch(`http://${API}:8080/api/produtos/exibicao?id=${produtoId}`, {
     method: 'GET',
-    headers: {
-        'Authorization': `Bearer ${token}`
-    }
 })
 .then(response => response.json())
 .then(data => {
