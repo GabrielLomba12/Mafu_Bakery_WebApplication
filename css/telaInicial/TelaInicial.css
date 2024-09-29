@@ -8,28 +8,48 @@
     margin-top: 4%;
 }
 
+
 .custom-container {
     padding-left: 10%;
     padding-right: 10%;
 }
-
+/* 
 .card-img-top {
-    height: 40%;
-}
+    height: 100%;
+} */
 
 .card-body {
     display: flex;
     flex-direction: column;
-    gap: 5%;
+    gap: 1%;
+    background-color: #F5EADD;
+    font-family: 'Poppins', sans-serif;
+}
+
+.hr-style {
+    border-color: rgba(176, 132, 62, 0.808);
+    border-width: 1.5px;
+}
+
+a.btn.btn-custom {
+    background-color: #694e22;/* Cor de fundo personalizada */
+    color: #ffffff; /* Cor do texto */
+    border: none; /* Remove a borda */
+    padding: 10px 20px; /* Ajuste o espaçamento interno */
+    border-radius: 5px; /* Arredonda os cantos */
+    transition: background-color 0.3s ease; /* Suaviza a transição da cor de fundo */
+    cursor: pointer; /* Muda o cursor para indicar que o botão é clicável */
 }
 
 .produtos-nome {
     height: 30%;
+    font-family: 'Poppins', sans-serif;
 }
 
 .card-title {
     font-size: 100%;
     font-weight: bold;
+    font-family: 'Poppins', sans-serif;
 }
 
 #imagem-sodie {
@@ -99,4 +119,18 @@
     box-shadow: 0 0 10px rgba(243, 156, 18, 0.5); 
     background-color: #fffbe7; 
 }
+
+.img-container {
+    background-color: #F5EADD; /* Cor de fundo desejada */
+    padding: 10px; /* Espaço ao redor da imagem */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-img-top {
+    width: 10%;
+    height: 95%;
+}
+
 

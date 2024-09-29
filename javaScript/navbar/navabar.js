@@ -2,7 +2,9 @@ var API = "localhost";
 
 const emailUser = localStorage.getItem("email");
 var token = localStorage.getItem("tokenAcesso");
-buscarUsuario(emailUser);
+
+if(emailUser && token) 
+    buscarUsuario(emailUser);
 
 function buscarUsuario(email) {
     fetch(`http://` + API + `:8080/api/usuarioLogado?email=${email}`, {
@@ -22,7 +24,12 @@ function buscarUsuario(email) {
         nome = data.nome;
         let palavras = nome.split(" ");
         let primeiroNome = palavras[0];
-        document.getElementById("login_user").innerHTML = "Olá, " + primeiroNome + ' (' + data.permissao + ')';
+
+        if(data.permissao === "ADMINISTRADOR" || data.permissao === "ESTOQUISTA") {
+            document.getElementById("login_user").innerHTML = "Olá, " + primeiroNome + ' (' + data.permissao + ')';
+        } else 
+            document.getElementById("login-user").innerHTML = "Olá " + primeiroNome;
+
         if(data.permissao === 'ESTOQUISTA') {
             document.getElementById('btn-usuario').style.display = 'none';
         }

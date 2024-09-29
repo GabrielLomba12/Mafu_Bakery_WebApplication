@@ -37,15 +37,17 @@ function montarLayoutExibicao(produtos) {
             produtosHTML += `
                 <div class="col product-col">
                     <div class="card h-100">
-                        <img src="${produto.imagens[0]}" class="card-img-top" alt="${produto.nome}">
+                        <div class="img-container">
+                            <img src="${produto.imagens[0]}" class="card-img-top" alt="${produto.nome}">
+                        </div>
                         <div class="card-body">
                             <div class="produtos-nome">
                                 <h5 class="card-title">${produto.nome}</h5>
-                                <hr>
+                                <hr class="hr-style">
                             </div>
                             <p class="card-text"><strong>R$ ${formatarCasasDecimais(produto.preco)}</strong></p>
                             <p>Avaliação: ${produto.avaliacao}</p>
-                            <a href="TelaDetalheProduto.html?produtoId=${produto.id}" class="btn btn-primary">Detalhes do produto</a>
+                            <a href="TelaDetalheProduto.html?produtoId=${produto.id}" class="btn btn-custom id="det">Ver detalhes</a>
                         </div>
                     </div>
                 </div>
