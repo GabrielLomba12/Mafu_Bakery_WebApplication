@@ -13,6 +13,7 @@
 
     <script src="javaScript/telaInicial/MontarLayoutProdutos.js" defer></script>
     <script src="javaScript/telaInicial/Utils.js" defer></script>
+    <script src="javaScript/telaInicial/Filtro.js" defer></script>
 
     <title>Tela Inicial</title>
 </head>
@@ -37,9 +38,16 @@
             <h2 id="subtitulo">BOLOS</h2>
             <p id="texto">
                 Deliciosamente recheados e com muito sabor, cada um de nossos bolos é criado
-                <br>
+                <br> 
                 para proporcionar mais amor e carinho para todas as ocasiões.
             </p>
+        </div>
+    </div>
+
+    <div class="menu-filtro">
+        <div id="filtro">
+            <p>Filtrar Produtos</p>
+            <input type="text" onkeyup="filtrarProdutos()" name="filtro-items" id="filtro-items" placeholder="Nome do produto...">
         </div>
     </div>
 

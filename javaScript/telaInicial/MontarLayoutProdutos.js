@@ -5,6 +5,8 @@ data = [];
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchProduto();
+    const filtroInput = document.getElementById('filtro-items');
+    filtroInput.addEventListener('keyup', filtrarProdutos);
 })
 
 async function fetchProduto() {
@@ -52,5 +54,21 @@ function montarLayoutExibicao(produtos) {
     });
 
     listaProdutos.innerHTML = produtosHTML;
+}
+
+function filtrarProdutos() {
+    var filtro = document.getElementById('filtro-items').value.toUpperCase();
+
+    var produtos = document.querySelectorAll("#product-list .product-col");
+
+    produtos.forEach(produto => {
+        var nomeProduto = produto.querySelector(".card-title").innerText.toUpperCase();
+
+        if (nomeProduto.includes(filtro)) {
+            produto.style.display = ""; 
+        } else {
+            produto.style.display = "none";
+        }
+    });
 }
 

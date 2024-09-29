@@ -46,7 +46,7 @@
     color: white;
     font-weight: bold;
     font-family: 'Poppins', sans-serif;
-    font-size: 80px;
+    font-size: 50px;
 }
 
 #texto {
@@ -62,3 +62,41 @@
     flex-direction: column;
     font-size: 20px;
 }
+
+.menu-filtro {
+    background-color: rgba(176, 132, 62, 0.808);
+    width: 100%;
+    height: 160px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#filtro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#filtro input {
+    width: 150%;
+    border-radius: 12px;
+    border: none;
+    font-family: 'Poppins', sans-serif;
+}
+
+#filtro p {
+    color: white;
+    font-size: 18px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#filtro input:focus {
+    outline: none;
+    border: 2px solid #785114;
+    box-shadow: 0 0 10px rgba(243, 156, 18, 0.5); 
+    background-color: #fffbe7; 
+}
+
