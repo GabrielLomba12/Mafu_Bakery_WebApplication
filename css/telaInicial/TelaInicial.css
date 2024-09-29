@@ -133,4 +133,133 @@ a.btn.btn-custom {
     height: 95%;
 }
 
+#itens-nav {
+    display: flex;
+    flex-direction: row;
+    width: 200px; /* Ajusta a largura da imagem */
+    height: 30px; /* Ajusta a altura da imagem */
+}
+
+#itens-nav p {
+    font-family: 'Poppins', sans-serif;
+    margin-right: 40%;
+    border: none;
+}
+
+#itens-nav img {
+    /* width: 100%;
+    height: 100%; */
+    object-fit: contain; /* Garante que a imagem mantenha sua proporção */
+    cursor: pointer; /* Aplica o cursor de link à imagem */
+}
+
+.burger {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+}
+
+.burger input {
+    display: none;
+}
+
+.burger span {
+    display: block;
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background: black;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: .25s ease-in-out;
+}
+
+.burger {
+    display: block;
+    width: 30px;
+    height: 25px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+}
+
+.burger input {
+    display: none;
+}
+
+.burger span {
+    display: block;
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background: black;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    transform: rotate(0deg);
+    transition: 0.25s ease-in-out;
+}
+
+.burger span:nth-of-type(1) {
+    top: 0px;
+    transform-origin: left center;
+}
+
+.burger span:nth-of-type(2) {
+    top: 50%;
+    transform: translateY(-50%);
+    transform-origin: left center;
+}
+
+.burger span:nth-of-type(3) {
+    top: 100%;
+    transform-origin: left center;
+    transform: translateY(-100%);
+}
+
+#itens-carrinho {
+    font-family: 'Poppins', sans-serif;
+}
+
+.burger-container {
+    position: relative;
+}
+
+.burger-menu {
+    display: none;
+    position: absolute;
+    top: 30px; 
+    right: 0;
+    background-color: #694e22;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 150px;
+    z-index: 10;
+}
+
+.burger-menu a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+}
+
+.burger-menu a:hover {
+    background-color: #ba9457;
+    color: white;
+    text-decoration: none;
+}
+
+.burger-container:hover .burger-menu {
+    display: block;
+}
 
