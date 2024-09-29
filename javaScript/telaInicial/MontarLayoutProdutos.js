@@ -43,7 +43,7 @@ function montarLayoutExibicao(produtos) {
                             </div>
                             <p class="card-text"><strong>R$ ${formatarCasasDecimais(produto.preco)}</strong></p>
                             <p>Avaliação: ${produto.avaliacao}</p>
-                            <a href="#" class="btn btn-primary">Detalhes do produto</a>
+                            <a href="TelaDetalheProduto.html?produtoId=${produto.id}" class="btn btn-primary">Detalhes do produto</a>
                         </div>
                     </div>
                 </div>
