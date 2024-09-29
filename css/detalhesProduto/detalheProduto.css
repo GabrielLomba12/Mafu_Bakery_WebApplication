@@ -1,0 +1,88 @@
+.card-produto{
+    display: flex;
+    justify-content: center;
+}
+
+.content {
+    width: 80%;
+    height: calc(90vh - 123px);
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-content: center;
+    gap: 20%; /* Adicionando espaçamento entre as seções de imagens e informações */
+}
+
+.div-informacoes {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    justify-content: center;
+    align-items: left;
+}
+
+.nomeProd {
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.descricao{
+    width: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonComprar {
+    padding: 15px;
+    border-radius: 15px;
+    font-size: 16px;
+    width: 50%;
+    align-self: center; /* Centraliza o botão dentro da coluna */
+}
+
+.div-imagens {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Para posicionar os botões de navegação em relação a este contêiner */
+    width: 400px; /* Definindo uma largura fixa para o contêiner de imagens */
+    height: auto; /* Mantém a altura da imagem */
+}
+
+.img-carousel {
+    width: 100%; /* A imagem preenche o contêiner */
+    height: auto;
+}
+
+.prev, .next {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #333;
+    opacity: 0;  /* Setas transparentes inicialmente */
+    transition: opacity 0.3s ease;  /* Transição suave */
+    z-index: 1; /* Garante que as setas fiquem acima da imagem */
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+.div-imagens:hover .prev, .div-imagens:hover .next {
+    opacity: 1; /* Exibe as setas ao passar o mouse sobre a área da imagem */
+}
+
+.prev:hover, .next:hover {
+    color: #007bff;  /* Muda a cor das setas ao passar o mouse */
+}
