@@ -18,7 +18,6 @@ async function fetchProduto() {
             }
         })
         const result = await response.json();
-        console.log(result);
         data = result;
         montarLayoutExibicao(data);
     } catch (error) {
@@ -34,9 +33,12 @@ function montarLayoutExibicao(produtos) {
 
     produtos.forEach(produto => {
         if (produto.status) {
+
+            let produtoSemEstoque = produto.quantidadeEstoque <= 0;
+
             produtosHTML += `
                 <div class="col product-col">
-                    <div class="card h-100">
+                    <div class="card h-100 ${produtoSemEstoque ? 'sem-estoque' : ''}">
                         <div class="img-container">
                             <img src="${produto.imagens[0]}" class="card-img-top" alt="${produto.nome}">
                         </div>
@@ -47,15 +49,42 @@ function montarLayoutExibicao(produtos) {
                             </div>
                             <p class="card-text"><strong>R$ ${formatarCasasDecimais(produto.preco)}</strong></p>
                             <p>Avaliação: ${produto.avaliacao}</p>
-                            <a href="TelaDetalheProduto.html?produtoId=${produto.id}" class="btn btn-custom id="det">Ver detalhes</a>
+                            <a href="TelaDetalheProduto.html?produtoId=${produto.id}" class="btn btn-custom det-button ${produtoSemEstoque ? 'disabled' : ''}" ${produtoSemEstoque ? 'tabindex="-1"' : ''}>Ver detalhes</a>
                         </div>
                     </div>
+                    ${produtoSemEstoque ? '<div class="esgotado-overlay">ESGOTADO</div>' : ''}
                 </div>
             `;
         }
     });
 
     listaProdutos.innerHTML = produtosHTML;
+
+    const style = document.createElement('style');
+    style.innerHTML = `
+        .sem-estoque {
+            filter: blur(5px);
+            position: relative;
+        }
+        .esgotado-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            z-index: 1;
+        }
+        .det-button.disabled {
+            pointer-events: none; /* Desativa qualquer interação com o botão */
+            opacity: 0.6; /* Torna visualmente claro que está desativado */
+        }
+    `;
+    document.head.appendChild(style);
 }
 
 function filtrarProdutos() {
