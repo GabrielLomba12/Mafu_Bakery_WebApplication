@@ -5,7 +5,9 @@ var permissao = localStorage.getItem("permissao")
 let productId = null;
 let listaImagensExcluidas = []
 let dadosIngrediente = []
+let imagensNovasAdicionais = [];
 let ingredienteSelect = document.getElementById("textarea-tam-est");
+
 document.addEventListener('DOMContentLoaded', () => {
     const urlParams = new URLSearchParams(window.location.search);
     productId = urlParams.get('id');
@@ -158,25 +160,22 @@ function alterarDadosDoProduto(productId) {
         urlImagensExcluidas: listaImagensExcluidas
     };
 
-    // const produtoBlob = new Blob([JSON.stringify(produto)], { type: 'application/json' });
-    // formData.append('produto', produtoBlob);
-
     formData.append('produto', new Blob([JSON.stringify(produto)], { type: 'application/json' }));
 
     // Adiciona a imagem principal
-    // const imagemPrincipalInput = document.getElementById("imagem-principal");
-    // if (imagemPrincipalInput) {
-    //     console.log("Imagem principal encontrada:", imagemPrincipalInput);
-    //     formData.append("imagemPrincipal", imagemPrincipalInput);
-    // }else{
-    //     throw new Error("Imagem principal não foi selecionada!")
-    // }
+    const imagemPrincipalInput = document.getElementById("input-imagem-principal");
+    if (imagemPrincipalInput.files[0]) {
+        console.log("Nova imagem principal encontrada:", imagemPrincipalInput.files[0]);
+        formData.append("imagemPrincipal", imagemPrincipalInput.files[0]);
+    }else{
+        console.log("Imagem principal não alterada.");
+    }
 
-    // // Adiciona os arquivos de imagem adicionais
-    // const imagensInput = document.querySelector("#input-imagens");
-    // for (let i = 0; i < imagensInput.files.length; i++) {
-    //     formData.append("imagensNovas", imagensInput.files[i]);
-    // }
+    // Adiciona os arquivos de imagem adicionais
+    console.log(imagensNovasAdicionais.length);
+    imagensNovasAdicionais.forEach(image => {
+        formData.append('imagensNovas', image);
+    });
 
     mostrarLoading();
     fetch(`http://`+API+`:8080/api/produtos/alterar?id=${productId}`, {
@@ -190,8 +189,8 @@ function alterarDadosDoProduto(productId) {
         if (response.status === 200) {
             setTimeout(() => {
                 esconderLoading();
-                // document.querySelector("#card-modal").style.display = "flex";
                 alert("Produto alterado com sucesso!");
+                window.location.href = "TelaBackOffice.html";
             }, 3000);
         } 
     })
@@ -205,6 +204,7 @@ function alterarDadosDoProduto(productId) {
 
 function alteraImagemPrincipal(event) {
     const imgPrincipal = document.getElementById("imagem-principal");
+    listaImagensExcluidas.push(imgPrincipal.src);
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
@@ -215,19 +215,61 @@ function alteraImagemPrincipal(event) {
     }
 }
 
+function incluirNovasImagensAdicionais(evento) {
+    const arquivos = evento.target.files;
+
+    for (let i = 0; i < arquivos.length; i++) {
+        imagensNovasAdicionais.push(arquivos[i]);
+        const arquivo = arquivos[i];
+        // Verifica se o arquivo é uma imagem
+        if (arquivo && arquivo.type.startsWith('image/')) {
+            const leitor = new FileReader();
+
+            leitor.onload = function (e) {
+
+                const imagemContainer = document.createElement('div');
+                imagemContainer.classList.add('imagem-container');
+
+                const img = document.createElement('img');
+                img.src = e.target.result;
+                img.classList.add('imagem-preview');
+                
+                const botaoRemover = document.createElement('button');
+                botaoRemover.textContent = 'Remover';
+                botaoRemover.classList.add('botao-remover');
+
+                botaoRemover.addEventListener('click', function () {
+                    imagemContainer.remove(); // Remove o container da imagem
+                });
+
+                imagemContainer.appendChild(img);
+                imagemContainer.appendChild(botaoRemover);
+                containerImagens.appendChild(imagemContainer);
+            };
+
+            leitor.readAsDataURL(arquivo); // Lê o arquivo como URL para exibir
+        }
+    }
+}
+
 const form = document.querySelector('form');
 form.addEventListener('submit', (event) => {
     // Customizar validação
     validarFormulario(event);
 });
-
+id="btn-img-secundaria"
 function alterarInterfaceParaEdicaoDoProduto() {
     if(permissao === "ESTOQUISTA")
         document.querySelector('h2').textContent = 'Edite o estoque do produto!';
     else {
+        const textoBotao = document.getElementById("btn-img-principal")
+        textoBotao.textContent = "Alterar Imagem Principal";
         const botao_incluir_img = document.getElementById("input-imagem-principal")
         botao_incluir_img.removeEventListener("change", carregaImagemPrincipal);
         botao_incluir_img.addEventListener("change", alteraImagemPrincipal);
+        const botaoIncluirImgAdicionais = document.getElementById("input-imagens")
+        botaoIncluirImgAdicionais.removeEventListener("change", incluirImagensAdicionais);
+        botaoIncluirImgAdicionais.addEventListener("change", incluirNovasImagensAdicionais);
         document.querySelector("#colorBtn").removeEventListener("click", cadastrarProd);
         document.querySelector("#colorBtn").addEventListener("click", function (event) {
             event.preventDefault(); // Evita o comportamento padrão do formulário

@@ -107,7 +107,6 @@ async function cadastrar() {
     }
 
     // Adiciona os arquivos de imagem adicionais
-    const imagensInput = document.getElementById("input-imagens");
     console.log(imagensAdicionais.length);
     imagensAdicionais.forEach(image => {
         formData.append('imagens', image);
@@ -129,9 +128,6 @@ async function cadastrar() {
                 document.querySelector(".form").reset();
                 window.location.href = 'TelaBackOffice.html';
             }, 3000);
-            // alert("Produto cadastrado com sucesso!");
-            // document.querySelector(".form").reset();
-            // window.location.href = 'TelaBackOffice.html';
         } else {
             const errorData = await response.json();
             throw new Error("Erro ao cadastrar o produto: " + errorData.message);
@@ -205,7 +201,9 @@ function carregaImagemPrincipal(event) {
     }
 }
 
-inputImagensAdicionais.addEventListener('change', function (evento) {
+inputImagensAdicionais.addEventListener('change', incluirImagensAdicionais);
+
+function incluirImagensAdicionais(evento) {
     const arquivos = evento.target.files;
 
     for (let i = 0; i < arquivos.length; i++) {
@@ -240,5 +238,4 @@ inputImagensAdicionais.addEventListener('change', function (evento) {
             leitor.readAsDataURL(arquivo); // Lê o arquivo como URL para exibir
         }
     }
-});
-
+}
