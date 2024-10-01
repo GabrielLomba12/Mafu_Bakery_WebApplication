@@ -3,11 +3,14 @@ var API = "localhost"; //Setar essa variavel quando testar local e comentar a do
 
 var emailUsuario = localStorage.getItem("email");
 var permissao = localStorage.getItem("permissao");
-var token = localStorage.getItem("tokenAcesso");
+var itensCarrinho = localStorage.getItem("carrinho");
 
 const opcoes = document.querySelector('.burger-menu');
 
-document.addEventListener('DOMContentLoaded', identificarAutenticacao);
+document.addEventListener('DOMContentLoaded', ()=> {
+    identificarAutenticacao();
+    atualizarCarrinho();
+});
 
 function identificarAutenticacao() {
     if (emailUsuario && (permissao === "ESTOQUISTA" || permissao === "ADMINISTRADOR")) {
@@ -32,6 +35,8 @@ function realizarLogout() {
     localStorage.removeItem("email");
     localStorage.removeItem("permissao");
     localStorage.removeItem("tokenAcesso");
+    localStorage.removeItem("carrinho");
+    localStorage.removeItem("quantidade");
 
     alert("Logout realizado com sucesso!")
 }
@@ -64,4 +69,11 @@ function buscarUsuario(email) {
         alert("Erro ao acessar usuário. Por favor, tente novamente.");
     });
 }
+
+function atualizarCarrinho() {
+    const quantidadeAtual = parseInt(localStorage.getItem("quantidade")) || 0;
+    document.getElementById("itens-carrinho").innerText = `[${quantidadeAtual}]`;
+}
+
+
 

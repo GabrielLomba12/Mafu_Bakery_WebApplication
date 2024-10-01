@@ -21,11 +21,16 @@ main{
 }
 
 .lista-produtos{
-    width: 60%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-left: 3%;
 }
 
 .resumo{
     width: 40%;
+    display: flex;
+    justify-content: center;
 }
 
 .box-titulos{
@@ -34,6 +39,7 @@ main{
     flex-direction: row;
     justify-content: center;
     gap: 8%;
+    font-family: "Poppins", sans-serif;
 }
 
 .resumo-pedido{
@@ -41,3 +47,39 @@ main{
     flex-direction: column;
 }
 
+.produtos-carrinho {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; 
+    margin-top: 10px; 
+}
+
+.produto {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 10px; 
+    background-color: #fff; 
+}
+
+.info-produto img {
+    width: 100px; 
+    height: auto; 
+    margin-right: 10px;
+}
+
+.info-produto {
+    display: flex;
+    flex-direction: row;
+}
+
+.container-prod {
+    display: flex;
+    flex-direction: row;
+    gap: 30%;
+    align-content: center;
+}
+
+#t {
+    font-weight: bold;
+}
