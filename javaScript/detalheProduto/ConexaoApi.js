@@ -3,18 +3,16 @@ var API = "localhost"; // Setar essa variavel quando testar local e comentar a d
 
 const divPreview = document.querySelector('.content');
 let imagemAtual = 0;
+const produtosMap = {};
 
-// Função para extrair o ID do produto da URL
 function getProdutoIdFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get('produtoId');
 }
 
-// Exemplo de uso:
 const produtoId = getProdutoIdFromURL();
-console.log(produtoId); // Verifique se o ID do produto está correto
+console.log(produtoId); 
 
-// Agora você pode usar o produtoId para buscar os detalhes do produto e exibi-los na tela
 fetch(`http://${API}:8080/api/produtos/exibicao?id=${produtoId}`, {
     method: 'GET',
 })
@@ -86,12 +84,50 @@ fetch(`http://${API}:8080/api/produtos/exibicao?id=${produtoId}`, {
         
         <p>Avaliação: ${data.avaliacao}</p>
         <p>R$ ${data.preco}</p>
-        <button class="buttonComprar" type="submit" disabled>Comprar</button>
+        <button class="buttonComprar" type="submit">Adicionar ao Carrinho</button>
     `
     divPreview.appendChild(divInformacoes);
-    // Continue com os campos que forem necessários
+    
+    const buttonComprar = divInformacoes.querySelector('.buttonComprar');
+    buttonComprar.onclick = () => {
+        const produto = {
+            id: produtoId,
+            nome: data.nome,
+            descricao: data.descricao,
+            avaliacao: data.avaliacao,
+            preco: data.preco,
+            imagem: data.imagens[0]
+        }; 
+        
+        let quantidadeAtual = parseInt(localStorage.getItem("quantidade")) || 0;
+        quantidadeAtual += 1;
+        localStorage.setItem("quantidade", quantidadeAtual);
+
+        let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        carrinho.forEach(produto => {
+            if (produtosMap[produto.id]) {
+                produtosMap[produto.id].quantidade += 1; // Soma a quantidade
+            } else {
+                produtosMap[produto.id] = {
+                    ...produto,
+                    quantidade: 1 // Inicializa a quantidade
+                };
+            }
+        });
+        carrinho.push(produto);
+
+        localStorage.setItem('carrinho', JSON.stringify(carrinho));
+
+        alert(`${data.nome} foi adicionado ao carrinho!`);
+        redirecionarTelaCarrinho();
+    };
 })
 .catch(error => {
     console.error("Erro ao buscar detalhes do produto:", error);
     alert("Erro ao carregar os detalhes do produto.");
 });
+
+
+function redirecionarTelaCarrinho() {
+    window.location.href = "TelaCarrinho.html"
+}
