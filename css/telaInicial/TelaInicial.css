@@ -37,6 +37,16 @@ a.btn.btn-custom {
     cursor: pointer;
 }
 
+a.btn.btn-carrinho {
+    background-color: #ff9d00;
+    color: #ffffff; 
+    border: none; 
+    padding: 10px; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease; 
+    cursor: pointer;
+}
+
 .produtos-nome {
     height: 30%;
     font-family: 'Poppins', sans-serif;

@@ -50,7 +50,7 @@ function exibirProdutosCarrinho() {
         valorTotal += valorTotalProduto;
 
         const imgElement = document.createElement('img');
-        imgElement.src = produto.imagem;
+        imgElement.src = produto.imagens[0];
         imgElement.alt = `${produto.nome} imagem`;
         imgElement.style.width = "100px"; 
 
