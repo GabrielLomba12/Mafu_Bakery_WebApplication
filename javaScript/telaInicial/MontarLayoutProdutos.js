@@ -38,22 +38,23 @@ function montarLayoutExibicao(produtos) {
 
             produtosHTML += `
                 <div class="col product-col">
-                    <div class="card h-100 ${produtoSemEstoque ? 'sem-estoque' : ''}">
-                        <div class="img-container">
-                            <img src="${produto.imagens[0]}" class="card-img-top" alt="${produto.nome}">
-                        </div>
-                        <div class="card-body">
-                            <div class="produtos-nome">
-                                <h5 class="card-title">${produto.nome}</h5>
-                                <hr class="hr-style">
-                            </div>
-                            <p class="card-text"><strong>R$ ${formatarCasasDecimais(produto.preco)}</strong></p>
-                            <p>Avaliação: ${produto.avaliacao}</p>
-                            <a href="TelaDetalheProduto.html?produtoId=${produto.id}" class="btn btn-custom det-button ${produtoSemEstoque ? 'disabled' : ''}" ${produtoSemEstoque ? 'tabindex="-1"' : ''}>Ver detalhes</a>
-                        </div>
+                <div class="card h-100 ${produtoSemEstoque ? 'sem-estoque' : ''}">
+                    <div class="img-container">
+                        <img src="${produto.imagens[0]}" class="card-img-top" alt="${produto.nome}">
                     </div>
-                    ${produtoSemEstoque ? '<div class="esgotado-overlay">ESGOTADO</div>' : ''}
+                    <div class="card-body">
+                        <div class="produtos-nome">
+                            <h5 class="card-title">${produto.nome}</h5>
+                            <hr class="hr-style">
+                        </div>
+                        <p class="card-text"><strong>R$ ${formatarCasasDecimais(produto.preco)}</strong></p>
+                        <p>Avaliação: ${produto.avaliacao}</p>
+                        <a href="TelaDetalheProduto.html?produtoId=${produto.id}" class="btn btn-custom det-button ${produtoSemEstoque ? 'disabled' : ''}" ${produtoSemEstoque ? 'tabindex="-1"' : ''}>Ver detalhes</a>
+                        <a href="#" class="btn btn-carrinho ${produtoSemEstoque ? 'disabled' : ''}" ${produtoSemEstoque ? 'tabindex="-1"' : ''} data-id="${produto.id}">Adicionar ao Carrinho</a>
+                    </div>
                 </div>
+                ${produtoSemEstoque ? '<div class="esgotado-overlay">ESGOTADO</div>' : ''}
+            </div>
             `;
         }
     });
@@ -85,7 +86,59 @@ function montarLayoutExibicao(produtos) {
         }
     `;
     document.head.appendChild(style);
+
+    const botoesCarrinho = document.querySelectorAll('.btn-carrinho');
+    botoesCarrinho.forEach(botao => {
+        botao.addEventListener('click', function(event) {
+            event.preventDefault();
+            const produtoId = this.getAttribute('data-id');
+            const produtoSelecionado = produtos.find(p => p.id == produtoId);
+
+            if (produtoSelecionado) {
+                adicionarAoCarrinho(produtoSelecionado);
+                let quantidadeAtual = parseInt(localStorage.getItem("quantidade")) || 0;
+                quantidadeAtual += 1;
+                localStorage.setItem("quantidade", quantidadeAtual);
+                window.location.reload();
+            }
+        });
+    });
 }
+
+function adicionarAoCarrinho(produto) {
+    let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    
+    const produtoExistente = carrinho.find(p => p.id === produto.id);
+    
+    if (produtoExistente) {
+        produtoExistente.quantidade += 1;
+    } else {
+        produto.quantidade = 1;
+        carrinho.push(produto);
+    }
+
+    localStorage.setItem('carrinho', JSON.stringify(carrinho));
+    alert(`${produto.nome} foi adicionado ao carrinho!`);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function filtrarProdutos() {
     var filtro = document.getElementById('filtro-items').value.toUpperCase();
