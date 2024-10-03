@@ -83,3 +83,9 @@ main{
 #t {
     font-weight: bold;
 }
+
+.info-quantidade {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}

@@ -90,34 +90,62 @@ fetch(`http://${API}:8080/api/produtos/exibicao?id=${produtoId}`, {
     
     const buttonComprar = divInformacoes.querySelector('.buttonComprar');
     buttonComprar.onclick = () => {
+        // const produto = {
+        //     id: produtoId,
+        //     nome: data.nome,
+        //     descricao: data.descricao,
+        //     avaliacao: data.avaliacao,
+        //     preco: data.preco,
+        //     imagem: data.imagens[0]
+        // }; 
+        
+        // let quantidadeAtual = parseInt(localStorage.getItem("quantidade")) || 0;
+        // quantidadeAtual += 1;
+        // localStorage.setItem("quantidade", quantidadeAtual);
+
+        // let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+        // carrinho.forEach(produto => {
+        //     if (produtosMap[produto.id]) {
+        //         produtosMap[produto.id].quantidade += 1; // Soma a quantidade
+        //     } else {
+        //         produtosMap[produto.id] = {
+        //             ...produto,
+        //             quantidade: 1 // Inicializa a quantidade
+        //         };
+        //     }
+        // });
+        // carrinho.push(produto);
+
         const produto = {
             id: produtoId,
             nome: data.nome,
             descricao: data.descricao,
             avaliacao: data.avaliacao,
             preco: data.preco,
-            imagem: data.imagens[0]
+            imagem: data.imagens[0],
+            quantidade: 1 // Inicializa a quantidade com 1
         }; 
-        
-        let quantidadeAtual = parseInt(localStorage.getItem("quantidade")) || 0;
-        quantidadeAtual += 1;
-        localStorage.setItem("quantidade", quantidadeAtual);
-
+    
+        // Recupera o carrinho do localStorage ou inicializa com um array vazio
         let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-        carrinho.forEach(produto => {
-            if (produtosMap[produto.id]) {
-                produtosMap[produto.id].quantidade += 1; // Soma a quantidade
-            } else {
-                produtosMap[produto.id] = {
-                    ...produto,
-                    quantidade: 1 // Inicializa a quantidade
-                };
-            }
-        });
-        carrinho.push(produto);
+        let quantidade = parseInt(localStorage.getItem('quantidade')) || 0;
 
+        // Verifica se o produto já está no carrinho
+        let produtoExistente = carrinho.find(item => item.id === produto.id);
+    
+        if (produtoExistente) {
+            // Se o produto já existe, incrementa a quantidade
+            produtoExistente.quantidade += 1;
+            quantidade += 1;
+        } else {
+            // Se o produto não existe, adiciona ao carrinho
+            carrinho.push(produto);
+            quantidade += 1;
+        }
+        
         localStorage.setItem('carrinho', JSON.stringify(carrinho));
-
+        localStorage.setItem('quantidade', quantidade);
+        
         alert(`${data.nome} foi adicionado ao carrinho!`);
         redirecionarTelaCarrinho();
     };
