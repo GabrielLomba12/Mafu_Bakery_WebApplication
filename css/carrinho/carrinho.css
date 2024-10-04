@@ -18,74 +18,132 @@ main{
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-content: top;
+    font-family: "Poppins", sans-serif;
 }
 
 .lista-produtos{
     width: 100%;
     display: flex;
     justify-content: center;
-    margin-left: 3%;
 }
 
-.resumo{
-    width: 40%;
-    display: flex;
-    justify-content: center;
+table{
+    padding: 10px
 }
 
-.box-titulos{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 8%;
-    font-family: "Poppins", sans-serif;
+th{
+    background-color: black;
+    color: white;
+    text-align: left;
+    padding: 5px 10px
 }
 
-.resumo-pedido{
-    display: flex;
-    flex-direction: column;
+td{
+    border: solid #ededed;
+    padding: 5px 10px
 }
 
-.produtos-carrinho {
-    display: flex;
-    flex-direction: column; 
-    gap: 15px; 
-    margin-top: 10px; 
-}
-
-.produto {
-    display: flex; 
-    justify-content: space-between; 
-    align-items: center; 
+.estilo-tabela th {
+    background-color: rgba(176, 132, 62, 0.808);
+    color: white; 
     padding: 10px; 
-    background-color: #fff; 
-}
-
-.info-produto img {
-    width: 100px; 
-    height: auto; 
-    margin-right: 10px;
-}
-
-.info-produto {
-    display: flex;
-    flex-direction: row;
-}
-
-.container-prod {
-    display: flex;
-    flex-direction: row;
-    gap: 30%;
-    align-content: center;
-}
-
-#t {
+    text-align: left; 
     font-weight: bold;
 }
 
-.info-quantidade {
+.estilo-tabela tbody tr {
+    background-color: white;
+}
+
+
+.estilo-tabela tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+
+.estilo-tabela td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /
+}
+
+.qtd {
+    text-align: center;
+}
+
+.qtd button {
+    padding: 5px;
+    background-color: rgba(176, 132, 62, 0.808);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 10px;
+    width: 30px;
+}
+
+.qtd p {
+    display: inline-block; /* Exibe o texto na mesma linha dos botões */
+    margin: 0 5px
+}
+
+#excluir{
+    background-color: rgba(176, 132, 62, 0.808);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+
+.resumo{
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.info{
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: 1%;
 }
+
+.left{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+}
+
+.resumo .resumo-pedido h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 20px 0;
+  }
+  
+  .resumo .resumo-pedido h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 20px 0 26px 0;
+  }
+
+  .cep input{
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+  }
+
+  .botao-cont button{
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+  }
