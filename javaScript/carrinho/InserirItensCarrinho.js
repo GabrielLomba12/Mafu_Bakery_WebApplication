@@ -61,7 +61,7 @@ function aumentarQuantidade(id) {
         localStorage.setItem('carrinho', JSON.stringify(produtosCarrinho));
         localStorage.setItem('quantidade', quantidade);
         exibirProdutosCarrinho(); // Atualiza a tela após a alteração
-        atualizarCarrinho();
+        atualizarCarrinho();location.reload();
     } else {
         console.log('Produto não encontrado no carrinho'); 
     }
@@ -82,6 +82,7 @@ function diminuirQuantidade(id) {
             produto.quantidade -= 1;
             quantidade -= 1;
         }
+        location.reload(true);
         
         localStorage.setItem('carrinho', JSON.stringify(produtosCarrinho));
         localStorage.setItem('quantidade', quantidade);
@@ -118,3 +119,52 @@ function atualizarCarrinho() {
 }
 
 document.addEventListener('DOMContentLoaded', exibirProdutosCarrinho);
+
+
+const btn1 = document.querySelector('.btn1');
+const btn2 = document.querySelector('.btn2');
+const btn3 = document.querySelector('.btn3');
+
+let novoValor1 = 20; 
+let novoValor2 = 30; 
+let novoValor3 = 40; 
+
+document.getElementById('btn-calc').addEventListener('click', function(){
+    btn1.setAttribute('data-valor', novoValor1 )
+    btn2.setAttribute('data-valor', novoValor2)
+    btn3.setAttribute('data-valor', novoValor3)
+
+    btn1.textContent = `${novoValor1}`
+    btn2.textContent = `${novoValor2}`
+    btn3.textContent = `${novoValor3}`
+
+})
+
+let valorFreteAnterior = 0; 
+
+function adicionarFrete(valorFrete, btnSelecionado) {
+    const botoesFrete = [btn1, btn2, btn3];
+    botoesFrete.forEach(btn => btn.classList.remove('selected'));
+
+    btnSelecionado.classList.add('selected');
+
+    let valorTotalPedido = parseFloat(document.getElementById('valor-total-pedido').innerText.replace('R$', '').trim());
+    let novoTotal = valorTotalPedido - valorFreteAnterior + valorFrete; 
+
+    document.getElementById('valor-total-pedido').innerText = `R$ ${novoTotal.toFixed(2)}`;
+
+    valorFreteAnterior = valorFrete;
+}
+
+// Adicionando eventos de clique nos botões de frete
+btn1.addEventListener('click', function() {
+    adicionarFrete(novoValor1, btn1);
+});
+
+btn2.addEventListener('click', function() {
+    adicionarFrete(novoValor2, btn2);
+});
+
+btn3.addEventListener('click', function() {
+    adicionarFrete(novoValor3, btn3);
+});

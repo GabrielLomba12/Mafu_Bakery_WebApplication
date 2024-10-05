@@ -22,6 +22,8 @@
     <script src="javaScript/identificacaoGeral/IdentificacaoUsuario.js" defer></script>
     <script src="javaScript/utils/Utils.js" defer></script>
     <script src="javaScript/carrinho/InserirItensCarrinho.js" defer></script>
+    <script src="javaScript/carrinho/ConsultaApiExterna.js" defer></script>
+    <script src="javaScript/carrinho/CalculoFrete.js" defer></script>
 
 
     <title>Tela Carrinho</title>
@@ -83,25 +85,36 @@
                 <div class="info">
                   <div class="left">
                     <div>
-                        <h2>Valor dos produtos</h2>
+                        <h2>Valor dos produtos:</h2>
+                    </div>
+                    <div>
+                      <h2>Total do pedido:</h2>
                     </div>
                     <div>
                         <h2>Frete:</h2>
-                    </div>
-                    <div>
-                        <h2>Total do pedido</h2>
                     </div>
                     
                   </div>
                   <div class="right">
                     <h3 id="valor-produtos"></h3>
-                    <h3 id="frete">Grátis</h3>
                     <h3 id="valor-total-pedido"></h3>
+                    <h3 id="frete">
+                      <button class="btn1" data-valor=""></button>
+                      <button class="btn2" data-valor=""></button>
+                      <button class="btn3" data-valor=""></button>
+                    </h3>
                   </div>
                 </div>
 
                 <div class="cep">
-                  <input type="text" placeholder="CEP">
+                  <div>
+                    <input type="text" id="cep" placeholder="CEP" maxlength="8">
+                    <button id="btn-calc">Calcular</button>
+                  </div>
+                  
+                  <div>
+                    <input type="text" id="rua" readonly>
+                  </div>
                 </div>
         
                 <div>
