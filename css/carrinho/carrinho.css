@@ -98,7 +98,7 @@ td{
 
 
 .resumo{
-    width: 50%;
+    width: 55%;
     display: flex;
     justify-content: center;
 }
@@ -140,6 +140,7 @@ td{
     padding: 10px 20px;
     border-radius: 15px;
     margin-bottom: 20px;
+    border: none;
   }
 
   .botao-cont button{
@@ -147,3 +148,31 @@ td{
     border-radius: 15px;
     margin-bottom: 20px;
   }
+
+  .selected {
+    background-color: rgba(176, 132, 62, 0.808); /* Exemplo: fundo verde para o botão selecionado */
+    color: white;
+}
+
+#btn-calc{
+    background-color: rgba(176, 132, 62, 0.808); /* Exemplo: fundo verde para o botão selecionado */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
+}
+
+#frete{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#frete button{
+    display: none;
+    border-radius: 8px;
+    padding: 5px;
+    border: none;
+}
+
+
