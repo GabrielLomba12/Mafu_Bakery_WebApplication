@@ -1,10 +1,11 @@
 const produtosCabecalho = document.querySelector('.box-titulos')
+let valorDeFrete = 0;
 
 function exibirProdutosCarrinho() {
     const produtosCarrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
     const produtosMap = {};
-    let valorTotal = 0;
-
+    let valorTotal = valorDeFrete;
+    let subTotal = 0;
     produtosCarrinho.forEach(produto => {
         produtosMap[produto.id] = {...produto};
     });
@@ -16,8 +17,8 @@ function exibirProdutosCarrinho() {
 
         const valorUnitario = parseFloat(produto.preco);
         const valorTotalProduto = valorUnitario * produto.quantidade;
+        subTotal += valorTotalProduto;
         valorTotal += valorTotalProduto;
-
         const imgElement = document.createElement('img');
         imgElement.src = produto.imagens[0];
         imgElement.alt = `${produto.nome} imagem`;
@@ -46,22 +47,19 @@ function exibirProdutosCarrinho() {
         tbody.appendChild(produtoElement)
     }
 
-    document.getElementById('valor-produtos').innerText = `R$ ${valorTotal.toFixed(2)}`;
+    document.getElementById('valor-produtos').innerText = `R$ ${subTotal.toFixed(2)}`;
     document.getElementById('valor-total-pedido').innerText = `R$ ${valorTotal.toFixed(2)}`; 
 }
 
 function aumentarQuantidade(id) {
     const produtosCarrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    let quantidade = parseInt(localStorage.getItem('quantidade')) || 0;
     const produto = produtosCarrinho.find(p => p.id == id);
 
     if (produto) {
         produto.quantidade += 1;
-        quantidade += 1;
         localStorage.setItem('carrinho', JSON.stringify(produtosCarrinho));
-        localStorage.setItem('quantidade', quantidade);
         exibirProdutosCarrinho(); // Atualiza a tela após a alteração
-        atualizarCarrinho();location.reload();
+        atualizarCarrinho();
     } else {
         console.log('Produto não encontrado no carrinho'); 
     }
@@ -69,24 +67,19 @@ function aumentarQuantidade(id) {
 
 function diminuirQuantidade(id) {
     const produtosCarrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    let quantidade = parseInt(localStorage.getItem('quantidade')) || 0;
     const produtoIndex = produtosCarrinho.findIndex(p => p.id == id);
 
     if (produtoIndex !== -1) {
         const produto = produtosCarrinho[produtoIndex];
 
         if (produto.quantidade === 1) {
-            produtosCarrinho.splice(produtoIndex, 1); // Remove o produto do array
-            quantidade -= 1;
+            produtosCarrinho.splice(produtoIndex, 1);
         } else {
             produto.quantidade -= 1;
-            quantidade -= 1;
         }
-        location.reload(true);
         
         localStorage.setItem('carrinho', JSON.stringify(produtosCarrinho));
-        localStorage.setItem('quantidade', quantidade);
-        exibirProdutosCarrinho(); // Atualiza a tela após a alteração
+        exibirProdutosCarrinho();
         atualizarCarrinho();
     } else {
         console.log('Produto não encontrado no carrinho'); 
@@ -95,18 +88,14 @@ function diminuirQuantidade(id) {
 
 function excluirProduto(id) {
     const produtosCarrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    let quantidade = parseInt(localStorage.getItem('quantidade')) || 0;
     const produtoIndex = produtosCarrinho.findIndex(p => p.id == id);
 
     if (produtoIndex !== -1) {
-        const produto = produtosCarrinho[produtoIndex];
 
-        produtosCarrinho.splice(produtoIndex, 1); // Remove o produto do array
-        quantidade -= produto.quantidade;
+        produtosCarrinho.splice(produtoIndex, 1);
         
         localStorage.setItem('carrinho', JSON.stringify(produtosCarrinho));
-        localStorage.setItem('quantidade', quantidade);
-        exibirProdutosCarrinho(); // Atualiza a tela após a alteração
+        exibirProdutosCarrinho();
         atualizarCarrinho();
     } else {
         console.log('Produto não encontrado no carrinho'); 
@@ -114,7 +103,11 @@ function excluirProduto(id) {
 }
 
 function atualizarCarrinho() {
-    const quantidadeAtual = parseInt(localStorage.getItem("quantidade")) || 0;
+    let quantidadeAtual = 0;
+    const produtosCarrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    produtosCarrinho.forEach(produto => {
+        quantidadeAtual += produto.quantidade;
+    })
     document.getElementById("itens-carrinho").innerText = `[${quantidadeAtual}]`;
 }
 
@@ -138,9 +131,7 @@ document.getElementById('btn-calc').addEventListener('click', function(){
     btn2.textContent = `${novoValor2}`
     btn3.textContent = `${novoValor3}`
 
-})
-
-let valorFreteAnterior = 0; 
+}) 
 
 function adicionarFrete(valorFrete, btnSelecionado) {
     const botoesFrete = [btn1, btn2, btn3];
@@ -149,11 +140,11 @@ function adicionarFrete(valorFrete, btnSelecionado) {
     btnSelecionado.classList.add('selected');
 
     let valorTotalPedido = parseFloat(document.getElementById('valor-total-pedido').innerText.replace('R$', '').trim());
-    let novoTotal = valorTotalPedido - valorFreteAnterior + valorFrete; 
+    let novoTotal = valorTotalPedido - valorDeFrete + valorFrete; 
 
     document.getElementById('valor-total-pedido').innerText = `R$ ${novoTotal.toFixed(2)}`;
 
-    valorFreteAnterior = valorFrete;
+    valorDeFrete = valorFrete;
 }
 
 // Adicionando eventos de clique nos botões de frete

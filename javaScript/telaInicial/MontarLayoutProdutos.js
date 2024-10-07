@@ -104,26 +104,26 @@ function montarLayoutExibicao(produtos) {
 
 function adicionarAoCarrinho(produto) {
     let carrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
-    let quantidade = parseInt(localStorage.getItem('quantidade')) || 0;
 
     const produtoExistente = carrinho.find(p => p.id === produto.id);
     
     if (produtoExistente) {
         produtoExistente.quantidade += 1;
-        quantidade += 1;
     } else {
         produto.quantidade = 1;
         carrinho.push(produto);
-        quantidade += 1;
     }
 
     localStorage.setItem('carrinho', JSON.stringify(carrinho));
-    localStorage.setItem('quantidade', quantidade);
     alert(`${produto.nome} foi adicionado ao carrinho!`);
 }
 
 function atualizarCarrinho() {
-    const quantidadeAtual = parseInt(localStorage.getItem("quantidade")) || 0;
+    let quantidadeAtual = 0;
+    const produtosCarrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    produtosCarrinho.forEach(produto => {
+        quantidadeAtual += produto.quantidade;
+    })
     document.getElementById("itens-carrinho").innerText = `[${quantidadeAtual}]`;
 }
 

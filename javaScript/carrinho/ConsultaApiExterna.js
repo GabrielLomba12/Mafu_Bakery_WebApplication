@@ -19,4 +19,3 @@ document.getElementById('btn-calc').addEventListener('click', function() {
         document.getElementById('rua').value = "CEP inválido!";
     }
 });
-
