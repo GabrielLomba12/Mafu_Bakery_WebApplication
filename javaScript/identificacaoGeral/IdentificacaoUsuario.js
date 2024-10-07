@@ -3,7 +3,6 @@ var API = "localhost"; //Setar essa variavel quando testar local e comentar a do
 
 var emailUsuario = localStorage.getItem("email");
 var permissao = localStorage.getItem("permissao");
-var itensCarrinho = localStorage.getItem("carrinho");
 
 const opcoes = document.querySelector('.burger-menu');
 
@@ -71,9 +70,10 @@ function buscarUsuario(email) {
 }
 
 function atualizarCarrinho() {
-    const quantidadeAtual = parseInt(localStorage.getItem("quantidade")) || 0;
+    let quantidadeAtual = 0;
+    const produtosCarrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    produtosCarrinho.forEach(produto => {
+        quantidadeAtual += produto.quantidade;
+    })
     document.getElementById("itens-carrinho").innerText = `[${quantidadeAtual}]`;
 }
-
-
-
