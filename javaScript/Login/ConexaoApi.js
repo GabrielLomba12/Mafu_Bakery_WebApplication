@@ -1,5 +1,5 @@
-var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-// var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+// var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
 const formulario = document.querySelector("form")
 const email = document.querySelector(".email")
@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function redirecionar() {
-    window.location.href = "TelaInicial.html";
+    window.location.href = "TelaBackOffice.html";
 }
 
 function loginUsuario() {
