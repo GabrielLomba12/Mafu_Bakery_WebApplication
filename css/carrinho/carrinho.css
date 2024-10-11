@@ -1,0 +1,178 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Poppins", sans-serif;
+}
+
+main{
+    min-height: calc(100vh - 120px);   
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.main{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: top;
+    font-family: "Poppins", sans-serif;
+}
+
+.lista-produtos{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+table{
+    padding: 10px
+}
+
+th{
+    background-color: black;
+    color: white;
+    text-align: left;
+    padding: 5px 10px
+}
+
+td{
+    border: solid #ededed;
+    padding: 5px 10px
+}
+
+.estilo-tabela th {
+    background-color: rgba(176, 132, 62, 0.808);
+    color: white; 
+    padding: 10px; 
+    text-align: left; 
+    font-weight: bold;
+}
+
+.estilo-tabela tbody tr {
+    background-color: white;
+}
+
+
+.estilo-tabela tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+
+.estilo-tabela td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /
+}
+
+.qtd {
+    text-align: center;
+}
+
+.qtd button {
+    padding: 5px;
+    background-color: rgba(176, 132, 62, 0.808);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 10px;
+    width: 30px;
+}
+
+.qtd p {
+    display: inline-block; /* Exibe o texto na mesma linha dos botões */
+    margin: 0 5px
+}
+
+#excluir{
+    background-color: rgba(176, 132, 62, 0.808);
+    color: white;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+
+.resumo{
+    width: 55%;
+    display: flex;
+    justify-content: center;
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    gap: 1%;
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+}
+
+.resumo .resumo-pedido h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 20px 0;
+  }
+  
+  .resumo .resumo-pedido h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 20px 0 26px 0;
+  }
+
+  .cep input{
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+    border: none;
+  }
+
+  .botao-cont button{
+    padding: 10px 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+  }
+
+  .selected {
+    background-color: rgba(176, 132, 62, 0.808); /* Exemplo: fundo verde para o botão selecionado */
+    color: white;
+}
+
+#btn-calc{
+    background-color: rgba(176, 132, 62, 0.808); /* Exemplo: fundo verde para o botão selecionado */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 15px;
+    border: none;
+}
+
+#frete{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+#frete button{
+    display: none;
+    border-radius: 8px;
+    padding: 5px;
+    border: none;
+}
+
+

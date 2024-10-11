@@ -92,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function redirecionar() {
-    window.location.href = "TelaBackOffice.html";
+    window.location.href = "TelaInicial.html";
 }
 
 function loginUsuario() {
