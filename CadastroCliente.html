@@ -9,10 +9,12 @@
     <link rel="stylesheet" href="./vendor/BootStrap/open-iconic-bootstrap.css">
     <link rel="stylesheet" href="css/cliente/cliente.css">
     <link rel="stylesheet" href="css/cliente/enderecos.css">
+    <link rel="stylesheet" href="css/cliente/modal.css">
 
     <script src="javaScript/metodosCliente/CadastroCliente.js" defer></script>
     <script src="javaScript/metodosCliente/ConsultaApiExterna.js" defer></script>
     <script src="javaScript/utils/Utils.js" defer></script>
+    <script src="javaScript/metodosCliente/ValidacaoFormulario.js" defer></script>
 
     <title>Cadastre-se</title>
 </head>
@@ -28,16 +30,23 @@
                         <div>
                             <label for="nome">Nome:</label><br>
                             <input type="text" id="nome" name="nome" required>
+                            <div class="error-message invalid-feedback" id="nomeError">
+                                Digite o seu nome completo.
+                            </div>
                         </div>
                         
                         <div>
                             <label for="cpf">CPF:</label><br>
                             <input type="text" id="cpf" name="cpf" maxlength="11" inputmode="numeric" required>
+                            <div class="invalid-feedback">
+                                Digite um CPF válido.
+                            </div>
                         </div>
             
                         <div>
                             <label for="data_nascimento">Data de Nascimento:</label><br>
                             <input type="date" id="data_nascimento" name="data_nascimento" required>
+                            <small id="dataNascimentoError" class="error-message"></small>
                         </div>
             
                         <div>
@@ -47,6 +56,9 @@
                                 <option value="feminino">Feminino</option>
                                 <option value="outro">Outro</option>
                             </select>
+                            <div class="invalid-feedback">
+                                Escolha um gênero
+                            </div>
                         </div>
                     </div>
         
@@ -54,11 +66,17 @@
                         <div>
                             <label for="email">Email:</label><br>
                             <input type="email" id="email" name="email" required>
+                            <div class="invalid-feedback">
+                                Digite um e-mail válido.
+                            </div>
                         </div>
             
                         <div>
                             <label for="senha">Senha:</label><br>
                             <input type="password" id="senha" name="senha" required>
+                            <div class="invalid-feedback">
+                                A senha deve conter no mínimo 5 caracteres.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -78,7 +96,7 @@
                         <div>
                             <div class="form-group">
                                 <label for="cep">CEP:</label><br>
-                                <input type="text" id="cep" name="cep" placeholder="CEP" maxlength="8">
+                                <input type="text" id="cep" name="cep" placeholder="CEP" maxlength="8" required>
                             </div>
                     
                             <div class="form-group">
@@ -105,7 +123,7 @@
                         <div>
                             <div class="form-group">
                                 <label for="numero">Número:</label><br>
-                                <input type="text" id="numero" name="numero" placeholder="123">
+                                <input type="text" id="numero" name="numero" placeholder="123" required>
                             </div>
                     
                             <div class="form-group">
@@ -133,7 +151,7 @@
                         <div>
                             <div class="form-group">
                                 <label for="cepFat">CEP:</label><br>
-                                <input type="text" id="cepFat" name="cepFat" placeholder="CEP" maxlength="8">
+                                <input type="text" id="cepFat" name="cepFat" placeholder="CEP" maxlength="8" required>
                             </div>
                     
                             <div class="form-group">
@@ -155,7 +173,7 @@
                         <div>
                             <div class="form-group">
                                 <label for="numeroFat">Número:</label><br>
-                                <input type="text" id="numeroFat" name="numeroFat" placeholder="123">
+                                <input type="text" id="numeroFat" name="numeroFat" placeholder="123" required>
                             </div>
                     
                             <div class="form-group">
@@ -184,12 +202,35 @@
             </form>
         </div>
     </div>
+
+
+    <div class="card-modal" id="card-modal">
+        <div class="modal-confirm" id="modal-confirm">
+            <p class="modal-heading">Cadastro Realizado!</p>
+            <p class="modal-info">
+                Cadastro de cliente realizado com sucesso.
+            </p>
+            <div class="button-wrapper">
+                <button class="accept-cookie-button" id="botaook">OK</button>
+            </div>
+        </div>
+    </div>
+    <div id="loadingModal" class="loading-modal">
+        <svg viewBox="25 25 50 50">
+            <circle r="20" cy="50" cx="50"></circle>
+        </svg>
+    </div>
 </body>
 
 <script>
     function nextCard() {
-        document.getElementById("card1").classList.remove("active");
-        document.getElementById("card2").classList.add("active");
+        if (validateForm()) {
+            
+            document.getElementById("card1").classList.remove("active");
+            document.getElementById("card2").classList.add("active");
+        } else {
+            alert('Por favor, preencha todos os campos obrigatórios.');
+        }
     }
 
     function prevCard() {
