@@ -58,7 +58,7 @@
 var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
 function cadastrar(formData) {
-    // mostrarLoading();
+    mostrarLoading();
     fetch(`http://`+API+`:8080/api/cliente/cadastro`, {
         method: "POST",
         body: formData,
@@ -67,6 +67,7 @@ function cadastrar(formData) {
         if (response.ok) {
             esconderLoading();
             console.log("Cadastro realizado!");
+            window.location.href = "TelaLogin.html"
         } else {
             throw new Error('Erro ao fazer a requisição: ' + response.statusText);
         }
@@ -132,4 +133,3 @@ document.querySelector("#form2").addEventListener("submit", function (event) {
         limparCampos(); // Limpar campos após o envio
     
 });
-
