@@ -91,7 +91,11 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-function redirecionar() {
+function redirecionarTelaInicial() {
+    window.location.href = "TelaInicial.html";
+}
+
+function redirecionarTelaBackOffice() {
     window.location.href = "TelaBackOffice.html";
 }
 
@@ -122,7 +126,7 @@ function loginUsuario() {
         localStorage.setItem("tokenAcesso", token);
         const elementoCard = document.querySelector(".cartao");
         if (elementoCard) {
-            if (permissao === "ADMINISTRADOR" || permissao === "ESTOQUISTA") {
+            if (permissao === "ADMINISTRADOR" || permissao === "ESTOQUISTA" || permissao === "CLIENTE") {
                 elementoCard.style.display = "flex";
             }
         } else {
@@ -135,5 +139,8 @@ function loginUsuario() {
 }
 
 document.querySelector('.tela-back-office').addEventListener('click', function () {
-    redirecionar();
+    if(localStorage.getItem("permissao") === "CLIENTE") 
+        redirecionarTelaInicial();
+    else 
+        redirecionarTelaBackOffice();
 });
