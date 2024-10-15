@@ -30,6 +30,11 @@ body {
     font-family: "Poppins", sans-serif;
 }
 
+.principal {
+    display: flex;
+    justify-content: center;
+}
+
 .container {
     width: 1140px;
     background-color: white;
@@ -59,13 +64,12 @@ body {
     margin-top: 65px;
     width: 960px;
     padding-left: 20px;
+    align-items: flex-start;
 }
 
 .info-pessoais {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
     margin: 55px 0;
 }
 
@@ -87,7 +91,6 @@ body {
 
 .container-enderecos {
     display: flex;
-    /* flex-direction: column; */
     flex-direction: column;
     margin: 10px;
     max-width: 960px;
@@ -241,8 +244,13 @@ body {
     z-index: 1000;
 }
 
+#cartao-usuario {
+    display: none;
+    flex-direction: column;
+}
+
 .salvar {
-    background: #000;
+    background: #694e22;
     color: #FFFFFF;
     font-weight: bold;
     font-family: "Poppins", sans-serif;
@@ -254,6 +262,7 @@ body {
     color: #000;
     font-weight: bold;
     font-family: "Poppins", sans-serif;
+    border-color: #694e22;
 }
 
 .button-wrapper {
@@ -273,20 +282,12 @@ body {
     padding: 18px;
     border: 1px solid #888;
     width: 42%;
-    height: 85%;
+    height: 64%;
     position: relative;
     overflow-y: auto;
     display: flex;
-}
-
-.modal-dados-email {
-    background-color: #ffffff;
-    padding: 18px;
-    border: 1px solid #888;
-    width: 42%;
-    height: 45%;
-    position: relative;
-    overflow-y: auto;
+    flex-direction: column;
+    border-radius: 2%;
 }
 
 .modal-dados-senha {
@@ -294,9 +295,10 @@ body {
     padding: 18px;
     border: 1px solid #888;
     width: 42%;
-    height: 58%;
+    height: 43%;
     position: relative;
     overflow-y: auto;
+    border-radius: 2%;
 }
 
 .modal-dados-endereco {
@@ -328,8 +330,10 @@ h2 {
 }
 
 .close {
+    position: absolute; 
+    top: 10px;
+    right: 15px;
     color: #aaa;
-    float: right;
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
@@ -341,7 +345,6 @@ h2 {
     text-decoration: none;
     cursor: pointer;
 }
-
 /* FIM MODAL */
 
 .cadastrar-endereco:hover {
@@ -351,9 +354,7 @@ h2 {
 
 .blur {
     filter: blur(5px);
-    /* Adicione o efeito de desfoque */
     pointer-events: none;
-    /* Impede que elementos da tela recebam eventos do mouse */
     z-index: -1;
 }
 

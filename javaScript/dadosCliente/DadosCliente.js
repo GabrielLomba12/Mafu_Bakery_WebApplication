@@ -30,27 +30,43 @@ function preencherInformacoesCliente() {
 
         dadosUsuario.innerHTML = 
         ` 
-            <p>${data.nomeCompleto}</p> 
-            <p>${formattedDate}</p> 
-            <p>${formattedCpf}</p> 
-            <p>${data.genero}</p> 
+            <p><strong>Nome Completo:</strong> ${data.nomeCompleto}</p> 
+            <p><strong>Data de Nascimento:</strong> ${formattedDate}</p> 
+            <p><strong>CPF:</strong> ${formattedCpf}</p> 
+            <p><strong>Gênero:</strong> ${data.genero}</p> 
         `;
 
-        // const senha = data.senha;
-        // const maskedSenha = '*'.repeat(senha.length);
+        const btnPreencher = document.getElementById('botao-usuario');
+        btnPreencher.addEventListener('click', () => {
+        document.getElementById('nome-usuario').value = data.nomeCompleto;
+        document.getElementById('data-nascimento').value = isoDate.split('T')[0];
+        document.getElementById('genero').value = data.genero;
+        });
+    })
+}
 
-        // senhaUsuario.innerHTML = ` <p>${maskedSenha}</p> `
+function preencherModalCliente() {
+    fetch(`http://${API}:8080/api/cliente/infoCliente?email=${email}`, {
+        method: 'GET',
+        headers : {
+            "Content-Type": "application/json"
+        }
+    }) 
+    .then(response => {
+        if(response.ok) {
+            return response.json();
+        } else  
+            throw new Error('Erro ao coletar dados do usuário.')
+    })
+    .then(data => {
+        
     })
 }
 
 function formatarCPF(cpf) {
-    // Remove todos elementos não numericos
     cpf = cpf.replace(/\D/g, '');
-
-    // Formata o CPF no padrão XXX.XXX.XXX-XX
     cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
     cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
     cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-
     return cpf;
 }

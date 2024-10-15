@@ -43,6 +43,8 @@ function realizarLogout() {
     localStorage.removeItem("email");
     localStorage.removeItem("permissao");
     localStorage.removeItem("tokenAcesso");
+    localStorage.removeItem("ClienteId");
+    localStorage.removeItem("dados-pessoais-usuario");
 
     alert("Logout realizado com sucesso!")
 }
