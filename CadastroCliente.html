@@ -85,7 +85,6 @@
             </form>
         </div>
     
-        <!-- Card 2: Endereço -->
         <div class="card" id="card2">
             <h3>Endereço</h3>
             <form id="form2">
@@ -139,61 +138,17 @@
                             <div class="form-group">
                                 <label for="tipo">Tipo de Endereço:</label><br>
                                 <select id="tipo" name="tipo">
+                                    <option value="FATURAMENTO" selected>Faturamento</option>
                                     <option value="ENTREGA" selected>Entrega</option>
                                 </select>
                             </div>
                         </div>
                     </section>
-                    
+                    <button type="button" class="btn" id="addEnderecoBtn" onclick="adicionarEndereco()">Adicionar Endereço</button>
+                    <button type="button" class="btn" id="limparCampos">Limpar Campos</button>
 
-                    <h4>Endereço de Faturamento</h4>
-                    <section class="endereco2">
-                        <div>
-                            <div class="form-group">
-                                <label for="cepFat">CEP:</label><br>
-                                <input type="text" id="cepFat" name="cepFat" placeholder="CEP" maxlength="8" required>
-                            </div>
-                    
-                            <div class="form-group">
-                                <label for="ruaFat">Rua:</label><br>
-                                <input type="text" id="ruaFat" name="ruaFat" placeholder="Rua" readonly>
-                            </div>
-                    
-                            <div class="form-group">
-                                <label for="bairroFat">Bairro:</label><br>
-                                <input type="text" id="bairroFat" name="bairroFat" placeholder="Bairro" readonly>
-                            </div>
-                    
-                            <div class="form-group">
-                                <label for="cidadeFat">Cidade:</label><br>
-                                <input type="text" id="cidadeFat" name="cidadeFat" placeholder="Cidade" readonly>
-                            </div>
-                        </div>
-    
-                        <div>
-                            <div class="form-group">
-                                <label for="numeroFat">Número:</label><br>
-                                <input type="text" id="numeroFat" name="numeroFat" placeholder="123" required>
-                            </div>
-                    
-                            <div class="form-group">
-                                <label for="complementoFat">Complemento:</label><br>
-                                <input type="text" id="complementoFat" name="complementoFat" placeholder="Apt 101">
-                            </div>
-                    
-                            <div class="form-group">
-                                <label for="ufFat">UF:</label><br>
-                                <input type="text" id="ufFat" name="ufFat" readonly>
-                            </div>
-                    
-                            <div class="form-group">
-                                <label for="tipo">Tipo de Endereço:</label><br>
-                                <select id="tipoFat" name="tipo">
-                                    <option value="FATURAMENTO" selected>Faturamento</option>
-                                </select>
-                            </div>
-                        </div>
-                    </section>
+                    <h4>Endereços Adicionados</h4>
+                    <textarea id="enderecosAdicionados" rows="5" readonly></textarea>
                 </div>
 
         
