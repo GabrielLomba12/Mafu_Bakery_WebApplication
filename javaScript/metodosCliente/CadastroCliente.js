@@ -2,16 +2,18 @@
 var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
 function cadastrar(formData) {
-    // mostrarLoading();
+    mostrarLoading();
     fetch(`http://` + API + `:8080/api/cliente/cadastro`, {
         method: "POST",
         body: formData,
     })
     .then(response => {
         if (response.ok) {
-            // esconderLoading();
-            console.log("Cadastro realizado!");
-            window.location.href = "TelaLogin.html";
+            setTimeout(() => {
+                esconderLoading();
+                console.log("Cadastro realizado!");
+                window.location.href = "Login.html";
+            }, 3000);
         } else {
             throw new Error('Erro ao fazer a requisição: ' + response.statusText);
         }
@@ -42,6 +44,14 @@ document.querySelector("#form2").addEventListener("submit", function (event) {
     // Obtém o texto do textarea
     const enderecosText = document.getElementById('enderecosAdicionados').value;
     const enderecos = processarEnderecos(enderecosText); // Converte o texto em um array de endereços
+
+    const temFaturamento = enderecos.some(endereco => endereco.tipo === 'FATURAMENTO');
+    const temEntrega = enderecos.some(endereco => endereco.tipo === 'ENTREGA');
+
+    if (!temFaturamento || !temEntrega) {
+        alert('É necessário cadastrar pelo menos um endereço de FATURAMENTO e um de ENTREGA.');
+        return; // Interrompe o envio se a validação falhar
+    }
 
     // Adicionar os endereços processados ao FormData
     formData.append("enderecos", JSON.stringify(enderecos));
