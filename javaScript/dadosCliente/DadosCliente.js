@@ -65,10 +65,10 @@ function preencherModalCliente() {
 function preencherEnderecosCliente() {
     fetch(`http://${API}:8080/api/endereco/enderecosCliente?id=${id}`, {
         method: 'GET',
-        headers : {
+        headers: {
             "Content-Type": "application/json"
         }
-    }) 
+    })
     .then(response => {
         if (!response.ok) {
             throw new Error("Erro ao acessar a API: " + response.statusText);
@@ -76,7 +76,6 @@ function preencherEnderecosCliente() {
         return response.json();
     })
     .then(data => {
-        console.log(data)
         let primeiroEndereco = document.getElementById("primeiro-endereco");
         let listaEndereco = document.querySelector(".lista-enderecos");
         primeiroEndereco.innerHTML = "";
@@ -97,9 +96,10 @@ function preencherEnderecosCliente() {
                 linhaEndereco.classList.add('linha-endereco');
             }
 
-            let enderecoConcatenado = '';
+            let enderecoConcatenado = (endereco.rua + ', ' + endereco.numero) + ' - ' + (endereco.complemento ? `${endereco.complemento}` : '');
+
             if (indice === 0) {
-                cadastrarEndereço.innerHTML = ` 
+                cadastrarEndereço.innerHTML = `
                     <div class="novo-endereco">
                         <p>Novo Endereço</p>
                         <h2>+</h2>
@@ -110,13 +110,12 @@ function preencherEnderecosCliente() {
                     modalEndereco.style.display = 'flex';
                     document.querySelector('#cartao-endereco h2').innerText = 'NOVO ENDEREÇO';
                     document.querySelector('#salvar-endereco').addEventListener('click', function () {
-                        // cadastrarNovoEndereco(id);
+                        cadastrarNovoEndereco(id);
                         modalEndereco.style.display = 'none';
                         mostrarLoading();
                     });
                 });
 
-                enderecoConcatenado = (endereco.rua + ', ' + endereco.numero) + ' - ' + (endereco.complemento ? `${endereco.complemento}` : '');
                 novoEndereco.innerHTML = `
                 <div class="dados" data-endereco-id="${endereco.id}">
                     <div id="dados-endereco">
@@ -124,31 +123,25 @@ function preencherEnderecosCliente() {
                         <p>${enderecoConcatenado}</p>
                         <p>${endereco.bairro}</p>
                         <p>${endereco.cidade + ', ' + endereco.uf + '-' + endereco.cep}</p>
+                        <p><strong>${endereco.principal ? '(Principal)' : ''}</strong></p>
                     </div>
                     <div class="button-endereco">
-                        <button class="editar-infos modal-endereco salvar-endereco btn-end-p">
-                            DEFINIR COMO PRINCIPAL
-                        </button>
+                        ${endereco.principal ? '' : '<button class="editar-infos modal-endereco salvar-endereco btn-end-p">DEFINIR COMO PRINCIPAL</button>'}
                     </div>
                 </div>
                 `;
-                novoEndereco.querySelector('.modal-endereco').addEventListener('click', function () {
-                    const modalEndereco = document.querySelector('#cartao-endereco');
-                    modalEndereco.style.display = 'flex';
-                    document.querySelector('#cartao-endereco h2').innerText = 'EDITAR ENDEREÇO';
-                    preencherDadosEndereco(endereco);
-                    document.querySelector('#salvar-endereco').addEventListener('click', function () {
-                        alterarEndereco(endereco.id)
-                        modalEndereco.style.display = 'none';
+                
+                // Listener para o botão "Definir como Principal"
+                if (!endereco.principal) {
+                    const botaoPrincipal = novoEndereco.querySelector('.btn-end-p');
+                    botaoPrincipal.addEventListener('click', function() {
+                        definirComoPrincipal(endereco.id, id);
                     });
-                });
-                // novoEndereco.querySelector('.btn-remover').addEventListener('click', function () {
-                //     deletarEndereco(endereco.id);
-                // });
+                }
+
                 primeiroEndereco.appendChild(cadastrarEndereço);
                 primeiroEndereco.appendChild(novoEndereco);
             } else {
-                enderecoConcatenado = (endereco.rua + ', ' + endereco.numero) + ' - ' + (endereco.complemento ? `${endereco.complemento}` : '');
                 novoEndereco.innerHTML = `
                 <div class="dados" data-endereco-id="${endereco.id}">
                     <div id="dados-endereco">
@@ -156,29 +149,24 @@ function preencherEnderecosCliente() {
                         <p>${enderecoConcatenado}</p>
                         <p>${endereco.bairro}</p>
                         <p>${endereco.cidade + ', ' + endereco.uf + '-' + endereco.cep}</p>
+                        <p><strong>${endereco.principal ? '(Principal)' : ''}</strong></p>
                     </div>
                     <div class="button-endereco">
-                        <button class="editar-infos modal-endereco salvar-endereco btn-end-p">
-                            DEFINIR COMO PRINCIPAL
-                        </button>
+                        ${endereco.principal ? '' : '<button class="editar-infos modal-endereco salvar-endereco btn-end-p">DEFINIR COMO PRINCIPAL</button>'}
                     </div>
                 </div>
                 `;
-                novoEndereco.querySelector('.modal-endereco').addEventListener('click', function () {
-                    const modalEndereco = document.querySelector('#cartao-endereco');
-                    modalEndereco.style.display = 'flex';
-                    document.querySelector('#cartao-endereco h2').innerText = 'EDITAR ENDEREÇO';
-                    preencherDadosEndereco(endereco);
-                    document.querySelector('#salvar-endereco').addEventListener('click', function () {
-                        alterarEndereco(endereco.id)
-                        modalEndereco.style.display = 'none';
+
+                if (!endereco.principal) {
+                    const botaoPrincipal = novoEndereco.querySelector('.btn-end-p');
+                    botaoPrincipal.addEventListener('click', function() {
+                        definirComoPrincipal(endereco.id, id);
                     });
-                });
-                // novoEndereco.querySelector('.btn-remover').addEventListener('click', function () {
-                //     deletarEndereco(endereco.id);
-                // });
+                }
+
                 linhaEndereco.appendChild(novoEndereco);
                 qtdLinha++;
+
                 if (qtdLinha === 2) {
                     listaEndereco.appendChild(linhaEndereco);
                     qtdLinha = 0;
@@ -190,7 +178,101 @@ function preencherEnderecosCliente() {
     })
     .catch(error => {
         console.log("Erro: " + error);
+    });
+}
+
+document.getElementById('cep').addEventListener('blur', function() {
+    let cep = document.getElementById('cep').value.replace(/\D/g, ''); 
+    if (cep.length === 8) {
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.erro) {
+                    document.getElementById('rua').value = data.logradouro;
+                    document.getElementById('bairro').value = data.bairro;
+                    document.getElementById('cidade').value = data.localidade;
+                    document.getElementById('uf').value = data.uf;
+                } else {
+                    document.getElementById('rua').value = "CEP não encontrado!";
+                    limparCampos();
+                }
+            })
+            .catch(error => console.error('Erro ao consultar o CEP:', error));
+    } else {
+        document.getElementById('rua').value = "CEP inválido!";
+        limparCampos();
+    }
+});
+
+function limparCampos() {
+    document.getElementById('bairro').value = '';
+    document.getElementById('cidade').value = '';
+    document.getElementById('uf').value = '';
+}
+
+function cadastrarNovoEndereco(id) {
+    const isPrincipal = document.getElementById('set-principal').checked;
+
+    const endereco = {
+        cep: document.getElementById('cep').value,
+        rua: document.getElementById('rua').value,
+        numero: document.getElementById('numero').value,
+        complemento: document.getElementById('complemento').value,
+        bairro: document.getElementById('bairro').value,
+        cidade: document.getElementById('cidade').value,
+        uf: document.getElementById('uf').value,
+        tipo: document.getElementById('opcoes').value,
+        principal: isPrincipal
+    };
+
+    const btnSalvar = document.getElementById('salvar-endereco');
+    btnSalvar.disabled = true; 
+
+    fetch(`http://${API}:8080/api/endereco/cadastrar?id=${id}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(endereco)
     })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Erro ao acessar a API: " + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert("Endereço cadastrado com sucesso!");
+        location.reload(); 
+    })
+    .catch(error => {
+        console.log("Erro: " + error);
+    })
+    .finally(() => {
+        btnSalvar.disabled = false;
+    });
+}
+
+function definirComoPrincipal(enderecoId, clienteId) {
+    fetch(`http://${API}:8080/api/endereco/enderecoPrincipal?enderecoId=${enderecoId}&clienteId=${clienteId}`, {
+        method: 'PATCH', 
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Erro ao definir endereço como principal: " + response.statusText);
+        }
+        return response.json();
+    })
+    .then(data => {
+        alert("Endereço definido como principal", data);
+        location.reload();
+    })
+    .catch(error => {
+        console.log("Erro: " + error);
+    });
 }
 
 function formatarCPF(cpf) {

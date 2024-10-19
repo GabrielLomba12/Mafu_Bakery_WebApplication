@@ -194,6 +194,11 @@ body {
     color: transparent;
 }
 
+.princ {
+    display: flex;
+    align-items: flex-start;
+}
+
 .btn-end-p:hover {
     color: #FFFFFF;
 }

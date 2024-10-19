@@ -19,6 +19,7 @@
     <script src="javaScript/dadosCliente/AcoesModal.js" defer></script>
     <script src="javaScript/dadosCliente/AlteracaoDadosCliente.js" defer></script>
     <script src="javaScript/dadosCliente/ModaisAlteracao.js" defer></script>
+    <script src="javaScript/dadosCliente/AlteracaoDadosCliente.js" defer></script>
 
     <title>Meus Dados</title>
 </head>
@@ -146,11 +147,11 @@
             <h2>EDITAR ENDEREÇO</h2>
             <div class="modal-info">
                 <label class="labels" for="cep">CEP</label>
-                <input type="text" class="input-dados" id="cep" onblur=pesquisacep(this); required>
+                <input type="text" class="input-dados" id="cep" required>
             </div>
             <div class="modal-info">
-                <label class="labels" for="logradouro">Logradouro</label>
-                <input type="text" class="input-dados" id="logradouro">
+                <label class="labels" for="rua">Rua</label>
+                <input type="text" class="input-dados" id="rua">
             </div>
             <div class="modal-info">
                 <label class="labels" for="numero">Número</label>
@@ -171,6 +172,17 @@
             <div class="modal-info">
                 <label class="labels" for="uf">UF</label>
                 <input type="text" class="input-dados" id="uf">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="tipo">Tipo</label>
+                <select name="opcoes" class="input-dados" id="opcoes">
+                    <option value="FATURAMENTO">Faturamento</option>
+                    <option value="ENTREGA">Entrega</option>
+                </select>
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="set-principal">Definir como principal?</label>
+                <div id="princ"><input type="checkbox" id="set-principal"></div>
             </div>
             <div class="button-wrapper">
                 <button id="salvar-endereco" class="salvar">SALVAR ALTERAÇÕES</button>
