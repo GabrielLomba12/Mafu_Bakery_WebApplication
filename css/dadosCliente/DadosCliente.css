@@ -177,6 +177,10 @@ body {
     font-size: 12px;
 }
 
+.btn-end-p {
+    width: 40%;
+}
+
 .svg {
     width: 13px;
     position: absolute;
@@ -188,6 +192,10 @@ body {
 
 .editar-infos:hover {
     color: transparent;
+}
+
+.btn-end-p:hover {
+    color: #FFFFFF;
 }
 
 .editar-infos:hover svg {
@@ -282,7 +290,7 @@ body {
     padding: 18px;
     border: 1px solid #888;
     width: 42%;
-    height: 64%;
+    height: 80%;
     position: relative;
     overflow-y: auto;
     display: flex;
@@ -295,7 +303,7 @@ body {
     padding: 18px;
     border: 1px solid #888;
     width: 42%;
-    height: 43%;
+    height: 56%;
     position: relative;
     overflow-y: auto;
     border-radius: 2%;
