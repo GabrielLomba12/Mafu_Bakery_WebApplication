@@ -118,18 +118,18 @@ const btn1 = document.querySelector('.btn1');
 const btn2 = document.querySelector('.btn2');
 const btn3 = document.querySelector('.btn3');
 
-let novoValor1 = 20; 
-let novoValor2 = 30; 
-let novoValor3 = 40; 
+let novoValor1 = 20.99; 
+let novoValor2 = 30.99; 
+let novoValor3 = 40.99; 
 
 document.getElementById('btn-calc').addEventListener('click', function(){
     btn1.setAttribute('data-valor', novoValor1 )
     btn2.setAttribute('data-valor', novoValor2)
     btn3.setAttribute('data-valor', novoValor3)
 
-    btn1.textContent = `${novoValor1}`
-    btn2.textContent = `${novoValor2}`
-    btn3.textContent = `${novoValor3}`
+    btn1.textContent = `R$ ${novoValor1}`
+    btn2.textContent = `R$ ${novoValor2}`
+    btn3.textContent = `R$ ${novoValor3}`
 
 }) 
 
