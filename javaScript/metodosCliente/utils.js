@@ -1,6 +1,6 @@
 function mostrarLoading() {
     document.getElementById("loadingModal").style.display = "block";
-    document.querySelector(".container").classList.add('blur');
+    document.querySelector(".main").classList.add('blur');
 }
 
 function esconderLoading() {

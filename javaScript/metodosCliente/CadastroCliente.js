@@ -1,5 +1,10 @@
-// var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+// var API = "4.228.231.149"; // Setar essa variável quando subir para a nuvem e comentar a localhost
+var API = "localhost"; // Setar essa variável quando testar local e comentar a do IP
+
+let faturamentoCadastrado = false; 
+let principalSelecionado = false; 
+
+let buttonOK = document.getElementById("botaook");
 
 function cadastrar(formData) {
     mostrarLoading();
@@ -11,8 +16,13 @@ function cadastrar(formData) {
         if (response.ok) {
             setTimeout(() => {
                 esconderLoading();
+                document.getElementById("card-modal").style.display = "flex"
+                document.getElementById("modal-confirm").style.display = "flex"
                 console.log("Cadastro realizado!");
-                window.location.href = "Login.html";
+                buttonOK.addEventListener("click", () => {
+                    window.location.href = "Login.html";
+                })
+                
             }, 3000);
         } else {
             throw new Error('Erro ao fazer a requisição: ' + response.statusText);
@@ -26,7 +36,7 @@ function cadastrar(formData) {
 document.querySelector("#form2").addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const formData = new FormData(); // Cria um novo FormData
+    const formData = new FormData(); 
 
     const cliente = {
         nomeCompleto: document.querySelector("#nome").value,
@@ -37,13 +47,11 @@ document.querySelector("#form2").addEventListener("submit", function (event) {
         senha: document.querySelector("#senha").value
     };
 
-    // Adicionar os dados do cliente ao FormData
     formData.append("cliente", JSON.stringify(cliente));
     console.log(cliente);
 
-    // Obtém o texto do textarea
     const enderecosText = document.getElementById('enderecosAdicionados').value;
-    const enderecos = processarEnderecos(enderecosText); // Converte o texto em um array de endereços
+    const enderecos = processarEnderecos(enderecosText);
 
     const temFaturamento = enderecos.some(endereco => endereco.tipo === 'FATURAMENTO');
     const temEntrega = enderecos.some(endereco => endereco.tipo === 'ENTREGA');
@@ -53,22 +61,19 @@ document.querySelector("#form2").addEventListener("submit", function (event) {
         return; // Interrompe o envio se a validação falhar
     }
 
-    // Adicionar os endereços processados ao FormData
     formData.append("enderecos", JSON.stringify(enderecos));
     console.log(enderecos);
 
-    // Chamar a função para cadastrar
     cadastrar(formData);
-    limparCampos(); // Limpar campos após o envio
+    limparCampos(); 
 });
 
 // Função para processar o texto do textarea e converter em um array de objetos de endereço
 function processarEnderecos(enderecosText) {
-    const enderecosArray = enderecosText.trim().split('\n\n'); // Divide as entradas por duas quebras de linha
+    const enderecosArray = enderecosText.trim().split('\n\n'); 
     const enderecos = enderecosArray.map(enderecoText => {
-        const partes = enderecoText.split(',').map(p => p.trim()); // Divide cada linha por vírgula e remove espaços
+        const partes = enderecoText.split(',').map(p => p.trim());
 
-        // Cria um objeto para cada endereço, assumindo que a ordem das partes é conhecida
         return {
             cep: partes[0]?.split(': ')[1] || '',
             rua: partes[1]?.split(': ')[1] || '',
@@ -78,7 +83,7 @@ function processarEnderecos(enderecosText) {
             complemento: partes[5]?.split(': ')[1] || '',
             uf: partes[6]?.split(': ')[1] || '',
             tipo: partes[7]?.split(': ')[1] || '',
-            principal: partes[8]?.split(': ')[1] === 'true' // Ajuste se necessário
+            principal: partes[8]?.split(': ')[1] === 'true'
         };
     });
 
@@ -86,7 +91,6 @@ function processarEnderecos(enderecosText) {
 }
 
 function adicionarEndereco() {
-    // Obtém os valores dos inputs
     const cep = document.getElementById('cep').value;
     const rua = document.getElementById('rua').value;
     const bairro = document.getElementById('bairro').value;
@@ -95,22 +99,60 @@ function adicionarEndereco() {
     const complemento = document.getElementById('complemento').value;
     const uf = document.getElementById('uf').value;
     const tipo = document.getElementById('tipo').value;
-    const principal = document.getElementById('principal').checked
+    const principal = document.getElementById('principal').checked;
 
-    // Verifica se os campos necessários estão preenchidos
     if (cep.trim() === '' || rua.trim() === '' || bairro.trim() === '' || cidade.trim() === '' || numero.trim() === '' || uf.trim() === '') {
         alert('Por favor, preencha todos os campos antes de adicionar o endereço.');
         return;
     }
 
-    // Obtém o textarea e adiciona o novo endereço
+    // Verifica se já existe um endereço de FATURAMENTO
+    if (tipo === 'FATURAMENTO' && faturamentoCadastrado) {
+        alert('Só é permitido cadastrar um endereço de FATURAMENTO.');
+        return;
+    }
+
+    // Verifica se já existe um endereço principal
+    if (principal && principalSelecionado) {
+        alert('Só é permitido cadastrar um endereço como principal.');
+        return;
+    }
+
+    if (tipo === 'FATURAMENTO' && principal) {
+        alert('Não é possível cadastrar um endereço de faturamento como principal.');
+        return; // Interrompe a adição do endereço
+    }
+    
+    if (tipo === 'FATURAMENTO') faturamentoCadastrado = true;
+    if (principal) {
+        principalSelecionado = true;
+        document.getElementById('principal').disabled = true; // Desabilita checkbox principal
+    }
+
     const enderecosAdicionados = document.getElementById('enderecosAdicionados');
     enderecosAdicionados.value += `CEP: ${cep}, Rua: ${rua}, Bairro: ${bairro}, Cidade: ${cidade}, Número: ${numero}, Complemento: ${complemento}, UF: ${uf}, Tipo: ${tipo}, Principal: ${principal}\n\n`;
-
 }
 
+// function copiarEnderecoFaturamento() {
+//     const enderecosText = document.getElementById('enderecosAdicionados').value;
+//     const enderecos = processarEnderecos(enderecosText);
+    
+//     const enderecoFaturamento = enderecos.find(endereco => endereco.tipo === 'FATURAMENTO');
+//     if (enderecoFaturamento) {
+//         document.getElementById('cep').value = enderecoFaturamento.cep;
+//         document.getElementById('rua').value = enderecoFaturamento.rua;
+//         document.getElementById('bairro').value = enderecoFaturamento.bairro;
+//         document.getElementById('cidade').value = enderecoFaturamento.cidade;
+//         document.getElementById('numero').value = enderecoFaturamento.numero;
+//         document.getElementById('complemento').value = enderecoFaturamento.complemento;
+//         document.getElementById('uf').value = enderecoFaturamento.uf;
+//         document.getElementById('tipo').value = 'ENTREGA'; // Define como endereço de entrega
+//     } else {
+//         alert('Não existe um endereço de FATURAMENTO para copiar.');
+//     }
+// }
+
 document.querySelector("#limparCampos").addEventListener('click', function(){
-    // Limpa os campos de input
     document.getElementById('cep').value = '';
     document.getElementById('rua').value = '';
     document.getElementById('bairro').value = '';
@@ -119,4 +161,5 @@ document.querySelector("#limparCampos").addEventListener('click', function(){
     document.getElementById('complemento').value = '';
     document.getElementById('uf').value = '';
     document.getElementById('tipo').value = 'FATURAMENTO';
-})
+    document.getElementById('principal').checked = false;
+});
