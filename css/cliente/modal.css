@@ -36,9 +36,9 @@
 }
 
 .modal-info {
-    font-size: 11px;
-    font-weight: 400;
-    color: rgb(51, 51, 51);
+    font-size: 13px;
+    font-weight: 500;
+    color: black;
     text-align: center;
 }
 
@@ -49,6 +49,29 @@
     align-items: center;
     justify-content: center;
     gap: 20px;
+}
+
+#botaook{
+    background-color: rgba(176, 132, 62, 0.808);
+    color: white;
+    padding: 10px 55px;
+    border-radius: 10px;
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+#botaook:hover {
+    background-color: rgba(147, 105, 37, 0.808);
+    transform: translateY(-5px);
+    border: none; 
+}
+
+.blur {
+    filter: blur(5px);
+    /* Adicione o efeito de desfoque */
+    pointer-events: none;
+    /* Impede que elementos da tela recebam eventos do mouse */
+    z-index: -1;
 }
 
 .loading-modal {
@@ -75,4 +98,26 @@
     stroke-dashoffset: 0;
     stroke-linecap: round;
     animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash4 {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 90, 200;
+        stroke-dashoffset: -35px;
+    }
+
+    100% {
+        stroke-dashoffset: -125px;
+    }
 }
