@@ -1,5 +1,5 @@
-// var API = "4.228.231.149"; // Setar essa variável quando subir para a nuvem e comentar a localhost
-var API = "localhost"; // Setar essa variável quando testar local e comentar a do IP
+var API = "4.228.231.149"; // Setar essa variável quando subir para a nuvem e comentar a localhost
+// var API = "localhost"; // Setar essa variável quando testar local e comentar a do IP
 
 let faturamentoCadastrado = false; 
 let principalSelecionado = false; 
