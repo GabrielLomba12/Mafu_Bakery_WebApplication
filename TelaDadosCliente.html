@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/navbar/navbar.css">
+    <link rel="stylesheet" href="css/reset/reset.css">
+    <link rel="stylesheet" href="css/telaInicial/TelaInicial.css">
+    <link rel="stylesheet" href="vendor/BootStrap/bootstrap.css">
+    <link rel="stylesheet" href="vendor/BootStrap/open-iconic-bootstrap.css">
+    <link rel="stylesheet" href="css/dadosCliente/DadosCliente.css">
+
+    <script src="javaScript/identificacaoGeral/IdentificacaoUsuario.js" defer></script>
+    <script src="javaScript/telaInicial/Utils.js" defer></script>
+    <script src="javaScript/utils/Utils.js" defer></script>
+    <script src="javaScript/dadosCliente/DadosCliente.js" defer></script>
+    <script src="javaScript/dadosCliente/AcoesModal.js" defer></script>
+    <script src="javaScript/dadosCliente/AlteracaoDadosCliente.js" defer></script>
+    <script src="javaScript/dadosCliente/ModaisAlteracao.js" defer></script>
+    <script src="javaScript/dadosCliente/AlteracaoDadosCliente.js" defer></script>
+
+    <title>Meus Dados</title>
+</head>
+
+<body>
+    <header>
+        <nav class="nav">
+            <div class="logo">
+                <img class="imgLogo" onclick="redirecionarTelaInicial()" src="images/logo-removebg-preview.png"
+                    alt="logo">
+            </div>
+
+            <div class="userInfo">
+                <p id="login_user"></p>
+                <div id="itens-nav">
+                    <img src="images/cart-removebg-preview.png" alt="Icone Carrinho" onclick="redirecionarTelaCarrinho()">
+                    <p id="itens-carrinho" ></p>
+
+                    <div class="burger-container">
+                        <label class="burger" for="burger">
+                            <input type="checkbox" id="burger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </label>
+                        <div class="burger-menu"></div>
+                    </div>
+                </div>
+            </div>            
+        </nav>
+        
+    </header>
+
+    <main class="principal">
+        <div class="container">
+            <div class="conteudo">
+                <h1>MINHAS INFORMAÇÕES</h1>
+                <p>Por favor, confira os dados abaixo para garantir que estão atualizados.</p>
+                <div class="info-pessoais">
+                    <h1>DADOS PESSOAIS</h1>
+                    <div id="dados-usuario"></div>
+                    <button id="botao-usuario" class="editar-infos">
+                        EDITAR
+                        <svg viewBox="0 0 512 512" class="svg">
+                            <path
+                                d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="info-login">
+                    <h1>DETALHES DE LOGIN</h1>
+                    <h2>SENHA</h2>
+                    <div id="senha-usuario"></div>
+                    <button id="botao-senha" class="editar-infos">
+                        EDITAR
+                        <svg viewBox="0 0 512 512" class="svg">
+                            <path
+                                d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="container-enderecos">
+                <h1>LISTA DE ENDEREÇOS</h1>
+                <div id="primeiro-endereco" class="info-enderecos">
+                </div>
+                <div class="lista-enderecos">
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- MODAL DADOS PESSOAIS -->
+    <div id="cartao-usuario" class="cartao">
+        <div class="modal-dados-pessoais">
+            <span class="close">&times;</span>
+            <h2>EDITAR INFORMAÇÕES</h2>
+            <div class="modal-info">
+                <label class="labels" for="nome-usuario">Nome Completo</label>
+                <input type="text" class="input-dados" id="nome-usuario">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="data-nascimento">Data de Nascimento</label>
+                <input type="date" class="input-dados" id="data-nascimento">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="genero">Gênero</label>
+                <input type="text" class="input-dados" id="genero">
+            </div>
+            <div class="button-wrapper">
+                <button id="salvar-dados-usuario" class="salvar">SALVAR ALTERAÇÕES</button>
+                <button class="cancelar">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+    <!-- FIM MODAL -->
+
+    <!-- MODAL SENHA -->
+    <div id="cartao-senha" class="cartao">
+        <div class="modal-dados-senha">
+            <span class="close">&times;</span>
+            <h2>EDITAR SENHA</h2>
+            <div class="modal-info">
+                <label class="labels" for="email-usuario">Senha Atual</label>
+                <input type="password" class="input-dados" id="campo-senha-usuario">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="email-usuario">Nova Senha</label>
+                <input type="password" class="input-dados" id="NovaSenha-usuario">
+            </div>
+            <div class="button-wrapper">
+                <button id="salvar-senha" class="salvar">SALVAR ALTERAÇÕES</button>
+                <button class="cancelar">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+    <!-- FIM MODAL -->
+
+    <!-- MODAL ENDEREÇO -->
+    <div id="cartao-endereco" class="cartao">
+        <div class="modal-dados-endereco">
+            <span class="close">&times;</span>
+            <h2>EDITAR ENDEREÇO</h2>
+            <div class="modal-info">
+                <label class="labels" for="cep">CEP</label>
+                <input type="text" class="input-dados" id="cep" required>
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="rua">Rua</label>
+                <input type="text" class="input-dados" id="rua">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="numero">Número</label>
+                <input type="text" class="input-dados" id="numero">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="complemento">Complemento</label>
+                <input type="text" class="input-dados" id="complemento">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="bairro">Bairro</label>
+                <input type="text" class="input-dados" id="bairro">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="cidade">Cidade</label>
+                <input type="text" class="input-dados" id="cidade">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="uf">UF</label>
+                <input type="text" class="input-dados" id="uf">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="tipo">Tipo</label>
+                <select name="opcoes" class="input-dados" id="opcoes">
+                    <option value="FATURAMENTO">Faturamento</option>
+                    <option value="ENTREGA">Entrega</option>
+                </select>
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="set-principal">Definir como principal?</label>
+                <div id="princ"><input type="checkbox" id="set-principal"></div>
+            </div>
+            <div class="button-wrapper">
+                <button id="salvar-endereco" class="salvar">SALVAR ALTERAÇÕES</button>
+                <button class="cancelar">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

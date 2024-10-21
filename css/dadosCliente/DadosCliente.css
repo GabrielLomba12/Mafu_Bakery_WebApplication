@@ -1,0 +1,421 @@
+/* estilização barra de rolagem */
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #5F9EA0 transparent;
+    box-sizing: border-box;
+}
+
+/* Works on Chrome, Edge, Opera and Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #070d12;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    border: 3px solid #070d12;
+}
+
+main {
+    background-color: #dedede;
+    position: relative;
+    box-shadow: 0 0 0 20px #dedede;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.principal {
+    display: flex;
+    justify-content: center;
+}
+
+.container {
+    width: 1140px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+.container h1 {
+    font-weight: 600;
+}
+
+.container h2 {
+    font-weight: 600;
+    font-size: 23px;
+    margin: 10px 0;
+}
+
+.container p {
+    font-size: 20px;
+}
+
+.conteudo {
+    margin-top: 65px;
+    width: 960px;
+    padding-left: 20px;
+    align-items: flex-start;
+}
+
+.info-pessoais {
+    display: flex;
+    flex-direction: column;
+    margin: 55px 0;
+}
+
+.info-login {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 55px 0;
+}
+
+.info-login h2 {
+    margin-top: 13px;
+}
+
+.info-login p {
+    margin-bottom: 8px;
+}
+
+.container-enderecos {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+    max-width: 960px;
+    min-height: 250px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.container-enderecos h1 {
+    padding-left: 20px;
+}
+
+.info-enderecos {
+    display: flex;
+}
+
+.linha-endereco {
+    display: flex;
+    flex-direction: row;
+}
+
+.cadastrar-endereco {
+    position: relative;
+    border: solid 1px gray;
+    width: 450px;
+    height: 250px;
+    margin: 10px;
+    cursor: pointer;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.novo-endereco {
+    margin: 20px 30px;
+}
+
+.dados p {
+    margin: 0;
+}
+
+.cadastrar-endereco h2 {
+    position: absolute;
+    bottom: 10px;
+    left: 25px;
+    font-size: 35px;
+}
+
+.enderecos {
+    border: solid 1px gray;
+    width: 450px;
+    height: 250px;
+    margin: 10px;
+}
+
+.dados {
+    margin: 20px 30px;
+}
+
+.dados h3 {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.buttons-endereco {
+    margin: 15px 5px 0 5px;
+}
+
+/*BOTAO EDITAR */
+.editar-infos {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100px;
+    height: 40px;
+    border: none;
+    padding: 0px 20px;
+    background-color: black;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0px black;
+    transition-duration: 0.3s;
+    font-size: 12px;
+}
+
+.btn-end-p {
+    width: 40%;
+}
+
+.svg {
+    width: 13px;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+    fill: white;
+    transition-duration: 0.3s;
+}
+
+.editar-infos:hover {
+    color: transparent;
+}
+
+.princ {
+    display: flex;
+    align-items: flex-start;
+}
+
+.btn-end-p:hover {
+    color: #FFFFFF;
+}
+
+.editar-infos:hover svg {
+    right: 43%;
+    margin: 0;
+    padding: 0;
+    border: none;
+    transition-duration: 0.3s;
+}
+
+.editar-infos:active {
+    transform: translate(3px, 3px);
+    transition-duration: 0.3s;
+    box-shadow: 2px 2px 0px white;
+}
+
+/* FIM BOTÃO*/
+
+.button-endereco {
+    display: flex;
+    flex-direction: row;
+    gap: 25px;
+    margin-top: 15px;
+}
+
+/*BOTÃO REMOVER*/
+.btn-remover {
+    border: 2px solid #000000;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/*FIM BOTÃO*/
+
+/* MODAL */
+
+.modal-info {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 25px 25px;
+}
+
+.cartao {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+#cartao-usuario {
+    display: none;
+    flex-direction: column;
+}
+
+.salvar {
+    background: #694e22;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    border: none;
+}
+
+.cancelar {
+    background: #FFFFFF;
+    color: #000;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    border-color: #694e22;
+}
+
+.button-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    margin-top: 50px;
+}
+
+.button-wrapper button {
+    margin: 5px 25px;
+    padding: 6px;
+}
+
+.modal-dados-pessoais {
+    background-color: #ffffff;
+    padding: 18px;
+    border: 1px solid #888;
+    width: 42%;
+    height: 80%;
+    position: relative;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2%;
+}
+
+.modal-dados-senha {
+    background-color: #ffffff;
+    padding: 18px;
+    border: 1px solid #888;
+    width: 42%;
+    height: 56%;
+    position: relative;
+    overflow-y: auto;
+    border-radius: 2%;
+}
+
+.modal-dados-endereco {
+    background-color: #ffffff;
+    padding: 18px;
+    border: 1px solid #888;
+    width: 42%;
+    height: 85%;
+    position: relative;
+    overflow-y: auto;
+}
+
+.input-dados {
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+h2 {
+    margin: 0 25px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+}
+
+.labels {
+    font-size: 20px;
+    font-family: "Poppins", sans-serif;
+}
+
+.close {
+    position: absolute; 
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* FIM MODAL */
+
+.cadastrar-endereco:hover {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    transform: scale(1.02);
+}
+
+.blur {
+    filter: blur(5px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.loading-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+
+.loading-modal svg {
+    width: 3.25em;
+    transform-origin: center;
+    animation: rotate4 2s linear infinite;
+    z-index: 2;
+}
+
+.loading-modal circle {
+    fill: none;
+    stroke: hsl(214, 97%, 59%);
+    stroke-width: 2;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash4 {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 90, 200;
+        stroke-dashoffset: -35px;
+    }
+
+    100% {
+        stroke-dashoffset: -125px;
+    }
+}
