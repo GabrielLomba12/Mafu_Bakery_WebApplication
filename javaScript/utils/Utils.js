@@ -18,3 +18,7 @@ function mostrarLoading() {
 function esconderLoading() {
     document.getElementById("loadingModal").style.display = "none";
 }
+
+function redirecionarTelaLogin() {
+    window.location.href = "Login.html"
+}
