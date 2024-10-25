@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/navbar/navbar.css">
+    <link rel="stylesheet" href="css/reset/reset.css">
+
+    <script src="javaScript/identificacaoGeral/IdentificacaoUsuario.js" defer></script>
+    <script src="javaScript/utils/Utils.js" defer></script>
+
+    <title>Tela Checkout</title>
+</head>
+<body>
+
+    <header>
+        <nav class="nav">
+            <div class="logo">
+                <img class="imgLogo" onclick="redirecionarTelaInicial()" src="images/logo-removebg-preview.png"
+                    alt="logo">
+            </div>
+
+            <div class="userInfo">
+                <p id="login_user"></p>
+                <div id="itens-nav">
+                    <img src="images/cart-removebg-preview.png" alt="Icone Carrinho" onclick="redirecionarTelaCarrinho()">
+                    <p id="itens-carrinho" ></p>
+
+                    <div class="burger-container">
+                        <label class="burger" for="burger">
+                            <input type="checkbox" id="burger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </label>
+                        <div class="burger-menu"></div>
+                    </div>
+                </div>
+            </div>            
+        </nav>
+        
+    </header>
+    
+</body>
+</html>
