@@ -48,7 +48,10 @@ function exibirProdutosCarrinho() {
     }
 
     document.getElementById('valor-produtos').innerText = `R$ ${subTotal.toFixed(2)}`;
+    localStorage.setItem('valorProdutos', `R$ ${subTotal.toFixed(2)}`);
+
     document.getElementById('valor-total-pedido').innerText = `R$ ${valorTotal.toFixed(2)}`; 
+    localStorage.setItem('valorTotalPedido', `R$ ${valorTotal.toFixed(2)}`);
 }
 
 function aumentarQuantidade(id) {
