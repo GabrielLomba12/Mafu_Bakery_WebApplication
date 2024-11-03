@@ -1,0 +1,78 @@
+.card-custom {
+    width: 18rem; 
+    background-color: #f8f9fa; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.card-custom img {
+    max-width: 100%; 
+    height: auto;
+    border-radius: 10px; 
+}
+.card-title {
+    margin-bottom: 15px; 
+    text-align: center; 
+    font-weight: bold; 
+    color: #333; 
+}
+
+main h1 {
+    margin-top: 30px;
+    text-align: center;
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+}
+
+.pagamento {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.resumo,
+.detalhes {
+    padding: 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+}
+.detalhes {
+    flex: 2;
+}
+#creditCard,
+#pixCard {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 450px;
+    overflow-y: auto;
+}
+
+.detalhes h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#btn-avancar{
+    width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #c1af9c;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    display: block;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

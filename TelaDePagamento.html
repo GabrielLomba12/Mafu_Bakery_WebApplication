@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/navbar/navbar.css">
+    <link rel="stylesheet" href="css/reset/reset.css">
+    <link rel="stylesheet" href="css/pagamento/pagamento.css">
+
+    <link rel="stylesheet" href="vendor/BootStrap/bootstrap.css">
+    <link rel="stylesheet" href="vendor/BootStrap/open-iconic-bootstrap.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet">
+
+    <script src="javaScript/identificacaoGeral/IdentificacaoUsuario.js" defer></script>
+    <script src="javaScript/utils/Utils.js" defer></script>
+    <script src="javaScript/pagamento/pagamento.js" defer></script>
+    <!-- <script src="javaScript/navbar/navabar.js" defer></script> -->
+
+    <title>Tela de Pagamento</title>
+</head>
+<body>
+
+    <header>
+        <nav class="nav">
+            <div class="logo">
+                <img class="imgLogo" onclick="redirecionarTelaInicial()" src="images/logo-removebg-preview.png"
+                    alt="logo">
+            </div>
+
+            <div class="userInfo">
+                <p id="login_user"></p>
+                <div id="itens-nav">
+                    <img src="images/cart-removebg-preview.png" alt="Icone Carrinho">
+                    <p id="itens-carrinho">[0]</p>
+
+                    <div class="burger-container">
+                        <label class="burger" for="burger">
+                            <input type="checkbox" id="burger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </label>
+                        <div class="burger-menu"></div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Pagamento</h1>
+
+        <div class="pagamento">
+            <section class="resumo">
+                <label for="principal">PIX</label>
+                <input type="checkbox" id="pix" name="pix" onclick="togglePaymentMethod('pix')" checked>
+    
+                <label for="principal">Cartão de Crédito</label>
+                <input type="checkbox" id="credito" name="credito" onclick="togglePaymentMethod('credito')">
+                
+                <div>
+                    <h2 id="valor-produtos">Valor dos produtos:</h2>
+                </div>
+                <div>
+                  <h2 id="valor-total-pedido">Total do pedido:</h2>
+                </div>
+                <div>
+                    <h2>Frete:</h2>
+                </div>
+            </section>
+    
+            <section class="detalhes">
+                <div id="creditCard" class="container mt-5" style="display: none;">
+                    <h2 class="text-center">Informações do Cartão de Crédito</h2>
+                    <form>
+                        <div class="mb-3">
+                            <label for="cardName" class="form-label">Nome do Titular</label>
+                            <input type="text" class="form-control" id="cardName" placeholder="Nome impresso no cartão" required>
+                        </div>
+        
+                        <div class="mb-3">
+                            <label for="cardNumber" class="form-label">Número do Cartão</label>
+                            <input type="text" class="form-control" id="cardNumber" placeholder="0000 0000 0000 0000" required maxlength="16" pattern="\d{16}">
+                        </div>
+        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="cardExpiry" class="form-label">Data de Validade</label>
+                                <input type="text" class="form-control" id="cardExpiry" placeholder="MM/AA" required pattern="\d{2}/\d{2}">
+                            </div>
+        
+                            <div class="col-md-6 mb-3">
+                                <label for="cardCvv" class="form-label">CVV</label>
+                                <input type="text" class="form-control" id="cardCvv" placeholder="123" required maxlength="3" pattern="\d{3}">
+                            </div>
+                        </div>
+        
+                        <div class="mb-3">
+                            <label for="parcelas" class="form-label">Número de Parcelas</label>
+                            <select class="form-select" id="parcelas" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="1">1x</option>
+                                <option value="2">2x</option>
+                                <option value="3">3x</option>
+                                <option value="4">4x</option>
+                                <option value="5">5x</option>
+                                <option value="6">6x</option>
+                                <option value="7">7x</option>
+                                <option value="8">8x</option>
+                                <option value="9">9x</option>
+                                <option value="10">10x</option>
+                            </select>
+                        </div>
+        
+                        <!-- <button type="submit" class="btn btn-primary ">Pagar</button> -->
+                    </form>
+                </div>
+                
+                <div id="pixCard" class="container mt-5" style="display: none;">
+                    <!-- <h2 class="text-center">Pagamento via PIX</h2> -->
+                    <div class="container mt-5 d-flex justify-content-center">
+                        <div class="card-custom">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Link_pra_pagina_principal_da_Wikipedia-PT_em_codigo_QR_b.svg/280px-Link_pra_pagina_principal_da_Wikipedia-PT_em_codigo_QR_b.svg.png" alt="Imagem QR Code">
+                            <div class="overlay-text">Aponte a câmera para o QR Code</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+        
+        <div>
+            <button id="btn-avancar" type="submit">Avançar</button>
+        </div>
+    </main>
+    
+</body>
+</html>
