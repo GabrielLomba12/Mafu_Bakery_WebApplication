@@ -1,12 +1,12 @@
-
+const frete = localStorage.getItem('valorFrete')
 const subtotal = localStorage.getItem('valorProdutos') || 'R$ 0.00';
 const totalPedido = localStorage.getItem('valorTotalPedido') || 'R$ 0.00';
 
 document.addEventListener('DOMContentLoaded', function() {
   
-
-    document.getElementById('valor-produtos').innerText = subtotal;
-    document.getElementById('valor-total-pedido').innerText = totalPedido;
+    document.getElementById('frete').innerText = "Frete: " + frete;
+    document.getElementById('valor-produtos').innerText = "Subtotal: " + subtotal;
+    document.getElementById('valor-total-pedido').innerText = "Total do pedido: " + totalPedido;
 
       // Verifica qual método de pagamento está selecionado e exibe o card correspondente
       const pixCheckbox = document.getElementById('pix');

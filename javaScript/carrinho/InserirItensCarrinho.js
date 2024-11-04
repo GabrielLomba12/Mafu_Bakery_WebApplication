@@ -51,7 +51,6 @@ function exibirProdutosCarrinho() {
     localStorage.setItem('valorProdutos', `R$ ${subTotal.toFixed(2)}`);
 
     document.getElementById('valor-total-pedido').innerText = `R$ ${valorTotal.toFixed(2)}`; 
-    localStorage.setItem('valorTotalPedido', `R$ ${valorTotal.toFixed(2)}`);
 }
 
 function aumentarQuantidade(id) {
@@ -146,6 +145,7 @@ function adicionarFrete(valorFrete, btnSelecionado) {
     let novoTotal = valorTotalPedido - valorDeFrete + valorFrete; 
 
     document.getElementById('valor-total-pedido').innerText = `R$ ${novoTotal.toFixed(2)}`;
+    localStorage.setItem('valorTotalPedido', `R$ ${novoTotal.toFixed(2)}`);
 
     valorDeFrete = valorFrete;
 }
@@ -161,4 +161,8 @@ btn2.addEventListener('click', function() {
 
 btn3.addEventListener('click', function() {
     adicionarFrete(novoValor3, btn3);
+});
+
+document.querySelector('.btn-continuar').addEventListener('click', function() {
+    localStorage.setItem('valorFrete', valorDeFrete.toFixed(2));
 });

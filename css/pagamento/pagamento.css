@@ -67,7 +67,7 @@ main h1 {
     padding: 10px;
     border-radius: 10px;
     border: none;
-    background-color: #c1af9c;
+    background-color: rgba(176, 132, 62, 0.808);
     color: white;
     font-weight: bold;
     font-size: 18px;
