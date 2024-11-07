@@ -1,0 +1,265 @@
+* {
+    scrollbar-width: auto;
+    scrollbar-color: #c1af9c transparent;
+    box-sizing: border-box;
+}
+
+/* Works on Chrome, Edge, Opera and Safari */
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+    background: #070d12;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: #FFFFFF;
+    border-radius: 20px;
+    border: 3px solid #070d12;
+}
+
+.modal-info {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    margin: 25px 25px;
+}
+
+.cartao {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+.modal-dados-endereco {
+    background-color: #ffffff;
+    padding: 18px;
+    border: 1px solid #888;
+    width: 42%;
+    height: 85%;
+    position: relative;
+    overflow-y: auto;
+}
+.input-dados {
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+.labels {
+    font-size: 20px;
+    font-family: "Poppins", sans-serif;
+}
+
+.close {
+    position: absolute; 
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* FIM MODAL */
+
+.blur {
+    filter: blur(5px);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.loading-modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+}
+
+
+.loading-modal svg {
+    width: 3.25em;
+    transform-origin: center;
+    animation: rotate4 2s linear infinite;
+    z-index: 2;
+}
+
+.loading-modal circle {
+    fill: none;
+    stroke: hsl(214, 97%, 59%);
+    stroke-width: 2;
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+    stroke-linecap: round;
+    animation: dash4 1.5s ease-in-out infinite;
+}
+
+h2 {
+    margin: 0 25px;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+}
+
+.salvar {
+    background: #694e22;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    border: none;
+}
+
+.cancelar {
+    background: #FFFFFF;
+    color: #000;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
+    border-color: #694e22;
+}
+
+.button-wrapper {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    margin-top: 50px;
+}
+
+.button-wrapper button {
+    margin: 5px 25px;
+    padding: 6px;
+}
+
+@keyframes rotate4 {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes dash4 {
+    0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+    }
+
+    50% {
+        stroke-dasharray: 90, 200;
+        stroke-dashoffset: -35px;
+    }
+
+    100% {
+        stroke-dashoffset: -125px;
+    }
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.checkout-section {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+}
+
+.checkout-section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.address-selection {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.address-selection label {
+    font-size: 1rem;
+    color: #555;
+    font-weight: 600;
+    text-align: left;
+}
+
+#enderecos-cadastrados {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+
+#botao-novo-endereco {
+    background-color: rgba(176, 132, 62, 0.808);
+    color: white;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 10px;
+}
+
+#botao-novo-endereco:hover {
+    background-color: #694e22;
+}
+
+#seguir-checkout {
+    background-color: rgba(176, 132, 62, 0.808);
+    color: white;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+#seguir-checkout:hover {
+    background-color: #694e22;
+}
+
+#frete {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 600px) {
+    .checkout-section {
+        padding: 20px;
+        width: 90%;
+    }
+
+    #enderecos-cadastrados, #botao-novo-endereco, #seguir-checkout {
+        width: 100%;
+    }
+}

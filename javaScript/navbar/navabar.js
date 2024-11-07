@@ -25,7 +25,6 @@ function buscarUsuario(email) {
         nome = data.nome;
         let palavras = nome.split(" ");
         let primeiroNome = palavras[0];
-
         if(data.permissao === "ADMINISTRADOR" || data.permissao === "ESTOQUISTA") {
             document.getElementById("login_user").innerHTML = "Olá, " + primeiroNome + ' (' + data.permissao + ')';
         } else 
@@ -36,7 +35,7 @@ function buscarUsuario(email) {
         }
     })
     .catch(error => {
-        console.error('Erro ao fazer login:', error);
+        console.error('Erro ao buscar dados de usuário logado:', error);
         alert("Erro ao acessar usuário. Por favor, tente novamente.");
     });
 }
