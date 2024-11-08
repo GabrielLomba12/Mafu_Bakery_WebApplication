@@ -1,0 +1,87 @@
+.resumo-pedido {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+h2, h3, h4 {
+    color: #333;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.produtos-resumo table {
+    width: 100%;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+}
+
+.produtos-resumo th, .produtos-resumo td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+}
+
+.valores-resumo {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.valores-resumo p, .valores-resumo h4 {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.valores-resumo h4 {
+    font-size: 1.6em;
+    color: rgba(176, 132, 62, 0.808);
+}
+
+.endereco-resumo, .pagamento-resumo {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.1em;
+}
+
+.endereco-resumo p, .pagamento-resumo p {
+    font-size: 1.2em;
+    margin: 5px 0;
+}
+
+.btn-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-finalizar, .btn-voltar {
+    padding: 12px 30px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+}
+
+.btn-finalizar {
+    background-color: rgba(176, 132, 62, 0.808);
+}
+
+.btn-finalizar:hover {
+    background-color: #694e22;
+}
+
+.btn-voltar {
+    background-color: rgba(176, 132, 62, 0.808);
+}
+
+.btn-voltar:hover {
+    background-color: #694e22;
+}
