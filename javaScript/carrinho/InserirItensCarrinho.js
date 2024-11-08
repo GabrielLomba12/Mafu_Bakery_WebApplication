@@ -146,8 +146,8 @@ function adicionarFrete(valorFrete, btnSelecionado) {
 
     document.getElementById('valor-total-pedido').innerText = `R$ ${novoTotal.toFixed(2)}`;
     localStorage.setItem('valorTotalPedido', `R$ ${novoTotal.toFixed(2)}`);
-
     valorDeFrete = valorFrete;
+    localStorage.setItem('valorFrete', valorDeFrete.toFixed(2));
 }
 
 // Adicionando eventos de clique nos botões de frete
@@ -163,6 +163,22 @@ btn3.addEventListener('click', function() {
     adicionarFrete(novoValor3, btn3);
 });
 
+function salvarResumoPedido() {
+    const produtosCarrinho = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const valorFrete = parseFloat(localStorage.getItem('valorFrete')) || 0;
+    const valorTotalPedido = parseFloat(localStorage.getItem('valorTotalPedido').replace('R$', '').trim()) || 0;
+    const valorProdutos = parseFloat(localStorage.getItem('valorProdutos').replace('R$', '').trim()) || 0;
+
+    const resumoPedido = {
+        produtos: produtosCarrinho,
+        valorFrete: valorFrete,
+        valorProdutos: valorProdutos,
+        valorTotalPedido: valorTotalPedido
+    };
+
+    localStorage.setItem('resumoPedido', JSON.stringify(resumoPedido));
+}
+
 document.querySelector('.btn-continuar').addEventListener('click', function() {
-    localStorage.setItem('valorFrete', valorDeFrete.toFixed(2));
+    salvarResumoPedido();
 });

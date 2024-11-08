@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const selectedPaymentMethod = pixCheckbox.checked ? 'pix' : 'credito';
         localStorage.setItem('metodoPagamento', selectedPaymentMethod);
         console.log(selectedPaymentMethod)
-        window.location.href = "TelaInicial.html"
+        window.location.href = "TelaResumoPedido.html"
     });
 });
 

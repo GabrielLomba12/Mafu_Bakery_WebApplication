@@ -6,6 +6,8 @@ const frete = localStorage.getItem('valorFrete')
 
 document.addEventListener('DOMContentLoaded', () => {
     fetchEnderecosDeEntrega(id);
+    const resumoPedido = JSON.parse(localStorage.getItem('resumoPedido'));
+    console.log(resumoPedido);
 });
 
 document.getElementById('frete').innerText = "Frete: " + frete;
