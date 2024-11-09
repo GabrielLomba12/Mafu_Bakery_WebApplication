@@ -142,7 +142,7 @@ function adicionarFrete(valorFrete, btnSelecionado) {
     btnSelecionado.classList.add('selected');
 
     let valorTotalPedido = parseFloat(document.getElementById('valor-total-pedido').innerText.replace('R$', '').trim());
-    let novoTotal = valorTotalPedido - valorDeFrete + valorFrete; 
+    let novoTotal = valorTotalPedido + valorFrete; 
 
     document.getElementById('valor-total-pedido').innerText = `R$ ${novoTotal.toFixed(2)}`;
     localStorage.setItem('valorTotalPedido', `R$ ${novoTotal.toFixed(2)}`);

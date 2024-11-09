@@ -30,7 +30,7 @@ function exibirResumoPedido() {
     }
 
     if (formaPagamento) {
-        document.getElementById('forma-pagamento').innerText = formaPagamento;
+        document.getElementById('forma-pagamento').innerText = formaPagamento.toUpperCase();
     }
 }
 
