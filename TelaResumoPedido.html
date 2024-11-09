@@ -7,10 +7,13 @@
     <link rel="stylesheet" href="css/navbar/navbar.css">
     <link rel="stylesheet" href="css/reset/reset.css">
     <link rel="stylesheet" href="css/resumoPedido/ResumoPedido.css">
+    <link rel="stylesheet" href="css/cliente/modal.css">
 
     <script src="javaScript/identificacaoGeral/IdentificacaoUsuario.js" defer></script>
     <script src="javaScript/utils/Utils.js" defer></script>
     <script src="javaScript/resumoPedido/ConstrucaoResumo.js" defer></script>
+    <script src="javaScript/cadastroPedido/InserirPedido.js" defer></script>
+    <script src="javaScript/cadastroPedido/Utils.js" defer></script>
 
     <title>Resumo do Pedido</title>
 </head>
@@ -44,7 +47,7 @@
         
     </header>
     
-    <main>
+    <main class="main">
         <div class="resumo-pedido">
             <h2>Resumo do Pedido</h2>
         
@@ -88,6 +91,25 @@
             </div>
         </div>        
     </main>
+
+    <div class="card-modal" id="card-modal">
+        <div class="modal-confirm" id="modal-confirm">
+            <p class="modal-heading">Compra Realizada!</p>
+            <p class="modal-info">
+                
+            </p>
+            <div class="button-wrapper">
+                <button class="accept-cookie-button" id="botaook">OK</button>
+            </div>
+        </div>
+    </div>
+    <div id="loadingModal" class="loading-modal">
+        <svg viewBox="25 25 50 50">
+            <circle r="20" cy="50" cx="50"></circle>
+        </svg>
+    </div>
+</body>
+
 
 </body>
 </html>
