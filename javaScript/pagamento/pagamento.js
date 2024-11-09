@@ -31,6 +31,10 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(selectedPaymentMethod)
         window.location.href = "TelaResumoPedido.html"
     });
+
+    document.getElementById('btn-voltar').addEventListener('click', function(){
+        window.location.href = "TelaCheckout.html"
+    });
 });
 
 function togglePaymentMethod(selectedMethod) {
