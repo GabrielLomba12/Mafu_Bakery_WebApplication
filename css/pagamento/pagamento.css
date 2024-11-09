@@ -62,7 +62,7 @@ main h1 {
     margin-bottom: 20px;
 }
 
-#btn-avancar{
+.btn-edit{
     width: 400px;
     padding: 10px;
     border-radius: 10px;
