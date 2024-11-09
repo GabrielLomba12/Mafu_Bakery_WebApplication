@@ -50,11 +50,44 @@
     </header>
 
     <main class="main">
-        
+
         <h1>Meus Pedidos</h1>
         <div class="list-group"></div>
 
     </main>
+
+    <div class="modal-itens-pedido" id="modal">
+        <div class="modal-content">
+            <button id="close-modal" class="close-btn">&times;</button> <!-- Botão de fechar -->
+            <h2 id="det-id"></h2>
+            <div class="info">
+                <p id="pagamento"></p>
+                <p id="status-pedido"></p>
+            </div>
+            <div class="info">
+                <p id="endereco-pedido"></p>
+                <p id="frete"></p>
+            </div>
+            <section class="lista-produtos">
+                <div class="box-titulos" id="box-titulos">
+                    <table border="1" class="estilo-tabela" id="produtoTabela">
+                        <thead>
+                            <tr>
+                                <th>Produto</th>
+                                <th>Nome</th>
+                                <th>Quantidade</th>
+                                <th>Valor Unitário</th>
+                                <th>Valor Total</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-body">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+    
 
 </body>
 

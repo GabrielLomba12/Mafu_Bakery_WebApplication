@@ -26,3 +26,143 @@
     width: 100%; 
 }
 
+#pedido-detalhes {
+    background-color: #694E22;
+    color: white;
+}
+
+
+.lista-produtos{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+table{
+    padding: 10px
+}
+
+th{
+    background-color: black;
+    color: white;
+    text-align: left;
+    padding: 5px 10px
+}
+
+td{
+    border: solid #ededed;
+    padding: 5px 10px
+}
+
+.estilo-tabela th {
+    background-color: rgba(176, 132, 62, 0.808);
+    color: white; 
+    padding: 10px; 
+    text-align: left; 
+    font-weight: bold;
+}
+
+.estilo-tabela tbody tr {
+    background-color: white;
+}
+
+
+.estilo-tabela tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+
+.estilo-tabela td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd; /
+}
+
+.qtd {
+    text-align: center;
+}
+
+.qtd button {
+    padding: 5px;
+    background-color: rgba(176, 132, 62, 0.808);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 10px;
+    width: 30px;
+}
+
+.qtd p {
+    display: inline-block; 
+    margin: 0 5px
+}
+
+.modal-itens-pedido {
+    display: none; 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    width: 70%;
+    height: 60%;
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #ff0000;
+}
+
+.info p {
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+.modal-content {
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 800px;
+    width: 80%;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: #333;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #ff0000;
+}
+
+body.modal-open {
+    overflow: hidden; 
+    filter: blur(5px); 
+}
+
+.info p {
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+
