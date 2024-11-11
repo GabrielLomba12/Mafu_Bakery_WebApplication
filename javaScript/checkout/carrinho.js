@@ -1,5 +1,5 @@
-var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-// var API = "localhost";
+// var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+var API = "localhost";
 
 var token = localStorage.getItem("tokenAcesso");
 

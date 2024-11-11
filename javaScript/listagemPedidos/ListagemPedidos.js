@@ -1,5 +1,6 @@
-var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-// var API = "localhost"; // Usar "localhost" para testes locais, e o IP para produção (comentado o "localhost")
+// var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+
+var API = "localhost"; // Usar "localhost" para testes locais, e o IP para produção (comentado o "localhost")
 
 let pedidosData = [];
 
