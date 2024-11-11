@@ -1,0 +1,134 @@
+.card-custom {
+    width: 18rem; 
+    background-color: #f8f9fa; 
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.card-custom img {
+    max-width: 100%; 
+    height: auto;
+    border-radius: 10px; 
+}
+.card-title {
+    margin-bottom: 15px; 
+    text-align: center; 
+    font-weight: bold; 
+    color: #333; 
+}
+
+main h1 {
+    margin-top: 30px;
+    text-align: center;
+    color: rgba(176, 132, 62, 0.808);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.pagamento {
+    display: flex;
+    flex-direction: column; /* Alinha as seções verticalmente */
+    align-items: center;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.resumo,
+.detalhes {
+    background-color: rgba(196, 156, 92, 0.2); /* Cor de fundo mais clara */
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    width: 100%;
+    max-width: 500px; /* Largura máxima para centralizar */
+}
+
+.detalhes form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.detalhes h2 {
+    font-size: 18px;
+    color: #555;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.detalhes .mb-3,
+.detalhes .row {
+    width: 100%; /* Uniformiza a largura dos inputs */
+}
+
+.detalhes .row .col-md-6 {
+    flex: 1;
+}
+
+.detalhes input,
+.detalhes select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+
+
+#creditCard .row .col-md-6 {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+#creditCard .row .col-md-6 input {
+    max-width: 100%; /* Ajusta o input para alinhamento com os outros campos */
+}
+
+.resumo label{
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.resumo div {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.resumo p,
+.detalhes p {
+    font-size: 16px;
+    color: #666;
+    margin: 0;
+}
+
+.btn-edit {
+    width: 500px; /* Ajuste para centralização */
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(176, 132, 62, 0.808);
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    display: block;
+    margin: 20px auto;
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+    background-color: rgba(176, 132, 62, 0.9);
+}

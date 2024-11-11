@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="css/navbar/navbar.css">
+    <link rel="stylesheet" href="css/reset/reset.css">
+    <link rel="stylesheet" href="css/telaEnderecoPedido/estilos.css">
+
+    <script src="javaScript/identificacaoGeral/IdentificacaoUsuario.js" defer></script>
+    <script src="javaScript/utils/Utils.js" defer></script>
+    <script src="javaScript/telaEnderecoPedido/FetchsEnderecos.js" defer></script>
+
+    <title>Tela Checkout</title>
+</head>
+<body>
+
+    <header>
+        <nav class="nav">
+            <div class="logo">
+                <img class="imgLogo" onclick="redirecionarTelaInicial()" src="images/logo-removebg-preview.png"
+                    alt="logo">
+            </div>
+
+            <div class="userInfo">
+                <p id="login_user"></p>
+                <div id="itens-nav">
+                    <img src="images/cart-removebg-preview.png" alt="Icone Carrinho" onclick="redirecionarTelaCarrinho()">
+                    <p id="itens-carrinho" ></p>
+
+                    <div class="burger-container">
+                        <label class="burger" for="burger">
+                            <input type="checkbox" id="burger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </label>
+                        <div class="burger-menu"></div>
+                    </div>
+                </div>
+            </div>            
+        </nav>
+        
+    </header>
+    
+    <main>
+        <section class="checkout-section">
+            <h2>Escolha o Endereço de Entrega</h2>
+
+            <!-- Dropdown com endereços cadastrados -->
+            <div class="address-selection">
+                <label for="enderecos-cadastrados">Endereços cadastrados:</label>
+                <select id="enderecos-cadastrados"></select>
+                <button id="botao-novo-endereco" onclick="abrirModal()">Adicionar Endereço</button>
+            </div>
+
+            <button id="seguir-checkout">Avançar</button>
+        </section>
+        <div>
+            <p id="frete"></p>
+        </div>
+    </main>
+
+    <div id="cartao-endereco" class="cartao">
+        <div class="modal-dados-endereco">
+            <span class="close">&times;</span>
+            <h2>NOVO ENDEREÇO</h2>
+            <div class="modal-info">
+                <label class="labels" for="cep">CEP</label>
+                <input type="text" class="input-dados" id="cep" required>
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="rua">Rua</label>
+                <input type="text" class="input-dados" id="rua">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="numero">Número</label>
+                <input type="text" class="input-dados" id="numero">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="complemento">Complemento</label>
+                <input type="text" class="input-dados" id="complemento">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="bairro">Bairro</label>
+                <input type="text" class="input-dados" id="bairro">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="cidade">Cidade</label>
+                <input type="text" class="input-dados" id="cidade">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="uf">UF</label>
+                <input type="text" class="input-dados" id="uf">
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="tipo">Tipo</label>
+                <select name="opcoes" class="input-dados" id="opcoes">
+                    <option value="ENTREGA">Entrega</option>
+                </select>
+            </div>
+            <div class="modal-info">
+                <label class="labels" for="set-principal">Definir como principal?</label>
+                <div id="princ"><input type="checkbox" id="set-principal"></div>
+            </div>
+            <div class="button-wrapper">
+                <button id="salvar-endereco" class="salvar">SALVAR ALTERAÇÕES</button>
+                <button class="cancelar">CANCELAR</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

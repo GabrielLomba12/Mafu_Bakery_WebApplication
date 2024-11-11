@@ -1,6 +1,9 @@
 var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
 // var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
+const urlParams = new URLSearchParams(window.location.search);
+const redirect = urlParams.get('redirect');
+
 const formulario = document.querySelector("form")
 const email = document.querySelector(".email")
 const senha = document.querySelector(".senha")
@@ -138,9 +141,20 @@ function loginUsuario() {
     });
 }
 
+// Configurar o link para redirecionar ao cadastro, mantendo o parâmetro de retorno ao carrinho, se existir
+document.querySelector('#cadastro').addEventListener('click', function (e) {
+    e.preventDefault();
+    // Redireciona para a tela de cadastro, mantendo o parâmetro "redirect=carrinho" se ele estiver na URL
+    window.location.href = `CadastroCliente.html${redirect ? '?redirect=' + redirect : ''}`;
+});
+
 document.querySelector('.tela-back-office').addEventListener('click', function () {
     if(localStorage.getItem("permissao") === "CLIENTE") 
-        redirecionarTelaInicial();
+        if (redirect === 'carrinho') {
+            window.location.href = 'TelaCarrinho.html';
+        } else {
+            redirecionarTelaInicial();
+        }
     else 
         redirecionarTelaBackOffice();
 });

@@ -26,6 +26,7 @@ function identificarAutenticacao() {
         opcoes.innerHTML = 
         `
             <a href="TelaDadosCliente.html">Meus Dados</a>
+            <a href="TelaPedidosCliente.html" id="pedidos-cliente">Meus Pedidos</a>
             <a href="TelaInicial.html" id="logout">Logout</a>
         `;
         document.getElementById('logout').addEventListener('click', realizarLogout);

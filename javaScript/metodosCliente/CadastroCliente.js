@@ -1,6 +1,9 @@
 var API = "4.228.231.149"; // Setar essa variável quando subir para a nuvem e comentar a localhost
 // var API = "localhost"; // Setar essa variável quando testar local e comentar a do IP
 
+const urlParams = new URLSearchParams(window.location.search);
+const redirect = urlParams.get('redirect');
+
 let faturamentoCadastrado = false; 
 let principalSelecionado = false; 
 
@@ -20,7 +23,11 @@ function cadastrar(formData) {
                 document.getElementById("modal-confirm").style.display = "flex"
                 console.log("Cadastro realizado!");
                 buttonOK.addEventListener("click", () => {
-                    window.location.href = "Login.html";
+                    if (redirect === 'carrinho') {
+                        window.location.href = 'TelaCarrinho.html';
+                    } else {
+                        window.location.href = 'Login.html';
+                    }
                 })
                 
             }, 3000);
