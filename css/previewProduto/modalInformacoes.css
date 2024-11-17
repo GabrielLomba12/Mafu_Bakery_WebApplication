@@ -1,22 +1,79 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1; /* Cor clara da paleta */
+    color: #553d2a; /* Cor escura da paleta */
+}
+
+.content {
+    width: 80%;
+    height: calc(90vh - 123px);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10%; 
+    background-color: #e3d7bf;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
 .div-informacoes{
+    width: 40%;
     display: flex;
     flex-direction: column;
     gap: 30px;
     justify-content: center;
+    align-items: left;
+    font-family: 'Poppins', sans-serif;
 }
 
 .nomeProd{
     font-size: 26px;
     font-weight: bold;
     text-align: center;
+    color: #735945;
+}
+
+.div-imagens {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Para posicionar os botões de navegação em relação a este contêiner */
+    width: 50%; /* Definindo uma largura fixa para o contêiner de imagens */
+    max-width: 500px;
+    border-radius: 10px;
+    height: 400px; /* Mantém a altura da imagem */
+    overflow: hidden;
+    background-color: #c7b69f; /* Fundo neutro */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.img-carousel {
+    width: 100%; /* A imagem preenche o contêiner */
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
 }
 
 .buttonComprar{
-    padding: 15px;
-    border-radius: 15px;
+    padding: 12px 20px;
+    border-radius: 8px;
     font-size: 16px;
-    width: 50%;  
+    font-weight: bold;
+    color: #fff;
+    background-color: #735945;
+    border: none;
+    cursor: pointer;
+    align-self: start;
+    transition: background-color 0.3s ease; 
 }
+
+.buttonComprar:hover {
+    background-color: #553d2a; 
+}
+
 
 .prev, .next {
     background-color: transparent;
@@ -29,6 +86,7 @@
     color: #333;
     opacity: 0;  /* Setas transparentes inicialmente */
     transition: opacity 0.3s ease;  /* Transição suave */
+    z-index: 1; /* Garante que as setas fiquem acima da imagem */
 }
 
 .prev {
@@ -39,14 +97,10 @@
     right: 10px;
 }
 
-
 .div-imagens:hover .prev, .div-imagens:hover .next {
-    opacity: 1; 
+    opacity: 1; /* Exibe as setas ao passar o mouse sobre a área da imagem */
 }
 
 .prev:hover, .next:hover {
-    color: #007bff;  
+    color: #007bff;  /* Muda a cor das setas ao passar o mouse */
 }
-
-
-
