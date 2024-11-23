@@ -17,6 +17,10 @@ document.getElementById('btn-produto').addEventListener('click', () => {
     window.location.href = "ListagemProduto.html";
 });
 
+document.getElementById('btn-pedido').addEventListener('click', () => {
+    window.location.href = "ListagemPedido.html";
+});
+
 function buscarUsuario(email) {
     fetch(`http://` + API + `:8080/api/usuarioLogado?email=${email}`, {
         method: 'GET',
