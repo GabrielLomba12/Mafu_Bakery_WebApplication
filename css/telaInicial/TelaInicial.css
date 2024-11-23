@@ -97,7 +97,34 @@ a.btn.btn-carrinho {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 10px;
 }
+
+.botoes-filtro label {
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.botoes-filtro input[type="radio"] {
+    display: none;
+}
+
+.botoes-filtro input[type="radio"]:checked + span {
+    background-color: #c1af9c;
+    color: white;
+    border-color: #c1af9c;
+}
+
+.botoes-filtro label span {
+    padding: 5px 10px;
+    display: inline-block;
+}
+
 
 #filtro {
     display: flex;
