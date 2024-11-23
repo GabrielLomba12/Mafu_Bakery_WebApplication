@@ -17,7 +17,7 @@
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
-    <title>Listar Usuário</title>
+    <title>Listar Pedidos</title>
 </head>
 
 <body>
@@ -43,21 +43,21 @@
 
     <main class="main">
         <div class="container">
-            <span>Listagem de Usuários</span>
+            <span>Listagem de Pedidos</span>
             <div class="informacoes">
                 <div class="container-filtro">
                     <div class="filtro-produto">
-                        <input id="filtro" onkeyup="filtrarUsuarios()" type="text" placeholder="Digite o nome do usuário">
+                        <input id="filtro" onkeyup="filtrarPedidos()" type="text" placeholder="Digite o status do pedido">
                     </div>
                 </div>
-                <div class="header">
+                <!-- <div class="header">
                     <button onclick="redirecionarCadastroUsuario()" id="novo">+</i></button>
-                </div>
+                </div> -->
             </div>
             <div class="divTable"></div>
         </div>
     </main>
-    <div class="card" id="card-modal">
+    <!-- <div class="card" id="card-modal">
         <div class="modal-confirm" id="modal-confirm">
             <p class="modal-heading">Deseja alterar o status?</p>
             <div class="button-wrapper">
@@ -70,10 +70,10 @@
         <svg viewBox="25 25 50 50">
             <circle r="20" cy="50" cx="50"></circle>
         </svg>
-    </div>
+    </div> -->
 
-    <script src="javaScript/listagemUsuario/ListagemUsuario.js"></script>
-    <script src="javaScript/listagemUsuario/Filtro.js"></script>
+    <script src="javaScript/listagemPedidos/ListagemPedidosBackOffice.js"></script>
+    <script src="javaScript/listagemPedidos/Filtro.js"></script>
     <script src="javaScript/navbar/navabar.js"></script>
 
 </body>
