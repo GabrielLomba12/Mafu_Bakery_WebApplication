@@ -54,10 +54,53 @@ function preencherTabela(pedidos) {
         <td>${pedido.dataPedido}</td>
         <td>${pedido.id}</td>
         <td>${pedido.totalPedido}</td>
-        <td>${pedido.statusPedido}</td>
+        <td>${pedido.statusDescricao}</td>
         <td class="acao"><button onclick="enviarParaAlteracao(${pedido.id})" id="alterar">Alterar</button></td>`;
         tbody.appendChild(tr);
     });
 }
 
-function enviarParaAlteracao(id) {}
+let pedidoId; 
+
+function enviarParaAlteracao(id) {
+    pedidoId = id;
+    document.getElementById('card-modal').style.display = 'block';
+    document.querySelector('.main').classList.add('blur'); 
+
+    document.getElementById('btnnao').onclick = () => {
+        document.getElementById('card-modal').style.display = 'none';
+        document.querySelector('.main').classList.remove('blur'); 
+    };
+
+    document.getElementById('btnsim').onclick = () => {
+        const novoStatus = document.getElementById('status-select').value;
+        atualizarStatusPedido(pedidoId, novoStatus);
+    };
+}
+
+
+async function atualizarStatusPedido(id, status) {
+    try {
+        const response = await fetch(`http://${API}:8080/api/pedidos/atualizarStatus?id=${id}&status=${status}`, {
+            method: 'PATCH',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            document.getElementById('card-modal').style.display = 'none';
+            document.querySelector('.main').classList.remove('blur');
+            fetchPedidosBOData();
+        } else {
+            alert('Erro ao atualizar status. Verifique os dados.');
+        }
+    } catch (error) {
+        console.error('Erro ao atualizar status:', error);
+        alert('Erro ao atualizar status. Tente novamente.');
+    }
+}
+
+
+
