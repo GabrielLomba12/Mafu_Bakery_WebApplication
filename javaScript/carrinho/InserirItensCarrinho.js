@@ -6,6 +6,15 @@ function exibirProdutosCarrinho() {
     const produtosMap = {};
     let valorTotal = valorDeFrete;
     let subTotal = 0;
+
+    const carrinhoVazio = document.querySelector(".carrinho-vazio");
+
+    const main = document.querySelector(".main")
+    if(produtosCarrinho.length === 0){
+        main.style.display = "none"
+        carrinhoVazio.style.display = "block"
+    }
+    
     produtosCarrinho.forEach(produto => {
         produtosMap[produto.id] = {...produto};
     });

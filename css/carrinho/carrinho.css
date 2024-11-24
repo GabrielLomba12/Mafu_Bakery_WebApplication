@@ -178,4 +178,21 @@ td{
     border: none;
 }
 
+.carrinho-vazio{
+    display: none; 
+    text-align: center;
+}
 
+.carrinho-vazio img{
+    max-width: 300px; 
+    margin: 20px auto;
+}
+
+.carrinho-vazio p {
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: #555;
+    margin-top: 10px;
+    line-height: 1.6; 
+    text-align: center; 
+}
