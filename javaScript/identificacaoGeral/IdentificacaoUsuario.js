@@ -15,10 +15,11 @@ function identificarAutenticacao() {
     if (emailUsuario && (permissao === "ESTOQUISTA" || permissao === "ADMINISTRADOR")) {
         opcoes.innerHTML = 
         `
-            <a href="TelaDadosCliente.html">Meus Dados</a>
             <a href="TelaBackOffice.html">Menu ${permissao}</a>
             <a href="TelaInicial.html" id="logout">Logout</a>
         `;
+        document.getElementById('carrinho-img').style.display = 'none';
+        document.getElementById('itens-carrinho').style.display = 'none';
         document.getElementById('logout').addEventListener('click', realizarLogout);
         buscarUsuario(emailUsuario);
 
@@ -69,7 +70,7 @@ function buscarUsuario(email) {
         let palavras = nome.split(" ");
         let primeiroNome = palavras[0];
         document.getElementById("login_user").innerHTML = `Olá, ` + primeiroNome + "!";
-        if(data.permissao === 'ESTOQUISTA') {
+        if(data.permissao === 'ESTOQUISTA' && document.title === 'Back-Office') {
             document.getElementById('btn-usuario').style.display = 'none';
         }
     })

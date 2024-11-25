@@ -1,7 +1,7 @@
 // var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
 var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
-const emailUsuario = localStorage.getItem("email");
+var emailUsuario = localStorage.getItem("email");
 var token = localStorage.getItem("tokenAcesso");
 var permissao = localStorage.getItem("permissao")
 

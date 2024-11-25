@@ -11,10 +11,12 @@ body{
 }
 
 .titulo{
-    font-size: 64px;
-    font-weight: 550;
-    text-align: center;
-    color: rgb(127, 66, 22);
+    font-size: 2em;
+    color: rgba(176, 132, 62, 0.808); 
+    text-align: center; 
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
 }
 
 .headerr{
@@ -90,6 +92,33 @@ main{
     margin: 0 auto;
 }
 
+#alterar{
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #fff; /* Fundo branco para contraste */
+    color: rgba(176, 132, 62, 1);
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.botoes {
+    background-color: rgb(127, 66, 22);
+    color: white; 
+    padding: 10px; 
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+}
+
+.divTable{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
 
 .tabela{
     display: flex;
@@ -117,22 +146,12 @@ td{
     padding: 5px 10px
 }
 
-/* Estilo para os cabeçalhos da tabela */
 .estilo-tabela th {
-    background-color: #007bff;
+    background-color: rgba(176, 132, 62, 0.808);
     color: white; 
     padding: 10px; 
     text-align: left; 
     font-weight: bold;
-}
-
-.botoes {
-    background-color: rgb(127, 66, 22);
-    color: white; 
-    padding: 10px; 
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
 }
 
 .estilo-tabela tbody tr {

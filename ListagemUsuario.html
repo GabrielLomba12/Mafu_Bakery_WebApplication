@@ -17,6 +17,9 @@
     integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     
+    <script src="javaScript/utils/Utils.js" defer></script>
+    <script src="javaScript/identificacaoGeral/IdentificacaoUsuario.js" defer></script>
+
     <title>Listar Usuário</title>
 </head>
 
@@ -25,25 +28,34 @@
     <header>
         <nav class="nav">
             <div class="logo">
-                <img class="imgLogo" src="images/logo-removebg-preview.png" alt="logo" onclick="redirecionarTelaInicial()">
+                <img class="imgLogo" onclick="redirecionarTelaBackOffice()" src="images/logo-removebg-preview.png"
+                    alt="logo">
             </div>
-            
+
             <div class="userInfo">
-                <div class="icon-nome">
-                    <a href="/TelaLogin.html" class="icon-usuario"><i class="fa-solid fa-user"></i></a>
-                    <div class="nome"><p id="login_user"></p></div>
+                <p id="login_user"></p>
+                <div id="itens-nav">
+                    <img id="carrinho-img" src="images/cart-removebg-preview.png" alt="Icone Carrinho" onclick="redirecionarTelaCarrinho()">
+                    <p id="itens-carrinho" ></p>
+
+                    <div class="burger-container">
+                        <label class="burger" for="burger">
+                            <input type="checkbox" id="burger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </label>
+                        <div class="burger-menu"></div>
+                    </div>
                 </div>
-                
-                <div class="dropdown-content" id="dropdown-content">
-                    <a class="logout" href="">Sair</a>
-                  </div>
-            </div>
+            </div>            
         </nav>
+        
     </header>
 
     <main class="main">
         <div class="container">
-            <span>Listagem de Usuários</span>
+            <span class="titulo">Listagem de Usuários</span>
             <div class="informacoes">
                 <div class="container-filtro">
                     <div class="filtro-produto">
@@ -74,7 +86,6 @@
 
     <script src="javaScript/listagemUsuario/ListagemUsuario.js"></script>
     <script src="javaScript/listagemUsuario/Filtro.js"></script>
-    <script src="javaScript/navbar/navabar.js"></script>
 
 </body>
 
