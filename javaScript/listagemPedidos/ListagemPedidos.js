@@ -76,6 +76,7 @@ function verDetalhes(idPedido) {
 
         document.getElementById('endereco-pedido').textContent = `Endereço de Envio: ${enderecoCompleto}`;
         document.getElementById('frete').textContent = `Valor do Frete: R$ ${pedido.pedido.frete.toFixed(2)}`;
+        document.getElementById('totalPedido').textContent = `Valor Total do Pedido: R$ ${pedido.pedido.totalPedido.toFixed(2)}`
 
         const tbody = document.getElementById("table-body");
         tbody.innerHTML = ""; 
@@ -97,22 +98,17 @@ function verDetalhes(idPedido) {
             tbody.appendChild(produtoElement);
         });
 
-        // Exibir o modal
         document.querySelector('.main').style.filter = 'blur(5px)';
         const modal = document.querySelector('.modal-itens-pedido').style.display = 'flex';
         
-        // // Adicionar o efeito de blur no conteúdo da página
-        // document.body.classList.add('modal-open');
     } else {
         console.log("Pedido não encontrado.");
     }
 }
 
-// Função para fechar o modal
 document.getElementById('close-modal').addEventListener('click', function() {
     const modal = document.getElementById('modal');
     modal.style.display = 'none';
 
-    // Remover o blur da página
     document.querySelector('.main').style.filter = '';
 });

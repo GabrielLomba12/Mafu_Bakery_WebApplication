@@ -44,7 +44,7 @@ body{
     border-radius: 10px;
     border: none;
     color: white;
-    background-color: #007bff;
+    background-color: rgba(176, 132, 62, 0.808);
 }
 
 .divTable{
@@ -81,7 +81,7 @@ td{
 }
 
 .estilo-tabela th {
-    background-color: #007bff;
+    background-color: rgba(176, 132, 62, 0.808);
     color: white; 
     padding: 10px; 
     text-align: left; 
@@ -106,4 +106,13 @@ td{
 #pesquisa-produto img {
     width: 20px;
     height: 20px;
+}
+
+.titulo{
+    font-size: 2em;
+    color: rgba(176, 132, 62, 0.808); 
+    text-align: center; 
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: "Poppins", sans-serif;
 }

@@ -31,7 +31,7 @@
             <div class="userInfo">
                 <p id="login_user"></p>
                 <div id="itens-nav">
-                    <img src="images/cart-removebg-preview.png" alt="Icone Carrinho" onclick="redirecionarTelaCarrinho()">
+                    <img id="carrinho-img" src="images/cart-removebg-preview.png" alt="Icone Carrinho" onclick="redirecionarTelaCarrinho()">
                     <p id="itens-carrinho" ></p>
 
                     <div class="burger-container">
@@ -61,6 +61,29 @@
     </div>
 
     <div class="menu-filtro">
+        <div class="botoes-filtro">
+            <label>
+                <input type="radio" name="categoria" value="todos" onclick="filtrarPorCategoria('todos')" checked>
+                <span>Todos</span>
+            </label>
+            <label>
+                <input type="radio" name="categoria" value="Bolos" onclick="filtrarPorCategoria('Bolos')">
+                <span>Bolos</span>
+            </label>
+            <label>
+                <input type="radio" name="categoria" value="Salgados" onclick="filtrarPorCategoria('Salgados')">
+                <span>Salgados</span>
+            </label>
+            <label>
+                <input type="radio" name="categoria" value="Tortas" onclick="filtrarPorCategoria('Tortas')">
+                <span>Tortas</span>
+            </label>
+            <label>
+                <input type="radio" name="categoria" value="Pães" onclick="filtrarPorCategoria('Pães')">
+                <span>Pães</span>
+            </label>
+        </div>
+
         <div id="filtro">
             <p>Filtrar Produtos</p>
             <input type="text" onkeyup="filtrarProdutos()" name="filtro-items" id="filtro-items" placeholder="Nome do produto...">

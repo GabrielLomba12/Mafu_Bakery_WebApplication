@@ -2,6 +2,10 @@ function redirecionarTelaInicial() {
     window.location.href = "TelaInicial.html"
 }
 
+function redirecionarTelaBackOffice() {
+    window.location.href = "TelaBackOffice.html"
+}
+
 function redirecionarDetalheProduto() {
     window.location.href = "TelaDetalheProduto.html"
 }

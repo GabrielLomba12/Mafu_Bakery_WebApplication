@@ -5,14 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="css/reset/reset.css">
-    <link rel="stylesheet" href="css/navbar/navbar.css">
     <link rel="stylesheet" href="css/detalhesProduto/detalheProduto.css">
+    <link rel="stylesheet" href="css/navbar/navbar.css">
+    <link rel="stylesheet" href="css/telaInicial/TelaInicial.css">
 
 
     <script src="javaScript/utils/Utils.js" defer></script>
     <script src="javaScript/navbar/navabar.js" defer></script>
     <script src="javaScript/detalheProduto/ConexaoApi.js" defer></script>
-    <script src="javaScript/utils/Utils.js" defer></script>
+    <script src="javaScript/identificacaoGeral/IdentificacaoUsuario.js" defer></script>
+    <script src="javaScript/telaInicial/MontarLayoutProdutos.js" defer></script>
+    <script src="javaScript/telaInicial/Utils.js" defer></script>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -29,20 +32,29 @@
     <header>
         <nav class="nav">
             <div class="logo">
-                <img class="imgLogo" src="images/logo-removebg-preview.png" alt="logo" onclick="redirecionarTelaInicial()">
+                <img class="imgLogo" onclick="redirecionarTelaInicial()" src="images/logo-removebg-preview.png"
+                    alt="logo">
             </div>
-            
+
             <div class="userInfo">
-                <div class="icon-nome">
-                    <a href="/TelaLogin.html" class="icon-usuario"><i class="fa-solid fa-user"></i></a>
-                    <div class="nome"><p id="login_user"></p></div>
+                <p id="login_user"></p>
+                <div id="itens-nav">
+                    <img src="images/cart-removebg-preview.png" alt="Icone Carrinho" onclick="redirecionarTelaCarrinho()">
+                    <p id="itens-carrinho" ></p>
+
+                    <div class="burger-container">
+                        <label class="burger" for="burger">
+                            <input type="checkbox" id="burger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </label>
+                        <div class="burger-menu"></div>
+                    </div>
                 </div>
-                
-                <div class="dropdown-content" id="dropdown-content">
-                    <a class="logout" href="">Sair</a>
-                </div>
-            </div>
+            </div>            
         </nav>
+        
     </header>
 
     <main>

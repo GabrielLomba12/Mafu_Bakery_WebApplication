@@ -1,0 +1,79 @@
+#card-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none; /* Mantém o modal oculto inicialmente */
+    z-index: 1000;
+    background-color: rgba(176, 132, 62, 0.808); /* Cor de fundo do modal */
+    padding: 30px; /* Espaçamento interno maior */
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+}
+
+.modal-confirm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* Espaçamento entre os itens */
+}
+
+.modal-heading {
+    color: #fff; /* Texto branco para contraste */
+    font-size: 18px;
+    text-align: center;
+}
+
+.select-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    color: #fff; /* Cor branca para o texto do label */
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #fff;
+    background-color: #fff; /* Fundo branco para o dropdown */
+    color: rgba(176, 132, 62, 1);
+    font-size: 16px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.button-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px; /* Reduz o espaço entre os botões */
+    width: 100%;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #fff; /* Fundo branco para contraste */
+    color: rgba(176, 132, 62, 1);
+    font-size: 16px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Efeito hover sutil */
+}
+
+.blur {
+    filter: blur(5px);
+}

@@ -92,7 +92,7 @@ function displayTableData() {
                 <span class="slider"></span>
             </label>
             </td>
-            <td class="acao"><button id="preview" onclick="fetchPreviewProduto(${item.id})">Visualizar</button></td>
+            <td class="acao"><button id="alterar" onclick="fetchPreviewProduto(${item.id})">Visualizar</button></td>
             `;
             tableBody.appendChild(row);
         });
@@ -126,7 +126,7 @@ function displayTableData() {
             <td>${item.quantidadeEstoque}</td>
             <td>R$${formatarCasasDecimais(item.preco)}</td>
             <td>${item.status ? 'Ativo' : 'Inativo'}</td>
-            <td class="acao"><button onclick="enviarParaAlteracao(${item.id})">Alterar</button></td>
+            <td class="acao"><button onclick="enviarParaAlteracao(${item.id})" id="alterar">Alterar</button></td>
         `;
             tableBody.appendChild(row);
         });
