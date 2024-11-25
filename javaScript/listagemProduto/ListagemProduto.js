@@ -1,5 +1,5 @@
-// var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
-var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
+var API = "4.228.231.149"; //Setar essa variavel quando subir para a nuvem e comentar a localhost
+// var API = "localhost"; //Setar essa variavel quando testar local e comentar a do IP
 
 var token = localStorage.getItem("tokenAcesso");
 
@@ -92,7 +92,7 @@ function displayTableData() {
                 <span class="slider"></span>
             </label>
             </td>
-            <td class="acao"><button id="preview" onclick="fetchPreviewProduto(${item.id})">Visualizar</button></td>
+            <td class="acao"><button id="alterar" onclick="fetchPreviewProduto(${item.id})">Visualizar</button></td>
             `;
             tableBody.appendChild(row);
         });
